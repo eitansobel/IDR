@@ -1,0 +1,20 @@
+<idr-close-popup-svg (click)="closeDialog()"></idr-close-popup-svg>
+<idr-modal-wrap>
+    <span class="headline" >{{headerText}}</span>
+
+    <div>
+        <mat-dialog-content>
+            <label><input type="radio" value="1" (click)="logoutControl(true)" name="logout"/>  <span class="checkmark"></span> Lock (continue using application in secure mode)</label>
+            <label><input type="radio" value="2" checked (click)="logoutControl(false)" name="logout" />  <span class="checkmark"></span> End shift early (Logout)</label>
+        </mat-dialog-content>
+        <mat-dialog-actions>
+            <idr-default-btn
+                className="default"
+                (click)="closeDialog()"><idr-close-svg class='icon'></idr-close-svg><span>Cancel</span></idr-default-btn>
+            <idr-default-btn
+                className="active"
+                (click)="save()"><idr-check-svg class='icon'></idr-check-svg><span>Ok</span></idr-default-btn>
+
+        </mat-dialog-actions>
+    </div>
+</idr-modal-wrap>

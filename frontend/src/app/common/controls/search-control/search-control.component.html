@@ -1,0 +1,11 @@
+<div class="searchContainer">
+    <input
+        class="search"
+        [(ngModel)]="searchText"
+        [placeholder]="placeholder"
+        (change)="onChange($event)"
+        maxlength="55"
+        (keyup)="onChange($event)"
+        >
+    <idr-search-icon-svg class="searchIcon"></idr-search-icon-svg>
+</div>

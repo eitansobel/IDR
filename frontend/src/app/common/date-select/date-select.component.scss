@@ -1,0 +1,13 @@
+:host {
+    display: flex;
+    justify-content: space-between;
+    
+    ng-select {
+        order: 1;
+        flex-basis: 30%;
+        
+                &.readonly {
+                    display: none;
+                }
+    }
+}

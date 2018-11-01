@@ -1,0 +1,23 @@
+@import '../../../styles.scss';
+
+:host {
+    display: block;
+    text-align: center;
+
+}
+idr-modal-wrap {
+    max-width: 360px;
+    min-width: 360px;
+    min-height: 300px;
+}
+
+p {
+    color: $modal-text-color;
+    margin-bottom: 24px;
+    margin-top: 22px;
+}
+
+idr-default-btn {
+    margin-top: 15px;
+    display: block;
+}

@@ -1,0 +1,294 @@
+@import '~styles.scss';
+
+ ::ng-deep mat-dialog-content {
+        @include respond-to('min-large') {
+            padding: 20px 10px;
+            color: #b1b6be;
+            font-size: 14px;
+        }
+}
+
+:host {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    ::ng-deep .ng-scrollbar.-vertical {
+        @include respond-to('min-large') {
+            width: 3px;
+        }
+        background: rgba(0, 0, 0, 0.1);
+
+        .ng-scrollbar-thumb  {
+            background: $dull-blue;
+        }
+    }
+
+    ::ng-deep  .mat-pseudo-checkbox {
+        border-color: #cbcbcb;
+
+        &.mat-pseudo-checkbox-checked {
+            background: $dull-blue;
+
+            &:after {
+                border-color: $white;
+                top: 6px;
+                left: 4px;
+            }
+        }
+    }
+
+    ng-select.hasError {
+        ::ng-deep .ng-select-container {
+            border: 1px solid $red;
+        }
+    }
+
+    .ng-select ::ng-deep .ng-select-container .ng-value-container {
+        padding-left: 21px;
+    }
+}
+
+.requiredAsterics {
+    color: $red;
+
+    z-index: 1;
+}
+
+.alertMsg {
+    position: relative;
+    &::after {
+        content: '*';
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        color: $red;
+    }
+}
+
+.receiverWrap {
+    @include respond-to('min-large') {
+        position: relative;
+
+        .responderWrap {
+            position: relative;
+        }
+    }
+    flex-basis: 90px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0 0;
+
+    & > * {
+                @include respond-to('min-large') {
+                    position: static;
+                }
+        flex-grow: 1;
+        margin: 0 10px;
+        position: relative;
+
+        label {
+            position: absolute;
+            left: 11px;
+            top: 7px;
+            color: #cbcbcb;
+            z-index: 1;
+        }
+        .requiredField  ::ng-deep .form-control input {
+            padding: 8px 15px 8px 50px;
+        }
+
+        ::ng-deep .form-control input {
+            color: $dull-blue;
+            -webkit-text-fill-color: $dull-blue;
+            padding: 8px 15px 8px 40px;
+            font-weight: 600;
+
+            &[readonly]{
+                padding: 8px 15px 8px 40px;
+                border: $border;
+            }
+        }
+
+        .addIcon {
+            right: 11px;
+            top: 11px;
+            display: flex;
+            width: 15px;
+            height: 15px;
+            background: $caribbean-green;
+            color: $white;
+            border-radius: 50%;
+            position: absolute;
+
+            &:after {
+                content: '\271a';
+                position: absolute;
+                right: 3px;
+                top: 0;
+                font-size: 10px;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.formSendMessage {
+    @include respond-to('min-large') {
+        position: absolute;
+        bottom: 0;
+        left: 80px;
+        width: calc(100% - 80px);
+        background: $white;
+        z-index: 1;
+    }
+    /*    flex-basis: 70px;*/
+    border-top: $border;
+    display: flex;
+    justify-content: space-between;
+    textarea {
+        @include respond-to('min-large') {
+            max-height: 55px;
+        }
+        @include placeholder{
+            color: $bombay;
+            -webkit-text-fill-color: $bombay;
+        }
+        resize: none;
+        margin-bottom: 10px;
+        flex-basis: 68%;
+        border: 0;
+        font-size: $base-font-size;
+        font-family: $base-font-sans-serif + 2;
+        max-height: 155px;
+        font-weight: 600;
+        padding: 8px 15px 8px 20px;
+        color: $black;
+        -webkit-text-fill-color: $black;
+
+        &:focus {
+            outline: none;
+        }
+
+    }
+
+    .newMessageControls {
+        flex-basis: 30%;
+        margin-right: 20px;
+        display: flex;
+        padding-top: 15px;
+
+        idr-default-btn {
+            @include respond-to('min-large') {
+                min-width: 129px;
+            }
+            flex-grow: 1;
+            margin-left: 20px;
+            min-width: 174px;
+
+            ::ng-deep  span.btn {
+                height: 37px;
+                line-height: 19px;
+                margin-bottom: 0;
+            }
+        }
+
+        ng-select {
+            @include respond-to('min-large') {
+                min-width: 129px;
+            }
+            flex-grow: 1;
+            margin-bottom: 0;
+            min-width: 174px;
+        }
+    }
+}
+
+mat-list-option {
+    outline: none;
+    overflow: hidden;
+
+    ::ng-deep .mat-list-item-content {
+        outline: none;
+    }
+}
+
+.list {
+    @include respond-to('min-large') {
+        width: 90%;
+        left: 13px;
+        font-size: $base-font-size - 1;
+    }
+    position: absolute;
+    width: 100%;
+    z-index: 3;
+    background: $white;
+    overflow: hidden;
+    min-height: 450px;
+    height: 100%;
+    box-shadow: -3px 4px 5px 0px rgba(0, 0, 0, 0.33) ;
+
+    &.hide {
+        display: none;
+    }
+}
+
+.attach {
+    margin-right: 15px;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+
+    idr-close-svg {
+        margin-left: 5px;
+        padding-top: 7px;
+        position: relative;
+        z-index: 1;
+        cursor: pointer;
+
+        ::ng-deep svg {
+            width: 10px;
+            height: 10px;
+            path {
+                fill: $bombay;
+            }
+        }
+    }
+
+    idr-attach-svg {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        ::ng-deep svg {
+            width: 20px;
+        }
+    }
+    span {
+        display: inline-block;
+        margin-right: 10px;
+        color: $bombay;
+        padding-top: 7px;
+    }
+
+    input {
+        width: 40px;
+        position: relative;
+        z-index: 2;
+        margin-top: 8px;
+        opacity: 0;
+    }
+}
+
+.addNewToList {
+    position: absolute;
+    right: 6px;
+    top: 5px;
+    border-radius: 3px;
+    background: $caribbean-green;
+    color: $white;
+    padding: 5px 8px;
+    text-transform: uppercase;
+    font-size: 12px;
+    cursor: pointer;
+}

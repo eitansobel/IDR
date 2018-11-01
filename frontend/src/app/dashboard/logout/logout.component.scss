@@ -1,0 +1,99 @@
+@import '~styles.scss';
+
+:host {
+    display: block;
+    width: 100%;
+
+    idr-modal-wrap {
+        display: block;
+
+    }
+
+    idr-default-btn ::ng-deep .btn {
+        @include respond-to('small-height') {
+            margin-bottom: 10px;
+        }
+    }
+
+    ::ng-deep .mat-dialog-actions {
+        display: block;
+    }
+}
+
+::ng-deep .mat-dialog-container {
+    padding: 0;
+    box-shadow: none;
+    overflow: visible;
+}
+
+::ng-deep .cdk-overlay-container {
+    z-index: 1002;
+}
+
+mat-dialog-content {
+    @include respond-to('small-height') {
+        padding: 10px 20px;
+    }
+    padding: 20px 20px;
+}
+
+label {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    margin-top: 12px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: $base-font-size;
+    font-weight: 600;
+
+    input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .checkmark {
+        position: absolute;
+        top: 3px;
+        left: 0;
+        height: 15px;
+        width: 15px;
+        border-radius: 3px;
+        background-color: $white;
+        border: $border;
+
+        &:after {
+            content: "";
+            position: absolute;
+            display: none;
+            left: 4px;
+            top: 0;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+    }
+
+    &:hover input ~ .checkmark {
+        background-color: #ccc;
+    }
+    
+    input:checked ~ .checkmark {
+        background-color: $dull-blue;
+        border-color: $dull-blue;
+    }
+    
+    input:checked ~ .checkmark:after {
+        display: block;
+    }
+}
+

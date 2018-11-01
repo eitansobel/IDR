@@ -1,0 +1,19 @@
+@import '~styles.scss';
+
+:host {
+    display: block;
+    text-align: center;
+
+        idr-modal-wrap {
+            min-width: 360px;
+        }
+}
+
+p {
+    color: $modal-text-color;
+}
+
+.headline {
+    margin-bottom: 30px;
+    display: inline-block;
+}

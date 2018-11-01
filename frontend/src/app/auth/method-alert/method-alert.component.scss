@@ -1,0 +1,56 @@
+@import '~styles.scss';
+
+:host {
+    display: block;
+    text-align: center;
+    padding-top: 50px;
+}
+
+idr-modal-wrap {
+    width: 630px;
+}
+
+label {
+    margin-bottom: 10px;
+    display: block;
+}
+
+.alertsActiveItem  {
+    position: relative;
+
+    label {
+        position: absolute;
+        top: 9px;
+        left: 10px;
+        font-weight: 600;
+        z-index: 1001;
+    }
+
+}
+
+.alertsActiveItem  ng-select {
+    ::ng-deep .ng-select-container {
+        padding-left: 65px;
+    }
+
+    ::ng-deep input {
+        padding-left: 65px!important;
+    }
+}
+
+.alertsList {
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.option {
+    color: $bombay;
+}
+
+::ng-deep ng-dropdown-panel {
+    text-align: left;
+}
+
+::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-disabled {
+    display: none!important;
+}

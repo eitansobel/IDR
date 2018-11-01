@@ -1,0 +1,523 @@
+@import '~styles.scss';
+
+:host {
+    .table-border {
+        border-collapse: collapse;
+
+        .title-cell {
+            .sort-patient-position {
+                position: relative;
+            }
+
+            ::ng-deep.btn-sort-patient {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translateX(-50%) translatey(-50%);
+                padding: 5px 20px;
+                display: block;
+                width: 75%;
+                height: 40px;
+                box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, .1);
+            }
+
+            idr-lock-svg.red {
+                background: $red;
+                ::ng-deep .svg-color {
+                    fill: $white;
+                    fill-rule: evenodd;
+                }
+            }
+
+            ::ng-deep .svg-color {
+                fill: #e4e6e8;
+                fill-rule: evenodd;
+            }
+
+            ::ng-deep span.btn-default {
+                height: 28px;
+                width: 28px;
+                margin-bottom: 0;
+                padding: 6px 0 0 0;
+            }
+
+            .doctor-cell-left-button {
+                margin: 8px 0;
+            }
+
+            ::ng-deep .home-svg {
+                height: 16px;
+                width: 16px;
+            }
+
+            ::ng-deep .sort-position {
+                left: -10px;
+                top: 5px;
+                position: absolute;
+            }
+
+            .doctor-title-name {
+                width: 147px;
+
+                .doctor-name {
+                    color: $denim;
+                    font-size: 15px;
+                    white-space: nowrap;
+                    font-weight: 600;
+                    text-transform: capitalize;
+                }
+
+                .doctor-title {
+                    font-size: 14px;
+                    color: $black;
+                    font-weight: 600;
+                    text-transform: capitalize;
+                }
+
+                .doctor-job {
+                    font-size: 14px;
+                    color: $bombay;
+                    font-weight: 600;
+                    text-transform: capitalize;
+                }
+
+                .delete-button {
+                    margin: 5px 0;
+                }
+            }
+
+            .patient-title-name {
+                width: 147px;
+
+                .patient-name {
+                    color: $denim;
+                    font-weight: 600;
+                    text-transform: capitalize;
+                    font-size: 14px;
+                    a {
+                        cursor: pointer;
+                    }
+                }
+
+                .patient-text {
+                    font-size: 13px;
+                    font-weight: 600;
+                }
+
+                .patient-prefix {
+                    font-size: 12px;
+                    color: grey;
+                }
+            }
+
+            .cell-div {
+                height: 126px;
+                width: 210px;
+                padding: 15px;
+                position: relative;
+                overflow: hidden;
+                white-space: nowrap;
+
+                &.elapsed {
+                    background: #f8ebe1;
+                }
+                &.soon {
+                    background: #e9eef4;
+                }
+
+                .doctor-title-name, .cell-text {
+                    font-size: 14px;
+                    line-height: 1;
+                    overflow: hidden;
+                    p {
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                    }
+                    .cell-title {
+                        margin-bottom: 3px;
+                        text-transform: capitalize;
+                        font-weight: 600;
+                    }
+                }
+
+                .empty-cell {
+                    width: 100%;
+                    height: 100%;
+                    margin: -15px;
+                    cursor: pointer;
+                }
+
+                .text-left-top {
+                    position: absolute;
+                    top: 15px;
+                    left: 15px;
+                }
+
+                .btn-right-top {
+                    position: absolute;
+                    top: 15px;
+                    right: 15px;
+                }
+
+                .btn-right-middle {
+                    position: absolute;
+                    top: 53px;
+                    right: 15px;
+                }
+
+                .btn-right-bottom {
+                    position: absolute;
+                    top: 91px;
+                    right: 15px;
+                }
+
+                .btn-left-bottom {
+                    position: absolute;
+                    top: 91px;
+                    left: 15px;
+                }
+            }
+
+            p {
+                margin-top: 0;
+                margin-bottom: 2px;
+                padding-bottom: 2px;
+            }
+
+            .cell-text {
+                font-size: 15px;
+                width: 70%;
+            }
+        }
+
+        .doctor-colour {
+            background-color: #f7f9fc;
+        }
+
+        .patient-colour {
+            background-color: $table-green;
+            border-left: 1px solid #ececec;
+        }
+
+        td {
+            border: $border;
+        }
+
+        .counter {
+            min-width: 40px;
+            width: 40px;
+            position: relative;
+
+            .counter-span {
+                position: absolute;
+                top: 15px;
+                left: 10px;
+                color: grey;
+            }
+        }
+
+        .sort-patient {
+            position: relative;
+
+            .sort-button {
+                position: absolute;
+            }
+        }
+    }
+
+        ::ng-deep.btn-sort-patient {
+            box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, .1) !important;
+        }
+    ::ng-deep .formSendMessage {
+        @include respond-to('min-large') {
+            position: static !important;
+            flex-basis: 115px;
+            width: 100% !important;;
+        }
+    }
+
+    .chatRoom {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        height: 80vh;
+        background: $white;
+        z-index: 9;
+        padding: 20px;
+        box-shadow: 0 0 25px 5px $shadow-color;
+        border-radius: 5px;
+        width: 650px;
+
+        idr-create-message {
+            height: 100%;
+        }
+
+        header {
+            color: $bombay;
+            display: flex;
+            align-items: center;
+        }
+
+        ::ng-deep {
+            .receiverWrap {
+                flex-wrap: wrap;
+                flex-basis: 150px;
+
+                & > div {
+                    width: 100%;
+                    margin: 0;
+                }
+            }
+
+            idr-chat {
+                border: $border;
+                border-radius: 4px;
+                padding: 15px 0;
+            }
+        }
+
+        ::ng-deep .newMessageControls idr-default-btn {
+            min-width: 130px !important;
+        }
+    }
+}
+
+.messageCounter {
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    font-size: 10px;
+    color: $white;
+    background: #425570;
+    width: 15px;
+    height: 15px;
+    border-radius: 2px;
+    z-index: 3;
+    text-align: center;
+    line-height: 15px;
+}
+
+:host {
+    ::ng-deep .ng-scrollbar.-vertical {
+        @include respond-to('min-large') {
+            width: 3px;
+        }
+        background: rgba(0, 0, 0, 0.1);
+
+        .ng-scrollbar-thumb {
+            background: $dull-blue;
+        }
+    }
+    ::ng-deep .ng-scrollbar.-horizontal {
+        background: rgba(0, 0, 0, 0.1);
+
+        .ng-scrollbar-thumb {
+            background: $dull-blue;
+        }
+    }
+}
+
+.home-footer {
+    display: flex;
+    margin-top: auto;
+    height: 60px;
+    padding-right: 20px;
+
+    .flexContainer {
+        @include respond-to('min-large') {
+            right: auto;
+            left: 40%;
+            tranfsform: translate(0, -50%);
+        }
+        position: absolute;
+        top: 25px;
+        right: 20px;
+    }
+
+    .footer-title {
+        @include respond-to('min-large') {
+            padding: 0 5px 0 10px;
+        }
+        padding: 0 10px 0 40px;
+    }
+
+    .circle-padding {
+        @include respond-to('min-large') {
+            padding: 0 10px 0 10px;
+        }
+        padding: 0 10px 0 20px;
+    }
+
+    .footer-text {
+        @include respond-to('min-large') {
+            font-size: $base-font-size - 2;
+        }
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+        font-weight: 600;
+        white-space: nowrap;
+
+        .footer-text-color {
+            color: $bombay;
+        }
+
+    }
+
+    ::ng-deep .search {
+        @include respond-to('min-large') {
+            min-width: 100px !important;
+        }
+    }
+}
+
+.searchContainer {
+    float: right;
+    position: relative;
+
+    input {
+        @include placeholder {
+            color: $bombay;
+            -webkit-text-fill-color: $bombay;
+        }
+        min-width: 300px;
+        border: $border-control;
+        color: $bombay;
+        font-size: $base-font-size;
+        border-radius: 5px;
+        padding: 11px 15px 11px 20px;
+        font-family: $base-font-sans-serif;
+        font-weight: 600;
+        -webkit-text-fill-color: $black;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .searchIcon {
+        position: absolute;
+        right: 9px;
+        top: 9px;
+
+        ::ng-deep svg {
+            width: 15px;
+            path {
+                fill: $bombay;
+            }
+        }
+    }
+
+}
+
+.flexContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 0 0 20px;
+
+    idr-default-btn {
+        margin: 0;
+
+        ::ng-deep span {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.usersInfo {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+
+.profile {
+    position: fixed;
+    top: 40px;
+    width: 90%;
+    height: calc(100% - 40px);
+    box-shadow: 0 0 25px 5px $shadow-color;
+    border-radius: 10px 0 0 0;
+    background: $white;
+    padding: 20px;
+    right: -100%;
+    transition: right 0.7s ease-out;
+    z-index: 9;
+
+    &.show {
+        right: 0;
+    }
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 2;
+}
+
+$cellHeight: 126px;
+$cellWidth: 210px;
+$counterWidth: 40px;
+$firstColumnWidth: 250px;
+
+.fixedTable {
+    display: inline-block;
+    border: 1px solid #ececec;
+    .counter {
+        height: 126px;
+        width: 39px;
+        float: left;
+        border-right: 1px solid #ececec;
+        box-sizing: border-box;
+    }
+    .sort-cell {
+        width: 210px;
+        float: left;
+        padding: 40px 25px 0 25px;
+    }
+
+    .table {
+        background-color: white;
+        width: auto;
+    }
+
+    &-header {
+        width: calc(100vw - 327px);
+        height: $cellHeight;
+        margin-left: $firstColumnWidth;
+        overflow: hidden;
+        border-bottom: 1px solid #ececec;
+    }
+
+    &-sidebar {
+        .title-cell {
+            width: 100%;
+            div.counter {
+                float: left;
+                min-width: 40px;
+                width: 40px;
+                height: 100%;
+            }
+            div.cell-div {
+                float: right;
+                height: 100%;
+                width: $cellHeight;
+            }
+        }
+        width: $firstColumnWidth;
+        height: calc(100vh - 278px);
+        float: left;
+        overflow: hidden;
+    }
+    &-body {
+        overflow: auto;
+        width: calc(100vw - 327px);
+        height: calc(100vh - 278px);
+        float: left;
+    }
+}

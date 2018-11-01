@@ -1,0 +1,229 @@
+<idr-close-popup-svg (click)="closeDialog()"></idr-close-popup-svg>
+
+<idr-modal-wrap>
+    <div>
+        <mat-dialog-content>
+            <h3>Import team members </h3>
+            <mat-horizontal-stepper [linear]='true' #stepper>
+                <mat-step [stepControl]="firstFormGroup"  [editable]="isEditable">
+                    <h2 class="steppHeader topHeadline">Let’s review a few things before we start</h2>
+
+                    <form [formGroup]="firstFormGroup">
+                        <ng-template matStepLabel>Prepare</ng-template>
+                        <h2 class="steppHeader">Review Information</h2>
+                        <mat-checkbox class="checkbox" formControlName="csvTrue" required>
+                            This file is in CSV format. <span class="required">*</span><br />
+                            <small>Using excel? Save the spreadsheet as a CSV file using «Save As».</small>
+                        </mat-checkbox>
+
+                        <h2 class="steppHeader">Review the data in your life</h2>
+                        <mat-checkbox class="checkbox" formControlName="headerTrue" required>
+                            He first row (aka header) has properly labels <span class="required">*</span><br />
+                            <small>RxPhoto will use the first row headers to match the columns to properties is RxPhoto. This is important.</small>
+                        </mat-checkbox>
+                        <mat-checkbox class="checkbox" formControlName="requiredTrue" required>
+                            Required Fields <span class="required">*</span><br />
+                            <small>First Name, Last Name, Date of Birth are required contact fields in IDR.</small>
+                        </mat-checkbox>
+                        <mat-checkbox class="checkbox" formControlName="namesTrue" required>
+                            First Name and Last Name are separated <span class="required">*</span><br />
+                            <small>Please make sure that First and Last Names are in different fields.</small>
+                        </mat-checkbox>
+                        <mat-checkbox class="checkbox" formControlName="bithdayTrue" required>
+                            Date of Birth <span class="required">*</span><br />
+                            <small>Please confirm that date of birth is formatted with MM/DD/YYYY.</small>
+                        </mat-checkbox>
+                        <mat-checkbox class="checkbox" formControlName="followCsvTrue" required>
+                            Please follow the CSV format below <span class="required">*</span><br />
+                            <small>All columns that have an * are required. You can fill only 5 columns</small>
+                        </mat-checkbox>
+                        <div class='example-container mat-elevation-z8'>
+                            <ng-scrollbar [trackX]="true" [trackY]='false'>
+                                <mat-table [dataSource]="dataSource" >
+
+                                    <ng-container matColumnDef="first_name">
+                                        <mat-header-cell *matHeaderCellDef> First Name <span>*</span></mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.first_name}} </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="middle_name">
+                                        <mat-header-cell *matHeaderCellDef> Middle Name </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.middle_name}} </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="last_name">
+                                        <mat-header-cell *matHeaderCellDef> Last Name <span>*</span></mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.last_name}} </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="dob">
+                                        <mat-header-cell *matHeaderCellDef> Date of birth <span>*</span></mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.dob}} </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="prefix">
+                                        <mat-header-cell *matHeaderCellDef> Prefix </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.prefix}} </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="preferred_name">
+                                        <mat-header-cell *matHeaderCellDef>Preferred Name </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.preferred_name}} </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="suffix">
+                                        <mat-header-cell *matHeaderCellDef> Suffix </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.suffix}} </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="phone">
+                                        <mat-header-cell *matHeaderCellDef> Phone <span>*</span></mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.phone}} </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="cell">
+                                        <mat-header-cell *matHeaderCellDef> Cell </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.cell}} </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="pager">
+                                        <mat-header-cell *matHeaderCellDef> Pager </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.pager}} </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="fax">
+                                        <mat-header-cell *matHeaderCellDef> Fax </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.fax}} </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="email">
+                                        <mat-header-cell *matHeaderCellDef> Email <span>*</span></mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="title">
+                                        <mat-header-cell *matHeaderCellDef> Job <span>*</span></mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="hospital_department">
+                                        <mat-header-cell *matHeaderCellDef> Hospital Department <span>*</span></mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.hospital_department}} </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="role">
+                                        <mat-header-cell *matHeaderCellDef> Hospital Role <span>*</span></mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.role}} </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="user_id">
+                                        <mat-header-cell *matHeaderCellDef> User ID # </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.user_id}} </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="dea_number">
+                                        <mat-header-cell *matHeaderCellDef> DEA # </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.dea_number}} </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="npi_number">
+                                        <mat-header-cell *matHeaderCellDef> NPI # </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.npi_number}} </mat-cell>
+                                    </ng-container>
+                                    <ng-container matColumnDef="state_license">
+                                        <mat-header-cell *matHeaderCellDef> State License # </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.state_license}} </mat-cell>
+                                    </ng-container>
+
+                                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                                </mat-table>
+                            </ng-scrollbar>
+                        </div>
+
+                    </form>
+                </mat-step>
+                <mat-step [editable]="isEditable">
+                    <h2 class="steppHeader topHeadline">Chose a file to upload</h2>
+                    <form [formGroup]="secondFormGroup">
+                        <ng-template matStepLabel>Upload</ng-template>
+                        <div class="importWrap">
+                            <ng4-files-drop
+                                (filesSelect)="filesSelect($event, stepper)"
+                                class="dragDrop">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="310" height="204" viewBox="0 0 310 204">
+                                <path fill="#D8DDE6" fill-rule="evenodd" d="M267.023 204h-210C25.594 204 .024 178.43.024 147s25.57-57 56.999-57c.99 0 2.008.032 3.057.099A87.22 87.22 0 0 1 60.023 87c0-47.973 39.028-87 87-87 44.621 0 81.382 33.258 86.4 76.852A34.268 34.268 0 0 1 244.522 75c19.025 0 34.502 15.478 34.502 34.5 0 3.99-.703 7.948-2.062 11.692 18.656 4.456 32.061 21.03 32.061 40.808 0 23.159-18.841 42-42 42zm-210-105c-26.467 0-47.999 21.534-47.999 48s21.532 48 47.999 48h210c18.196 0 33.001-14.804 33.001-33 0-17.209-12.918-31.331-30.046-32.847a4.506 4.506 0 0 1-3.603-2.424 4.494 4.494 0 0 1 .121-4.338 25.479 25.479 0 0 0 3.527-12.891c0-14.059-11.439-25.5-25.501-25.5-4.48 0-8.912 1.205-12.816 3.483a4.481 4.481 0 0 1-4.43.062 4.491 4.491 0 0 1-2.334-3.765C223.238 41.847 189.013 9 147.023 9c-43.008 0-78 34.991-78 78 0 2.534.129 5.133.383 7.72a4.497 4.497 0 0 1-1.382 3.703 4.508 4.508 0 0 1-3.771 1.186c-2.733-.416-5.03-.609-7.23-.609z"/>
+                                <path fill="#3F78CB" fill-rule="evenodd" d="M184.524 174h-60a4.5 4.5 0 0 1-4.501-4.5V114h-16.499a4.499 4.499 0 0 1-3.182-7.682l51-51a4.498 4.498 0 0 1 6.362 0l51 51a4.492 4.492 0 0 1 .976 4.904 4.495 4.495 0 0 1-4.156 2.778h-16.501v55.5a4.5 4.5 0 0 1-4.499 4.5zm-55.501-9h51.001v-55.5a4.5 4.5 0 0 1 4.5-4.5h10.136l-40.136-40.137L114.386 105h10.138a4.5 4.5 0 0 1 4.499 4.5V165z"/>
+                                </svg>
+                                <p>Drag and drop a CSV file here to upload</p>
+                                <ng4-files-click (filesSelect)="filesSelect($event, stepper)" class="chooseFile">
+                                    <span class="fileName" *ngIf="filenname">{{filenname}}</span>
+                                    <div *ngIf="!filenname" class="btn"><span>Select a file</span></div>
+                                </ng4-files-click>
+                                <p class="csvError" *ngIf="frongFormat">Can’t process your file, please check file format, or try again.</p>
+                            </ng4-files-drop>
+                        </div>
+                        <div class="notations">
+                            <h4>Good things to know about importing patients:</h4>
+                            <p>After the import it will take several minutes to see all of your patients inside RxPhoto. Any dublicate entries will not be added during the import and must be added manually. There will be an errors spreadsheet for you to download after the import to determine if you need to add any patients manually.</p>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step>
+                    <h2 class="steppHeader topHeadline">Review Information</h2>
+                    <ng-template matStepLabel>Review</ng-template>
+                    <div class="notations">
+                        <h4>Good things to know about importing patients:</h4>
+                        <p>After the import it will take several minutes to see all of your patients inside RxPhoto. Any dublicate entries will not be added during the import and must be added manually. There will be an errors spreadsheet for you to download after the import to determine if you need to add any patients manually.</p>
+                    </div>
+
+                    <mat-table *ngIf="resultData.length" [dataSource]="resultData" >
+
+                        <ng-container matColumnDef="author">
+                            <mat-header-cell *matHeaderCellDef> First Name <span>*</span></mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.author}}  </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="timestamp">
+                            <mat-header-cell *matHeaderCellDef> Date</mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.timestamp | date: 'd/M/yyyy'}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="processed">
+                            <mat-header-cell *matHeaderCellDef> Process</mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.processed}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="added">
+                            <mat-header-cell *matHeaderCellDef> Added</mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.added}} </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="errors">
+                            <mat-header-cell *matHeaderCellDef> Errors</mat-header-cell>
+                            <mat-cell *matCellDef="let element" class="error">
+                                <a [attr.href]="element.errors ? element.sheet_url : null" target="_blank"
+                                    [ngClass]="{'exists': element.errors}">
+                                    <svg class="loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 340">
+                                        <circle cx="170" cy="170" r="160" stroke="#E2007C"/>
+                                        <circle cx="170" cy="170" r="135" stroke="#E2007C"/>
+                                    </svg>
+                                    {{element.errors}}
+                                </a>
+                            </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="resultColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: resultColumns;"></mat-row>
+                    </mat-table>
+                </mat-step>
+            </mat-horizontal-stepper>
+            <div class="footer">
+                <idr-default-btn
+                    (click)="goBack(stepper)"
+                    className="default"
+                    >Back
+                </idr-default-btn>
+                <idr-default-btn
+                    [ngClass]="{'inactive': checkButtonStatus(stepper)}"
+                    *ngIf="stepper.selectedIndex < 2"
+                    (click)="goForward(stepper)"
+                    className="active"
+                    >Next
+            </idr-default-btn>
+            <idr-default-btn
+                *ngIf="stepper.selectedIndex >= 2"
+                (click)="closeDialog()"
+                className="active"
+                >Done
+            </idr-default-btn>
+        </div>
+    </mat-dialog-content>
+</div>
+</idr-modal-wrap>

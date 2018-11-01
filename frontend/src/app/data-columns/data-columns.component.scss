@@ -1,0 +1,31 @@
+@import '../../styles.scss';
+
+$notify-color: #edf1f6;
+
+.data-column {
+    padding: 25px 20px 0 20px;
+    .table-list {
+        margin: 20px 0;
+        .flexContainer {
+            display: block !important;
+        }
+        .buttons {
+            float: left;
+        }
+    }
+}
+
+.notify {
+    width: 100%;
+    display: flex;
+    padding: 20px;
+    flex-flow: row nowrap;
+    border-radius: 4px;
+    color: #828992;
+    border: solid 1.5px $border;
+    background-color: $notify-color;
+    font-weight: 600;
+    span {
+        color: #5c6570;
+    }
+}

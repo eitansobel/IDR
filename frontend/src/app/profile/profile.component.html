@@ -1,0 +1,373 @@
+<div class="leftColumn">
+    <div class="avatarWrap">
+        <idr-edit-icon-svg
+            class="editProfile"
+            (click)="uploadPhoto()"></idr-edit-icon-svg>
+        <img *ngIf="croppedImage" [src]="croppedImage" />
+    </div>
+                  
+    <div class="rightControlWrap" *ngIf="!approvedUser">
+        <h3>Privilege level</h3>
+        <p>None</p>
+    </div>
+    <div class="rightControlWrap">
+        <h3>Last modified {{last_update}}</h3>
+
+        <idr-default-btn
+            *ngIf="approvedUser"
+            className="active"
+            (click)="checkPrivileges()"
+            ><idr-plus-svg class="icon"></idr-plus-svg><span>Privilege level</span></idr-default-btn>
+        <idr-default-btn
+            className="active"
+            (click)="changePass()"
+            ><idr-edit-svg class="icon"></idr-edit-svg><span>Change Password</span></idr-default-btn>
+        <idr-default-btn
+            className="active"
+            type="link"
+            [routerLink]="['/auth/set-alerts']"
+            ><idr-alert-icon-svg class="icon"></idr-alert-icon-svg><span>Alert methods</span></idr-default-btn>
+    </div>
+</div>
+<div class="rightColumn">
+    <div class="nonApprovedMess" *ngIf="!approvedUser">You currently do not have access to the system. Your access is pending approval by the system administrator. If you have any questions, please contact (555) 555-5555.</div>
+
+    <idr-form-wrap
+        [formData]="personal"
+        [edittable]="personalEdit"
+        editName="personalEdit"
+        (onSave)="onSave($event)">
+        <div class="formWrap">
+            <h4>Personal information</h4>
+            <span (click)="personalEdit = false"><idr-edit-icon-svg class="editProfile"></idr-edit-icon-svg></span>
+            <form
+                class="form"
+                (keyup.enter)="login()"
+                (ngSubmit)="login()"
+                novalidate
+                [formGroup]="personal"
+                >
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <label>First Name</label>
+                        <idr-input-text
+                            [hasError]="personal.controls.first_name.invalid && !personalEdit"
+                            formControlName="first_name"
+                            [readonly]="personalEdit"
+                            [required]='true'
+                            [control]="personal.controls.first_name"
+                            ></idr-input-text>
+                    </div>
+                    <div class='control-half'>
+                        <label>Job</label>
+                        <idr-input-text
+                            [hasError]="personal.controls.title.invalid && !personalEdit"
+                            formControlName="title"
+                            [readonly]="personalEdit"
+                            (change)="trimTitle()"
+                            [required]='true'
+                            [control]="personal.controls.title"
+                            ></idr-input-text>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <label>Last Name</label>
+                        <idr-input-text
+                            [hasError]="personal.controls.last_name.invalid && !personalEdit"
+                            formControlName="last_name"
+                            [readonly]="personalEdit"
+                            [required]='true'
+                            [control]="personal.controls.last_name"
+                            ></idr-input-text>
+                    </div>
+                    <div class='control-half'>
+                        <label>Prefix</label>
+                        <idr-input-text
+                            [hasError]="personal.controls.prefix.invalid && !personalEdit"
+                            formControlName="prefix"
+                            [readonly]="personalEdit"
+                            [control]="personal.controls.prefix"
+                            ></idr-input-text>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <label>Middle Name</label>
+                        <idr-input-text
+                            [hasError]="personal.controls.middle_name.invalid && !personalEdit"
+                            formControlName="middle_name"
+                            [readonly]="personalEdit"
+                            [control]="personal.controls.middle_name"
+                            ></idr-input-text>
+                    </div>
+                    <div class='control-half'>
+                        <label>Suffix</label>
+                        <idr-input-text
+                            [hasError]="personal.controls.suffix.invalid && !personalEdit"
+                            formControlName="suffix"
+                            [readonly]="personalEdit"
+                            [control]="personal.controls.suffix"
+                            ></idr-input-text>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <label>Preferred Name</label>
+                        <idr-input-text
+                            [hasError]="personal.controls.preferred_name.invalid && !personalEdit"
+                            formControlName="preferred_name"
+                            [readonly]="personalEdit"
+                            [control]="personal.controls.preferred_name"
+                            ></idr-input-text>
+
+                    </div>
+                    <div class='control-half'>
+                        <label>DOB</label>
+                        <span *ngIf="personalEdit">{{this.personal.controls.birthday.value}}</span>
+                        <idr-date-select
+                            [readonly]="personalEdit"
+                            [date]="this.personal.controls.birthday.value"
+                            formControlName="birthday"
+                        ></idr-date-select>
+                        <idr-validation-message
+                            [control]="personal.controls.birthday"
+                            ></idr-validation-message>
+                    </div>
+                </div>
+                <idr-server-error [message]="message"></idr-server-error>
+            </form>
+        </div>
+    </idr-form-wrap>
+    <idr-form-wrap
+        [formData]="contactInfo"
+        (onSave)="onSave($event)"
+        [edittable]="contactInfoEdit"
+        editName="contactInfoEdit"
+    >
+        <div class="formWrap">
+            <h4>Contact information</h4>
+            <span (click)="(contactInfoEdit = false); disabledSelect('contactInfoEdit')">
+                <idr-edit-icon-svg class="editProfile"></idr-edit-icon-svg>
+            </span>
+            <form
+                (ngSubmit)="onSave()"
+                novalidate
+                class="form"
+                [formGroup]="contactInfo"
+                >
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <label>Phone</label>
+                        <div class='form-control' [ngClass]="{'hasError' : contactInfo.controls.phone.invalid && !contactInfoEdit}">
+                            <input
+                               [readonly]="contactInfoEdit"
+                               placeholder="(XXX) XXX-XXXX"
+                               [attr.maxlength]="maxLength"
+                               phoneMask
+                               formControlName="phone"
+                               >
+                           <span class='required'>*</span>
+                           <idr-validation-message
+                           *ngIf="contactInfo.controls.phone.invalid && !contactInfoEdit"
+                           [control]="contactInfo.controls.phone"
+                           ></idr-validation-message>
+                       </div>
+                    </div>
+                    <div class='control-half'>
+                        <label>Fax</label>
+                
+                            <div class='form-control' [ngClass]="{'hasError' : contactInfo.controls.fax.invalid && !contactInfoEdit}">
+                                <input
+                                   [readonly]="contactInfoEdit"
+                                   [value]="value"
+                                   placeholder="(XXX) XXX-XXXX"
+                                   [attr.maxlength]="maxLength"
+                                   phoneMask
+                                   formControlName="fax"
+                                   >
+                                   <idr-validation-message
+                                   *ngIf="contactInfo.controls.fax.invalid && !contactInfoEdit"
+                                   [control]="contactInfo.controls.fax"
+                                   ></idr-validation-message>
+                           </div>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <label>Pager</label>
+                       
+                            <div class='form-control' [ngClass]="{'hasError' : contactInfo.controls.pager.invalid && !contactInfoEdit}">
+                                <input
+                                   [readonly]="contactInfoEdit"
+                                   [value]="value"
+                                   placeholder="(XXX) XXX-XXXX"
+                                   [attr.maxlength]="maxLength"
+                                   phoneMask
+                                   formControlName="pager"
+                                   >
+                                   <idr-validation-message
+                                   *ngIf="contactInfo.controls.pager.invalid && !contactInfoEdit"
+                                   [control]="contactInfo.controls.pager"
+                                   ></idr-validation-message>
+                           </div>
+                    </div>
+                    <div class='control-half'>
+                        <label>Email</label>
+                        <idr-input-text
+                            [hasError]="contactInfo.controls.email.invalid && !contactInfoEdit"
+                            formControlName="email"
+                            [readonly]="contactInfoEdit"
+                            [control]="contactInfo.controls.email"
+                            [required]='true'
+                            ></idr-input-text>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <label>Cell</label>
+                      
+                            <div class='form-control phoneMask' [ngClass]="{'hasError' : contactInfo.controls.cell.invalid && !contactInfoEdit}">
+                                <input
+                                   [readonly]="contactInfoEdit"
+                                   [value]="value"
+                                   placeholder="(XXX) XXX-XXXX"
+                                   [attr.maxlength]="maxLength"
+                                   phoneMask
+                                   formControlName="cell"
+                                    
+                                   >
+                               <span class='required'>*</span>
+                               <idr-validation-message
+                                   *ngIf="contactInfo.controls.cell.invalid && !contactInfoEdit"
+                                   [control]="contactInfo.controls.cell"
+                                   ></idr-validation-message>
+                           </div>
+                    </div>
+                    <div class='control-half'>
+                        <label>Preferred</label>
+                        <ng-select [items]="preferred_mode"
+                            [selectOnTab]="true"
+                            bindValue="value"
+                            formControlName="preferred_mode"
+                            >
+                        </ng-select>
+                    </div>
+                </div>
+
+                <idr-server-error [message]="message"></idr-server-error>
+            </form>
+        </div>
+    </idr-form-wrap>
+    <idr-form-wrap
+        [formData]="additionalInfo"
+        (onSave)="onSave($event)"
+        [edittable]="additionalInfoEdit"
+        editName="additionalInfoEdit"
+    >
+        <div class="formWrap">
+            <h4>Additional information</h4>
+            <span (click)="(additionalInfoEdit = !additionalInfoEdit); disabledSelect('additionalInfoEdit')">
+                <idr-edit-icon-svg class="editProfile"></idr-edit-icon-svg>
+            </span>
+            <form
+                class="form"
+                (ngSubmit)="onSave()"
+                novalidate
+                [formGroup]="additionalInfo"
+                >
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <label>Hospital Role</label>
+                        <ng-select
+                            [items]="hospital_role"
+                            [selectOnTab]="true"
+                            class="required"
+                            bindLabel="title"
+                            bindValue="id"
+                            class="required"
+                            placeholder="Select Your Hospital Role"
+                            formControlName="hospital_role">
+                        </ng-select>
+                        <idr-validation-message
+                            [control]="additionalInfo.controls.hospital_role"
+                            ></idr-validation-message>
+                    </div>
+                    <div class='control-half'>
+                        <label>DEA #</label>
+                        <idr-input-text
+                            [hasError]="additionalInfo.controls.dea_number.invalid && formSubmitted"
+                            formControlName="dea_number"
+                            [readonly]="additionalInfoEdit"
+                            [control]="additionalInfo.controls.dea_number"
+                            ></idr-input-text>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <label>Hospital</label>
+                        <ng-select
+                            [items]="hospital"
+                            [selectOnTab]="true"
+                            bindLabel="title"
+                            class="required"
+                            bindValue="clinic_remote_id"
+                            placeholder="Select hospital"
+                            formControlName="hospital">
+                        </ng-select>
+                        <idr-validation-message
+                            [control]="additionalInfo.controls.hospital"
+                            ></idr-validation-message>
+                    </div>
+                    <div class='control-half'>
+                        <label>User ID #</label>
+                        <idr-input-text
+                            [hasError]="additionalInfo.controls.user_id.invalid && formSubmitted"
+                            formControlName="user_id"
+                            [readonly]="additionalInfoEdit"
+                            [control]="additionalInfo.controls.user_id"
+                            ></idr-input-text>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <label>Hospital Department</label>
+                        <ng-select
+                            [items]="hospital_department"
+                            [selectOnTab]="true"
+                            bindLabel="title"
+                            bindValue="id"
+                            class="required"
+                            placeholder="Select Hospital Department"
+                            formControlName="hospital_department">
+                        </ng-select>
+                        <idr-validation-message
+                            [control]="additionalInfo.controls.hospital_department"
+                            ></idr-validation-message>
+                    </div>
+                    <div class='control-half'>
+                        <label>NPI #</label>
+                        <idr-input-text
+                            [hasError]="additionalInfo.controls.npi_number.invalid && formSubmitted"
+                            formControlName="npi_number"
+                            [readonly]="additionalInfoEdit"
+                            [control]="additionalInfo.controls.npi_number"
+                            ></idr-input-text>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <label>State License #</label>
+                        <idr-input-text
+                            [hasError]="additionalInfo.controls.state_license.invalid && formSubmitted"
+                            formControlName="state_license"
+                            [readonly]="additionalInfoEdit"
+                            [control]="additionalInfo.controls.state_license"
+                            ></idr-input-text>
+                    </div>
+                </div>
+                <idr-server-error [message]="message"></idr-server-error>
+            </form>
+        </div>
+    </idr-form-wrap>
+</div>

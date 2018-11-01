@@ -1,0 +1,224 @@
+@import '~styles.scss';
+
+:host {
+    display: block;
+    width: 100%;
+
+    idr-modal-wrap {
+        display: block;
+    }
+
+    ::ng-deep .mat-dialog-actions {
+        display: block;
+    }
+}
+
+::ng-deep .mat-dialog-container {
+    padding: 0;
+    box-shadow: none;
+    overflow: visible;
+}
+
+.btn {
+    width: 100%;
+    background: none;
+    text-align: center;
+    border: 0;
+    display: inline-block;
+    font-size: $base-font-size + 2;
+    padding: 7px 17px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 10px  lighten($shadow-color, 10%);
+    font-weight: 600;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    height: 40px;
+    transition: all .5s;
+
+    idr-check-svg {
+        float: left;
+    }
+
+    span{
+        position: relative;
+        z-index: 2;
+        display: block
+    }
+
+    &:before,
+    &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        height: 100%;
+        background:  $dull-blue; /* onhover background color */
+        z-index: -1;
+        transform: translate3D(0,-100%,0); /* move elements above button so they don't appear initially */
+        transition: all .5s;
+    }
+
+    &:before{
+        z-index: 1;
+        top: 0;
+        left: 0;
+        width: 150%;
+        background:  $dull-blue;
+        transform-origin: 0 bottom;
+        transform:  translateX(-100%) rotate(-30deg);
+    }
+
+    &:after{
+        top: 0;
+        left: auto;
+        right: 0;
+        width: 150%;
+        transform-origin: right bottom;
+        transform: translateX(100%) rotate(30deg);
+    }
+
+    &:hover {
+        cursor: pointer;
+        color: $white;
+
+        &:after{
+
+            right: 0;
+            transform: rotate(0deg);
+            transition: all .5s;
+        }
+
+        &:before{
+            left: 0;
+            transform: rotate(0deg);
+            transition: all .5s;
+        }
+
+        i {
+            ::ng-deep svg {
+                path{
+                    fill: $white;
+                }
+            }
+        }
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    &-default {
+        background: $white;
+        color: $black;
+        border: $border;
+
+        i {
+            position: relative;
+            z-index:2;
+
+            ::ng-deep svg {
+                path{
+                    fill: $btn-background;
+                }
+            }
+        }
+    }
+
+    i {
+        float: left;
+        line-height: 16px;
+
+        ::ng-deep svg {
+            width: 14px;
+            height: 14px;
+        }
+    }
+}
+
+mat-dialog-content {
+    padding: 20px 20px;
+}
+
+.loadImage {
+    width: 33px;
+    height: 33px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+
+    &::-webkit-file-upload-button { /* chromes and blink button */
+    cursor: pointer;
+}
+}
+
+image-cropper {
+    ::ng-deep .source-image[src='undefined'] {
+        display: none;
+    }
+    
+}
+
+:host {
+
+    .loadImageWrap {
+        background:$gray url('/assets/images/placeholder.svg') no-repeat 50% 50%;
+        border-radius: 10px;
+        width: 300px;
+        height: 235px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        ::ng-deep .cropper {
+            color: $denim;
+
+            .resize.topright ::ng-deep .square {
+                background-color: $denim!important;
+            }
+        }
+
+    }
+}
+
+image-cropper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0;
+    background: $gray;
+}
+
+h3 {
+    font-weight: 600;
+    font-size: 21px;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+:host ::ng-deep .editProfile {
+    z-index: 1;
+    cursor: pointer;
+}
+
+idr-crop-svg {
+    position: absolute;
+    right: 50px;
+    top: 9px;
+}
+
+.hint {
+    color: $red;
+    font-size: $base-font-size - 1;
+    max-width: 300px;
+    text-align: center;
+}

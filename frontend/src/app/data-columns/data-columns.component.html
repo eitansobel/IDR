@@ -1,0 +1,29 @@
+<div class="data-column">
+    <div class="notify">
+        <div>Please, select what DATA columns you want to see the Table from a list of <span> Available DATA Columns.
+    </span> To change the order of Data column is drag and slide up or down.
+        </div>
+    </div>
+    <div class="table-list">
+        <idr-data-column-list
+            searchHolder="Search care team member"
+            [sortableKeys]="['title', 'is_hidden', 'update_interval']"
+            [searchKeys]="['title', {author: 'full_name'}]"
+            [listHeader]="listHeader">
+            <div class="buttons">
+                <idr-default-btn
+                    (click)="newDataColumn()"
+                    className="active btn-small"
+                    *ngIf="userCanCreateDataColumn">
+                    <idr-plus-svg class="icon"></idr-plus-svg>
+                    <span>Create Data Column</span>
+                </idr-default-btn>
+            </div>
+        </idr-data-column-list>
+    </div>
+    <div class="overlay" *ngIf="loadProfile"></div>
+</div>
+<div class="spinner" *ngIf="spinner">
+    <div class="dot1"></div>
+    <div class="dot2"></div>
+</div>

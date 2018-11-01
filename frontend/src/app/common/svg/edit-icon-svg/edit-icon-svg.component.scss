@@ -1,0 +1,19 @@
+@import '~styles.scss';
+:host.editProfile {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    top: 0;
+    z-index: 1;
+
+    path {
+        transition: all 0.5s;
+    }
+
+    &:hover{
+        path:last-child {
+            fill: $dull-blue
+        }
+    }
+
+}

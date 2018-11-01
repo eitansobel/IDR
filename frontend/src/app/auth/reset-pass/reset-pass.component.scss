@@ -1,0 +1,26 @@
+@import '../../../styles.scss';
+
+:host {
+    display: block;
+    text-align: center;
+
+    idr-default-btn {
+        margin-top: 35px;
+        display: block;
+
+        ::ng-deep .btn {
+            margin-bottom: 0;
+        }
+    }
+}
+
+idr-modal-wrap {
+    max-width: 360px;
+    min-width: 360px;
+    min-height: 300px;
+}
+
+form {
+    margin-top: 22px;
+}
+

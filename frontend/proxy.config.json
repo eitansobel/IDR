@@ -1,0 +1,14 @@
+{
+    "api/v1/": {
+        "target": "http://idr.staging.myappworx.com/",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    },
+    "/api/v2/": {
+        "target": "http://idr-auth.staging.myappworx.com",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    }
+}

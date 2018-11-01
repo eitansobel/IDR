@@ -1,0 +1,79 @@
+$steel: #9ba0a6;
+$dull-blue: #4b86dd;
+$spring-wood: #f8f4ef;
+$cararra: #e8e4de;
+$tide: #beb7b0;
+$white: #fff;
+$black: #000;
+$bombay: #b1b6be;
+$caribbean-green: #0BC899;
+$body-color: #f5f5f5;
+$link-water: #e9f0f9;
+$shadow-color: #e0e0e0;
+$modal-text-color: #cbcbcb;
+$base-font-sans-serif:  'Open Sans',  'Helvetica', sans-serif;
+$red: #ed1c3e;
+$denim: #1563d7; 
+$gray: #f2f3f5;
+
+$table-green: #edf7f2;
+
+// Body
+$base-text-color: $white !default;
+$base-font-size: 13px !default;
+$base-line-height: 1.2 !default;
+$base-font-family: $base-font-sans-serif !default;
+/*$max-width: 1000px;*/
+$vertical-rhythm: ($base-line-height * 1em);
+
+$base-min-width: 1024px;
+
+// Liks
+$base-link-color: $dull-blue;
+$border-control: 1px solid #e4e4e4;
+$hover: darken($base-link-color, 10%);
+// Buttons 
+$btn-color: $white !default;
+$btn-background: $caribbean-green !default;
+$btn-font-size: 12px !default;
+$border: 1px solid #ececec;
+
+$animation-speed: 0.3s;
+$breakpoints: (
+    'medium-landscape':  (orientation : landscape ),
+    'small-height':  ( max-height:  900px ),
+    'medium': ( max-width:  992px ),
+    'medium-large': ( max-width:  1024px ),
+    'min-large':  ( max-width: 1200px ),
+    'extra-large': ( max-width:  1450px ),
+    'large':  ( min-width: 1200px ),
+
+) !default;
+
+@mixin respond-to($breakpoint) {
+  // If the key exists in the map
+    @if map-has-key($breakpoints, $breakpoint) {
+        // Prints a media query based on the value
+        @media #{inspect(map-get($breakpoints, $breakpoint))} {
+            @content;
+        }
+    }
+
+    // If the key doesn't exist in the map
+    @else {
+        @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Available breakpoints are: #{map-keys($breakpoints)}.";
+    }
+}
+
+@mixin placeholder {
+  &::-webkit-input-placeholder { @content; }
+  &:-moz-placeholder { @content; }
+  &::-moz-placeholder { @content; }
+  &:-ms-input-placeholder { @content; }
+}
+
+// angular-notifier custom styles
+$notifier-success-background-color: #03b231;
+$notifier-warning-background-color: #c79808;
+$notifier-error-background-color: #c0313b;

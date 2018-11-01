@@ -1,0 +1,363 @@
+<idr-close-popup-svg (click)="closeDialog()"></idr-close-popup-svg>
+
+<idr-modal-wrap>
+    <div>
+        <mat-dialog-content>
+            <h3>New Team Member</h3>
+            <form
+                *ngIf="personal"
+                class="form"
+                novalidate
+                [formGroup]="personal"
+                >
+                <div class="formWrap">
+                    <h4>Personal information</h4>
+                    <div class="flexSpread">
+                        <div class='control-half'>
+                            <label>First Name</label>
+                            <idr-input-text
+                                [hasError]="personal.controls.first_name.invalid && formSubmitted"
+                                formControlName="first_name"
+                                placeholder='First Name'
+                                [required]='true'
+                                [control]="personal.controls.first_name"
+                                ></idr-input-text>
+                        </div>
+                        <div class='control-half'>
+                            <label>Job</label>
+                            <idr-input-text
+                                [hasError]="personal.controls.title.invalid && formSubmitted"
+                                formControlName="title"
+                                placeholder='Job'
+                                [required]='true'
+                                [control]="personal.controls.title"
+                                ></idr-input-text>
+                        </div>
+                    </div>
+                    <div class="flexSpread">
+                        <div class='control-half'>
+                            <label>Last Name</label>
+                            <idr-input-text
+                                [hasError]="personal.controls.last_name.invalid && formSubmitted"
+                                formControlName="last_name"
+                                placeholder='Last Name'
+                                [required]='true'
+                                [control]="personal.controls.last_name"
+                                ></idr-input-text>
+                        </div>
+                        <div class='control-half'>
+                            <label>Prefix</label>
+                            <idr-input-text
+                                [hasError]="personal.controls.prefix.invalid && formSubmitted"
+                                formControlName="prefix"
+                                placeholder='Prefix'
+                                [control]="personal.controls.prefix"
+                                ></idr-input-text>
+                        </div>
+                    </div>
+                    <div class="flexSpread">
+                        <div class='control-half'>
+                            <label>Middle Name</label>
+                            <idr-input-text
+                                [hasError]="personal.controls.middle_name.invalid && formSubmitted"
+                                formControlName="middle_name"
+                                placeholder='Middle Name'
+                                [control]="personal.controls.middle_name"
+                                ></idr-input-text>
+                        </div>
+                        <div class='control-half'>
+                            <label>Suffix</label>
+                            <idr-input-text
+                                [hasError]="personal.controls.suffix.invalid && formSubmitted"
+                                formControlName="suffix"
+                                placeholder='Suffix'
+                                [control]="personal.controls.suffix"
+                                ></idr-input-text>
+                        </div>
+                    </div>
+                    <div class="flexSpread">
+                        <div class='control-half'>
+                            <label>Preferred Name</label>
+                            <idr-input-text
+                                [hasError]="personal.controls.preferred_name.invalid && formSubmitted"
+                                formControlName="preferred_name"
+                                placeholder='Preferred Name'
+                                [control]="personal.controls.preferred_name"
+                                ></idr-input-text>
+
+                        </div>
+                        <div class='control-half'>
+                            <label>DOB</label>
+
+                            <idr-date-select
+                                [date]="this.personal.controls.birthday.value"
+                                formControlName="birthday"
+                                ></idr-date-select>
+
+                            <idr-validation-message
+                                *ngIf="formSubmitted"
+                                [control]="personal.controls.birthday"
+                                ></idr-validation-message>
+                        </div>
+                    </div>
+                    <div class="importWrap">
+                        <ng4-files-drop
+                            (filesSelect)="filesSelect($event)"
+                            class="dragDrop">
+
+                            <ng4-files-click (filesSelect)="filesSelect($event)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44">
+                                <path fill="#C6C8CB" fill-rule="evenodd" d="M42 44.001H2A2 2 0 0 1 .001 42V27.001a2 2 0 1 1 3.999 0V40h35.999V27.001a2 2 0 0 1 4 0V42A2 2 0 0 1 42 44.001zM35.001 17a1.99 1.99 0 0 1-1.415-.586l-9.585-9.585V32a2 2 0 0 1-4 0V6.828l-9.587 9.586a2 2 0 1 1-2.828-2.828l13-13c.001-.002.004-.002.006-.004.184-.183.403-.329.646-.429.012-.005.024-.007.035-.011.226-.089.469-.141.726-.141L22 0c.258 0 .502.053.729.142l.031.01c.247.102.469.25.655.435l12.999 12.999A1.998 1.998 0 0 1 35.001 17z"/>
+                                </svg>{{filename}}
+                            </ng4-files-click>
+                        </ng4-files-drop>
+                        <idr-default-btn
+                            className="default"
+                            *ngIf="showCancel"
+                            (click)="cancelImport()"><span>Cancel</span></idr-default-btn>
+                        <idr-default-btn
+                            *ngIf="showClear"
+                            className="default"
+                            (click)="clearForm()"><span>Clear</span></idr-default-btn>
+                        <idr-default-btn
+                            className="active"
+                            (click)="importData()"><span>Import</span></idr-default-btn>
+                    </div>
+                    <p class="csvError" *ngIf="csvError">X {{csvErrorText}} </p>
+                </div>
+
+                <div class="formWrap">
+                    <h4>Contact information</h4>
+
+                    <div class="flexSpread">
+                        <div class='control-half'>
+                            <label>Phone</label>
+
+                            <div class='form-control phoneMask' 
+                                 [ngClass]="{'hasError': personal.controls.phone.invalid && formSubmitted}">
+                                 <input
+                                    placeholder="(XXX) XXX-XXXX"
+                                    phoneMask
+                                    formControlName="phone"
+                                    >
+                                <span class='required'>*</span>
+                                <idr-validation-message
+                                    *ngIf="personal.controls.phone.invalid && formSubmitted"
+                                    [control]="personal.controls.phone"
+                                    ></idr-validation-message>
+                            </div>
+                        </div>
+                        <div class='control-half'>
+                            <label>Fax</label>
+                            <div class='form-control phoneMask' 
+                                 [ngClass]="{'hasError': personal.controls.fax.invalid && formSubmitted}">
+                                 <input
+                                    placeholder="(XXX) XXX-XXXX"
+                                    phoneMask
+                                    formControlName="fax"
+                                    >
+                                <idr-validation-message
+                                    *ngIf="personal.controls.fax.invalid && formSubmitted"
+                                    [control]="personal.controls.fax"
+                                    ></idr-validation-message>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flexSpread">
+                        <div class='control-half'>
+                            <label>Pager</label>
+
+                            <div class='form-control phoneMask' 
+                                 [ngClass]="{'hasError': personal.controls.pager.invalid && formSubmitted}">
+                                 <input
+                                    placeholder="(XXX) XXX-XXXX"
+                                    phoneMask
+                                    formControlName="pager"
+                                    >
+                                <idr-validation-message
+                                    *ngIf="personal.controls.pager.invalid && formSubmitted"
+                                    [control]="personal.controls.pager"
+                                    ></idr-validation-message>
+                            </div>
+                        </div>
+                        <div class='control-half'>
+                            <label>Email</label>
+                            <idr-input-text
+                                [hasError]="personal.controls.email.invalid && formSubmitted"
+                                formControlName="email"
+                                placeholder='Email'
+                                [control]="personal.controls.email"
+                                [required]='true'
+                                ></idr-input-text>
+                        </div>
+                    </div>
+                    <div class="flexSpread">
+                        <div class='control-half'>
+                            <label>Cell</label>
+
+                            <div class='form-control phoneMask' 
+                                 [ngClass]="{'hasError': personal.controls.cell.invalid && formSubmitted}">
+                                 <input
+                                    placeholder="(XXX) XXX-XXXX"
+                                    phoneMask
+                                    formControlName="cell"
+                                    >
+                                <span class='required'>*</span>
+                                <idr-validation-message
+                                    *ngIf="personal.controls.cell.invalid && formSubmitted"
+                                    [control]="personal.controls.cell"
+                                    ></idr-validation-message>
+                            </div>
+                        </div>
+                        <div class='control-half'>
+                            <label>Preferred</label>
+                            <ng-select [items]="preferred_mode"
+                                [selectOnTab]="true"
+                                placeholder="Preferred Mode"
+                                bindValue="value"
+                                formControlName="preferred_mode"
+                                >
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="flexSpread">
+                        <div class='control-half'>
+                            <label>Password</label>
+                            <idr-input-pass
+                                [hasError]="personal.controls.password.invalid && formSubmitted"
+                                formControlName="password"
+                                placeholder='Password'
+                                [required]='true'
+                                [control]="personal.controls.password"
+                                ></idr-input-pass>
+                        </div>
+                        <div class='control-half'>
+                            <label>Confirm Password</label>
+                            <idr-input-pass
+                                [hasError]="personal.controls.confirm_password.invalid && formSubmitted"
+                                formControlName="confirm_password"
+                                placeholder='Confirm Password'
+                                [required]='true'
+                                [control]="personal.controls.confirm_password"
+                                ></idr-input-pass>
+                        </div>
+                    </div>
+                    <div class="flexSpread">
+                        <div class='control-half'>
+                            <label>Username</label>
+                            <idr-input-text
+                                [hasError]="personal.controls.username.invalid && formSubmitted"
+                                formControlName="username"
+                                placeholder='Username'
+                                [required]='true'
+                                [control]="personal.controls.username"
+                                ></idr-input-text>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="formWrap">
+                    <h4>Additional information</h4>
+
+                    <div class="flexSpread">
+                        <div class='control-half'>
+                            <label>Hospital Role</label>
+                            <ng-select
+                                [items]="hospital_role"
+                                [selectOnTab]="true"
+                                placeholder="Hospital Role"
+                                class="required"
+                                bindLabel="title"
+                                bindValue="id"
+                                class="required"
+                                [ngClass]="{'hasError': personal.controls.hospital_role.invalid && formSubmitted}"
+                                formControlName="hospital_role">
+                        </ng-select>
+                        <idr-validation-message
+                            *ngIf="formSubmitted"
+                            [control]="personal.controls.hospital_role"
+                            ></idr-validation-message>
+                    </div>
+                    <div class='control-half'>
+                        <label>DEA #</label>
+                        <idr-input-text
+                            [hasError]="personal.controls.dea_number.invalid && formSubmitted"
+                            formControlName="dea_number"
+                            placeholder="DEA #"
+                            [control]="personal.controls.dea_number"
+                            ></idr-input-text>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <label>Hospital</label>
+                        {{this.data.hospital.title}}
+
+                    </div>
+                    <div class='control-half'>
+                        <label>User ID #</label>
+                        <idr-input-text
+                            [hasError]="personal.controls.user_id.invalid && formSubmitted"
+                            formControlName="user_id"
+                            [control]="personal.controls.user_id"
+                            placeholder="User ID #"
+                            ></idr-input-text>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <label>Hospital Department</label>
+                        <ng-select
+                            [items]="hospital_department"
+                            [selectOnTab]="true"
+                            bindLabel="title"
+                            bindValue="id"
+                            placeholder="Hospital Department"
+                            class="required"
+                            [ngClass]="{'hasError': personal.controls.hospital_department.invalid && formSubmitted}"
+                            formControlName="hospital_department">
+                    </ng-select>
+                    <idr-validation-message
+                        *ngIf="formSubmitted"
+                        [control]="personal.controls.hospital_department"
+                        ></idr-validation-message>
+                </div>
+                <div class='control-half'>
+                    <label>NPI #</label>
+                    <idr-input-text
+                        [hasError]="personal.controls.npi_number.invalid && formSubmitted"
+                        formControlName="npi_number"
+                        placeholder="NPI #"
+                        [control]="personal.controls.npi_number"
+                        ></idr-input-text>
+                </div>
+            </div>
+            <div class="flexSpread">
+                <div class='control-half'>
+                    <label>State License #</label>
+                    <idr-input-text
+                        [hasError]="personal.controls.state_license.invalid && formSubmitted"
+                        formControlName="state_license"
+                        placeholder="License"
+                        [control]="personal.controls.state_license"
+                        ></idr-input-text>
+                </div>
+            </div>
+            <idr-server-error [message]="message"></idr-server-error>
+
+        </div>
+        <div class="footer">
+            <idr-default-btn
+                className="default btn-small"
+                (click)="cancel()"><span>Cancel</span></idr-default-btn>
+            <idr-default-btn
+                className="active btn-small"
+                (click)="save()"><span>Save</span></idr-default-btn>
+        </div>
+    </form>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+</mat-dialog-actions>
+</div>
+</idr-modal-wrap>

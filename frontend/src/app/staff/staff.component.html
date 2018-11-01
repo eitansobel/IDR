@@ -1,0 +1,66 @@
+<div class="swipeIcon" (click)="toggleLists(val=!val)">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="36" viewBox="0 0 18 36">
+        <path id="hide_icon" class="cls-1" d="M12674,3186a0.972,0.972,0,0,1,1,1v34a1,1,0,0,1-2,0v-34A0.972,0.972,0,0,1,12674,3186Zm8,0a0.972,0.972,0,0,1,1,1v34a1,1,0,0,1-2,0v-34A0.972,0.972,0,0,1,12682,3186Zm8,0a0.972,0.972,0,0,1,1,1v34a1,1,0,0,1-2,0v-34A0.972,0.972,0,0,1,12690,3186Z" transform="translate(-12673 -3186)"/>
+    </svg>
+</div>
+<div class="leftColumn">
+    <div class="flexContainer">
+        <h3 class="listHeadling">WorkGroups</h3>
+        <idr-default-btn
+            className="active btn-small"
+            (click)="newList()"
+            *ngIf="myRole"
+            ><idr-plus-svg class="icon"></idr-plus-svg><span>Add Workgroup</span></idr-default-btn>
+    </div>
+    <idr-sortable-list
+        className="list"
+        typeName="stafflist"
+        (chosedData)="onChooseData($event)"
+        [keys]="['title', 'qty', 'update_time']"
+        [listData]="teamList"
+        searchHolder="Search Workgroup"
+        [listHeader]="header"></idr-sortable-list>
+</div>
+<div class="rightColumn usersInfo">
+ 
+    <idr-sortable-list
+        *ngIf="teamListSingle"
+        className="tableList"
+        typeName="stafflist"
+        searchHolder="Search team member"
+        [listTitle]="checkedTitle"
+        [keys]="['first_name', 'middle_name', 'last_name', 'hospital_department', 'hospital_role', 'title']"
+        [listData]="teamListSingle"
+        (chosedData)="chosedPfData($event)"
+        [myRole]="myRole"
+        [list_id]="editableListid"
+        [listHeader]="listHeaderSingle">
+        <div class="buttons">
+            <idr-default-btn
+                className="active btn-small"
+                (click)="newMember()"
+                *ngIf="myRole"
+                ><idr-plus-svg class="icon"></idr-plus-svg><span>New Team Member</span></idr-default-btn>
+            <idr-default-btn
+                className="active btn-small"
+                (click)="multipleUpload()"
+                *ngIf="myRole"
+                class="multyBtn"
+                ><idr-plus-svg class="icon"></idr-plus-svg><span>Multiple Upload</span></idr-default-btn>
+            <idr-default-btn
+                className="active btn-small"
+                *ngIf="editableListid && myRole"
+                (click)="editList()"
+                ><idr-edit-svg class='icon'></idr-edit-svg><span>Edit list</span></idr-default-btn>
+        </div>
+    </idr-sortable-list>
+   
+    <div class='profile' [ngClass]="{'show': loadProfile}">
+         <idr-view-profile [myRole]="myRole"  (closeAll)="closeProfile($event)" [viewProfile]="chosedProfile"></idr-view-profile>
+    </div>
+    <div class="overlay" *ngIf="loadProfile"></div>
+</div>
+<div class="spinner" *ngIf="spinner">
+    <div class="dot1"></div>
+    <div class="dot2"></div>
+</div>

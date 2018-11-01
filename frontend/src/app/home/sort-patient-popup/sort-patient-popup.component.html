@@ -1,0 +1,52 @@
+<idr-modal-wrap class="form-control">
+    <div>
+        <mat-dialog-content>
+            <h3 class="title center">{{headerText}}</h3>
+            <div></div>
+            <form class="form fieldset-group" novalidate>
+                <fieldset id="sort" class="fieldset-sort">
+                    <legend>Sort by:</legend>
+                    <label for="room-number" [ngClass]="{'picked': sort === 1, 'unborder': sort === 2}"
+                        class="left-radius"><span>SSN</span></label>
+                    <input type="radio" [value]=1 name="sort" id="room-number" [(ngModel)]='sort'>
+                    <label for="first-name"
+                        [ngClass]="{'picked': sort === 2, 'unborder': sort === 3}"><span>First Name</span></label>
+                    <input type="radio" [value]=2 name="sort" id="first-name" [(ngModel)]='sort'>
+                    <label for="last-name"
+                        [ngClass]="{'picked': sort === 3, 'unborder': sort === 4}"><span>Last Name</span></label>
+                    <input type="radio" [value]=3 name="sort" id="last-name" [(ngModel)]='sort'>
+                    <label for="dob" [ngClass]="{'picked': sort === 4}" class="right-radius"><span>DOB</span></label>
+                    <input type="radio" [value]=4 name="sort" id="dob" [(ngModel)]='sort'>
+                    <label for="room" [ngClass]="{'picked': sort === 5}" class="right-radius"><span>Room</span></label>
+                    <input type="radio" [value]=5 name="sort" id="room" [(ngModel)]='sort'>
+                </fieldset>
+
+                <fieldset id="order" class="fieldset-order">
+                    <legend>Order:</legend>
+                    <label for="ascending" class="left-radius"
+                        [ngClass]="{'picked': order === 1}"><span>Ascending</span>
+                        <idr-arrow-svg class="asc"></idr-arrow-svg>
+                    </label>
+                    <input type="radio" [value]=1 name="order" id="ascending" [(ngModel)]='order'>
+                    <label for="descending" class="right-radius"
+                        [ngClass]="{'picked': order === 2}"><span>Descending</span>
+                        <idr-arrow-svg class="des"></idr-arrow-svg>
+                    </label>
+                    <input type="radio" [value]=2 name="order" id="descending" [(ngModel)]='order'>
+                </fieldset>
+                <div class="footer flexSpread">
+                    <idr-default-btn
+                        (click)="closeDialog()"
+                        className="default">
+                        <idr-close-svg class='icon'></idr-close-svg>
+                        <span>Cancel</span></idr-default-btn>
+                    <idr-default-btn
+                        (click)="applySort()"
+                        className="active">
+                        <idr-check-svg class='icon'></idr-check-svg>
+                        <span>Apply</span></idr-default-btn>
+                </div>
+            </form>
+        </mat-dialog-content>
+    </div>
+</idr-modal-wrap>

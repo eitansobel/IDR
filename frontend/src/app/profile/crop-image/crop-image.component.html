@@ -1,0 +1,46 @@
+<idr-close-popup-svg (click)="closeDialog()"></idr-close-popup-svg>
+
+<idr-modal-wrap>
+    <div>
+        <mat-dialog-content>
+            <div class="loadImageWrap">
+                <idr-edit-icon-svg class="editProfile"></idr-edit-icon-svg>
+                <idr-crop-svg *ngIf="!showCrop && croppedImage" (click)="crop()"></idr-crop-svg>
+                <input size="60" type="file" class="loadImage" (change)="fileChangeEvent($event)" />
+                 <div *ngIf="!file" class="image">
+                    <img *ngIf="croppedImage" [attr.src]="croppedImage">
+                </div>
+            <image-cropper
+                *ngIf="showCrop"
+                [imageChangedEvent]="imageChangedEvent"
+                [maintainAspectRatio]="true"
+                [aspectRatio]="3 / 2.35 "
+                [resizeToWidth]="300"
+                format="png, jpg"
+                (imageCropped)="imageCropped($event)"
+                (imageLoaded)="imageLoaded($event)"
+                (loadImageFailed)="loadImageFailed($event)"
+                [imageBase64]="imageBase64"
+                ></image-cropper>
+                </div>
+            <h3>Change Profile Photo</h3>
+            <p class="hint" *ngIf="showCropError">Please upload your Profile picture in one of these formats jpg, jpeg, png</p>
+        </mat-dialog-content>
+        <mat-dialog-actions>
+            <button
+                class="btn btn-default"
+                *ngIf="croppedImage && !showCrop"
+                (click)="deleteImage()"
+                mat-button><i><idr-close-svg
+            ></idr-close-svg></i><span>Delete photo</span></button>
+            <button
+                class="btn btn-default"
+                *ngIf="croppedImage && showCrop"
+                (click)="cancelCrop()"
+                mat-button><i><idr-close-svg></idr-close-svg></i><span>Cancel</span></button>
+            <idr-default-btn
+                className="active"
+                (click)="save()"><idr-check-svg class='icon'></idr-check-svg><span>Save changes</span></idr-default-btn>
+        </mat-dialog-actions>
+    </div>
+</idr-modal-wrap>

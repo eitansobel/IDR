@@ -1,0 +1,10 @@
+<span
+    (click)="handleClick($event)"
+    class="btn btn-{{className}}">
+    <span>
+        <i>
+            <ng-content select=".icon"></ng-content>
+        </i>
+        <ng-content></ng-content>
+    </span>
+</span>

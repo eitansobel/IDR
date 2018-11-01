@@ -1,0 +1,237 @@
+@import '~styles.scss';
+
+:host {
+
+    ::ng-deep .ng-scrollbar.-horizontal {
+        background: rgba(0, 0, 0, 0.1);
+        visibility: hidden;
+        @include respond-to('extra-large') {
+            height: 3px;
+            visibility: visible;
+        }
+        .ng-scrollbar-thumb {
+            background: $dull-blue;
+        }
+    }
+}
+
+:host {
+    display: flex;
+    position: relative;
+    /*min-height: calc(100% - 61px);*/
+    @include respond-to('min-large') {
+        left: 0;
+
+        -webkit-transition: left 0.4s ease-in-out;
+        -moz-transition: left 0.4s ease-in-out;
+        -ms-transition: left 0.4s ease-in-out;
+        -o-transition: left 0.4s ease-in-out;
+        transition: left 0.4s ease-in-out;
+
+        &.slide {
+            left: 385px;
+        }
+
+        .leftColumn {
+            position: absolute;
+            height: 100%;
+            left: -385px;
+        }
+        .multyBtn {
+            display: none;
+        }
+    }
+}
+
+.listHeadling {
+    text-transform: uppercase;
+    color: $modal-text-color;
+    margin: 0;
+    font-size: $base-font-size;
+}
+
+.spinner {
+    margin: 100px auto;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin: -40px 0 0 -40px;
+    -webkit-animation: sk-rotate 2.0s infinite linear;
+    animation: sk-rotate 2.0s infinite linear;
+}
+
+.leftColumn {
+    @include respond-to('medium-large') {
+        min-width: 385px;
+    }
+    min-height: 100%;
+    .flexContainer {
+        flex-basis: 44px;
+        width: calc(100% - 8px);
+    }
+
+    ::ng-deep {
+        .searchContainer,
+        .searchContainer input {
+            width: 100%;
+        }
+    }
+}
+
+.dot1,
+.dot2 {
+    width: 60%;
+    height: 60%;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    background-color: $dull-blue;
+    border-radius: 100%;
+    -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+    animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.dot2 {
+    top: auto;
+    bottom: 0;
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+}
+
+.flexContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    h3 {
+        margin-top: 10px;
+    }
+
+    idr-default-btn {
+        margin: 0;
+
+        ::ng-deep span {
+            margin: 0;
+        }
+
+        span {
+            padding: 0;
+        }
+    }
+}
+
+.buttons {
+    display: flex;
+    margin-left: 20px;
+
+    idr-default-btn {
+        margin-right: 15px;
+        @include respond-to('extra-large') {
+            margin-right: 5px;
+            ::ng-deep {
+                .btn.btn-small span {
+                    font-size: 13px;
+                }
+
+                i {
+                    margin-right: 5px;
+                }
+            } 
+        }
+    }
+}
+
+.usersInfo {
+    position: relative;
+    overflow: hidden;
+    /*height: 100%;*/
+
+    @include respond-to('min-large') {
+        ::ng-deep .searchContainer {
+            display: none;
+        }
+    }
+}
+
+.profile {
+    position: fixed;
+    top: 40px;
+    width: 90%;
+    height: calc(100% - 40px);
+    box-shadow: 0 0 25px 5px $shadow-color;
+    border-radius: 10px 0 0 0;
+    background: $white;
+    padding: 20px;
+    right: -100%;
+    transition: right 0.7s ease-out;
+    z-index: 3;
+
+    &.show {
+        right: 0;
+    }
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 2;
+}
+
+.swipeIcon {
+    @include respond-to('min-large') {
+        display: block;
+    }
+    display: none;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    z-index: 2;
+
+    svg {
+        height: 20px;
+
+        path {
+            fill: $bombay;
+        }
+    }
+}
+
+@-webkit-keyframes sk-rotate {
+    100% {
+        -webkit-transform: rotate(360deg)
+    }
+}
+
+@keyframes sk-rotate {
+    100% {
+        transform: rotate(360deg);
+        -webkit-transform: rotate(360deg)
+    }
+}
+
+@-webkit-keyframes sk-bounce {
+    0%, 100% {
+        -webkit-transform: scale(0.0)
+    }
+    50% {
+        -webkit-transform: scale(1.0)
+    }
+}
+
+@keyframes sk-bounce {
+    0%, 100% {
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+    }
+    50% {
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+    }
+}

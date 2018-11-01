@@ -1,0 +1,251 @@
+@import '../../../styles.scss';
+
+:host {
+    display: block;
+    text-align: center;
+    
+    .form-control.phoneMask {
+    margin-bottom: 10px;
+    width: 100%;
+    position: relative;
+
+    input {
+        @include placeholder {
+            color: $bombay;
+            -webkit-text-fill-color: $bombay;
+        }
+        width: 100%;
+        border: $border-control;
+        font-size: $base-font-size;
+        border-radius: 5px;
+        font-family: $base-font-sans-serif;
+        font-weight: 600;
+        padding: 8px 15px 8px 20px;
+        color: $black;
+        -webkit-text-fill-color: $black;
+
+        &:focus {
+            outline: none;
+        }
+
+        &[readonly] {
+            border: 0;
+            padding-left: 0;
+             font-size: $base-font-size + 1;
+
+            & + .required {
+                display: none;
+            }
+        }
+    }
+
+
+    &.hasError {
+        input {
+            border-color: $red;
+        }
+    }
+    .required {
+        position: absolute;
+        top: 9px;
+        left: 10px;
+        color: $red;
+    }
+    
+}
+}
+
+.flexSpread {
+    display: flex;
+    justify-content: space-between;
+}
+
+idr-modal-wrap {
+    max-width: 400px;
+}
+
+::ng-deep .mat-horizontal-content-container {
+    padding: 0!important;
+}
+
+.control-half {
+    text-align: left;
+    width: 48%;
+}
+
+::ng-deep .mat-horizontal-stepper-header .mat-step-icon,
+::ng-deep .mat-horizontal-stepper-header .mat-step-icon-not-touched {
+    margin-right: 0!important;
+    text-indent: -9999px;
+    border: $border;
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    background: $white;
+    
+    span,
+    .mat-icon{
+        display: none;
+    }
+}
+
+::ng-deep .mat-stepper-horizontal-line {
+    border: $border;
+    border-width: 2px;
+    margin: 0!important;
+}
+
+::ng-deep .mat-step-label {
+    min-width: auto!important;
+}
+
+::ng-deep .mat-horizontal-stepper-header {
+    padding: 0!important;
+}
+
+::ng-deep .mat-horizontal-stepper-header[ng-reflect-active="true"] + .mat-stepper-horizontal-line,
+::ng-deep .mat-horizontal-stepper-header[aria-selected="true"] + .mat-stepper-horizontal-line {
+    border-color: $caribbean-green;
+}
+
+::ng-deep .mat-horizontal-stepper-header[ng-reflect-active="true"],
+::ng-deep .mat-horizontal-stepper-header[aria-selected="true"] {
+    .mat-step-icon {
+        border-color: $caribbean-green;
+        
+        &:after {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: $caribbean-green;
+            border-radius: 50%;
+        }
+    }
+}
+.step-1 {
+    ::ng-deep .mat-horizontal-stepper-header-container {
+        .mat-horizontal-stepper-header:first-child{
+            .mat-step-icon {
+                border-color: $caribbean-green;
+                
+                &:after {
+                    content: '';
+                    width: 4px;
+                    height: 4px;
+                    background: $caribbean-green;
+                    border-radius: 50%;
+                }
+            }
+        }
+        .mat-stepper-horizontal-line:nth-child(2) {
+             border-color: $caribbean-green;
+        }
+    }
+}
+.step-2 {
+    ::ng-deep .mat-horizontal-stepper-header-container {
+        .mat-horizontal-stepper-header:first-child{
+            .mat-step-icon {
+                border-color: $caribbean-green;
+                
+                &:after {
+                    content: '';
+                    width: 4px;
+                    height: 4px;
+                    background: $caribbean-green;
+                    border-radius: 50%;
+                }
+            }
+        }
+        .mat-horizontal-stepper-header:nth-child(3){
+            .mat-step-icon {
+                border-color: $caribbean-green;
+                
+                &:after {
+                    content: '';
+                    width: 4px;
+                    height: 4px;
+                    background: $caribbean-green;
+                    border-radius: 50%;
+                }
+            }
+        }
+             .mat-stepper-horizontal-line:nth-child(2),
+             .mat-stepper-horizontal-line:nth-child(4) {
+             border-color: $caribbean-green;
+        }
+    }
+}
+.step-3 {
+    ::ng-deep .mat-horizontal-stepper-header-container {
+        .mat-horizontal-stepper-header:first-child,
+                 .mat-horizontal-stepper-header:nth-child(3),
+                 .mat-horizontal-stepper-header:nth-child(5),
+                 .mat-horizontal-stepper-header:nth-child(7){
+            .mat-step-icon {
+                border-color: $caribbean-green;
+                
+                &:after {
+                    content: '';
+                    width: 4px;
+                    height: 4px;
+                    background: $caribbean-green;
+                    border-radius: 50%;
+                }
+            }
+        }
+         .mat-stepper-horizontal-line:nth-child(2),
+             .mat-stepper-horizontal-line:nth-child(4),
+             .mat-stepper-horizontal-line:nth-child(6) {
+             border-color: $caribbean-green;
+        }
+       
+    }
+}
+
+ng-select {
+    position: relative;
+    margin-bottom: 15px;
+    
+    &.required ::ng-deep .ng-select-container {
+        &:before {
+            content: '*';
+            position: absolute;
+            top: 9px;
+            left: 10px;
+            color: $red;
+            z-index: 2;
+        }
+        &.ng-has-value {
+            &:before {
+                display: none;
+            }
+        }
+    }
+}
+::ng-deep .mat-horizontal-content-container {
+    overflow: visible!important;
+}
+
+::ng-deep .mat-horizontal-stepper-content[aria-expanded="true"] {
+    overflow: visible!important;
+}
+
+::ng-deep .ng-select .ng-select-container {
+    border: $border-control;
+    padding-left: 10px;
+    input{
+        padding-left: 10px;
+    }
+    
+}
+::ng-deep .ng-dropdown-panel.ng-select-bottom {
+    text-align: left;
+}
+::ng-deep  .ng-select.hasError .ng-select-container {
+    border-color: $red;
+}
+
+p {
+    color: $modal-text-color;
+}

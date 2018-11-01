@@ -1,0 +1,387 @@
+@import '~styles.scss';
+
+h4 {
+    font-size: $base-font-size + 2;
+}
+
+.form-control {
+    margin-bottom: 10px;
+}
+
+.header {
+    border-bottom: $border;
+    padding-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.asterisk {
+    color: $red;
+    position: absolute;
+    right: 10px;
+    top: 13px;
+}
+
+.buttons {
+    display: flex;
+
+    idr-default-btn {
+        margin-left: 15px;
+
+        ::ng-deep span {
+            margin-bottom: 0;
+            svg {
+                width: 14px;
+                height: 17px;
+                vertical-align: middle;
+                margin-right: 10px;
+
+                path {
+                    fill: $bombay;
+                }
+            }
+        }
+
+        ::ng-deep  .btn-small {
+            ::ng-deep svg {
+                height: 14px!important;
+            }
+        }
+    }
+}
+
+.headline {
+    font-weight: 600;
+}
+
+.list-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.list-group-item {
+    text-align: left;
+    flex-basis: 48%;
+    margin-bottom: 10px;
+}
+
+:host {
+    display: block;
+    width: 100%;
+
+    idr-modal-wrap {
+        display: block;
+    }
+
+    ::ng-deep .mat-dialog-actions {
+        display: block;
+    }
+}
+
+::ng-deep .mat-dialog-container {
+    padding: 0;
+    box-shadow: none;
+    overflow: visible;
+}
+
+mat-dialog-content {
+    padding: 20px 20px;
+}
+
+.table {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    line-height: 1.5;
+    height: 50vh;
+    font-size: $base-font-size;
+    padding-top: 35px;
+    margin-bottom: 20px;
+
+    & + idr-default-btn {
+        ::ng-deep span {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.columnList {
+    position: relative;
+}
+
+.row {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    border: solid 1.5px  $border;
+    cursor: pointer;
+
+    &.header {
+        border: solid 1px transparent;
+        color: $modal-text-color;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 95%;
+        background: $white;
+        margin-right: 40px;
+        z-index: 4;
+        padding-bottom: 0;
+        margin-bottom: 0;
+
+        .rowItem {
+            color: $modal-text-color!important;
+            white-space: nowrap;
+            &:first-child {
+                max-width: 46px;
+                text-align: center;
+            }
+
+            &:last-child {
+                padding-left: 0;
+            }
+        }
+        ::ng-deep .mat-checkbox-input {
+            opacity: 0;
+        }
+        ::ng-deep .mat-checkbox-checked .mat-checkbox-background {
+            background: $dull-blue;
+        }
+    }
+
+
+    ::ng-deep  .mat-pseudo-checkbox {
+        border-color: #cbcbcb;
+
+        &.mat-pseudo-checkbox-checked {
+            background: $dull-blue;
+            &:after {
+                border-color: $white;
+                top: 6px;
+                left: 4px;
+            }
+        }
+    }
+
+    ::ng-deep .mat-list-text {
+        padding-right: 0!important;
+        @include respond-to('min-large') {
+            .rowItem:first-child {
+                flex-grow: 2;
+            }
+        }
+    }
+
+    &Item {
+        flex-flow: row nowrap;
+        flex-basis: 0;
+        padding: 19px 10px;
+        word-break: break-word;
+        color: #abb3bf;
+        flex-grow: 1;
+        font-weight: 600;
+
+        &.active {
+            ::ng-deep  svg {
+                width: 15px;
+
+                polyline {
+                    stroke: $dull-blue;
+                }
+            }
+        }
+
+        &.asc {
+            ::ng-deep  svg {
+                transform: rotate(180deg);
+                margin-top: 3px;
+            }
+        }
+
+    }
+}
+
+.listBody {
+    margin-top: 20px;
+    padding-right: 20px;
+}
+
+.rowList {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+mat-dialog-content {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 0;
+    flex-wrap: wrap;
+
+    .columnList {
+        flex-grow: 1;
+        max-width: 48%;
+        overflow: hidden;
+    }
+}
+
+:host {
+    ::ng-deep .mat-list-item-content-reverse {
+        flex-direction: row!important;
+        width: 100%;
+    }
+
+    ::ng-deep .mat-list-text {
+        margin-left: 20px;
+        flex-flow: row nowrap!important;
+        width: 100%;
+    }
+}
+
+idr-arrow-svg {
+    margin-left: 5px;
+
+    ::ng-deep svg {
+        width: 15px;
+        vertical-align: middle;
+        line-height: 18px;
+
+        polyline {
+            stroke: #abb3bf;
+        }
+    }
+}
+
+.searchContainer {
+    position: relative;
+    width: 100%;
+
+    input,
+    ::ng-deep input {
+        @include placeholder{
+            color: $bombay;
+            -webkit-text-fill-color: $bombay;
+        }
+        min-width: 277px;
+        width: 100%;
+        border: $border-control;
+        font-size: $base-font-size;
+        border-radius: 5px;
+        padding: 11px 15px 11px 20px!important;
+        font-family: $base-font-sans-serif;
+        font-weight: 600;
+        color: $black;
+        -webkit-text-fill-color: $black;
+
+        &:focus{
+            outline: none;
+        }
+    }
+
+    ::ng-deep input[readonly] {
+        padding: 11px 15px 11px 20px!important;
+        background: rgb(235, 235, 228);
+    }
+
+    .searchIcon {
+        position: absolute;
+        right: 9px;
+        top: 9px;
+
+        ::ng-deep svg {
+            width: 15px;
+
+            path {
+                fill: $bombay;
+            }
+        }
+    }
+}
+
+.columnTitle {
+    color: $bombay;
+    font-size: $base-font-size + 1;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.desc {
+    color: $bombay;
+    font-size: $base-font-size - 1;
+    font-weight: 600;
+}
+
+mat-checkbox {
+    cursor: pointer;
+}
+
+:host {
+    ::ng-deep .ng-scrollbar.-vertical {
+        @include respond-to('min-large') {
+            width: 3px;
+        }
+        background: rgba(0, 0, 0, 0.1);
+
+        .ng-scrollbar-thumb  {
+            background: $dull-blue;
+        }
+    }
+}
+
+.successWrap {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background: $white;
+    border: $border;
+    border-radius: 4px;
+    height: 0;
+    overflow: hidden;
+    -webkit-animation: slide 1s ease-out;
+    animation: slide 1s ease-out;
+
+
+    .successMessage {
+        color: $caribbean-green;
+        margin-bottom: 15px;
+    }
+    idr-server-error{
+        text-align: center;
+    }
+
+    .errorMessage {
+        color: $red;
+
+        ::ng-deep span {
+            display: block;
+            width: 100%;
+            text-align: center;
+            text-transform: capitalize;
+        }
+    }
+}
+
+@-webkit-keyframes slide {
+    0% {height: 0;  padding: 0;}
+    50% {height: auto;  padding: 40px 0;}
+    100% {
+        height: 0;
+        padding:  0;
+    }
+}
+@keyframes slide {
+    0% {height: 0;  padding: 0;}
+    50% {height: auto;  padding: 40px 0;}
+    100% {
+        height: 0;
+        padding:  0;
+    }
+}

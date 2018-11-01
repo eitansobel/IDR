@@ -1,0 +1,19 @@
+.coming_soon {
+    width: 100%;
+    height: calc(100% - 300px);
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+
+    h2 {
+        font-size: 60px;
+        flex-basis: 100%;
+        text-align: center;
+        margin: 0 0 45px 0;
+    }
+
+    idr-default-btn {
+        flex-basis: 100%;
+
+    }
+}

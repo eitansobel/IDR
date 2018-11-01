@@ -1,0 +1,34 @@
+<h4><ng-content></ng-content></h4>
+<label>
+    <idr-dropdown-svg></idr-dropdown-svg>
+    <input
+        placeholder="Date"
+        (change)="onChange($event)"
+        (dateTimeChange)="onChange($event)"
+        [owlDateTimeTrigger]="dt3"
+        [min]="minDate"
+         [(ngModel)]="selectedMoment"
+        [owlDateTime]="dt3">
+    <owl-date-time
+        [pickerType]="'calendar'"
+         (afterPickerClosed)="onCloseDate($event)"
+        #dt3
+        ></owl-date-time>
+</label>
+<label>
+    <idr-dropdown-svg></idr-dropdown-svg>
+    <input
+        (change)="onChange($event)"
+        placeholder="Time"
+         [(ngModel)]="selectedMoment"
+        (dateTimeChange)="onChange($event)"
+        [owlDateTimeTrigger]="dt4"
+        [min]="minTime"
+        [owlDateTime]="dt4">
+    <owl-date-time
+        (afterPickerClosed)="onClose($event)"
+        (afterPickerOpen)="onOpen($event)"
+        [hour12Timer]='true'
+        [pickerType]="'timer'"
+        #dt4></owl-date-time>
+</label>

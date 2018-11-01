@@ -1,0 +1,72 @@
+<idr-close-popup-svg (click)="closeDialog()"></idr-close-popup-svg>
+
+<idr-modal-wrap>
+    <div>
+        <mat-dialog-content>
+            <h3 class="title center">{{headerText}}</h3>
+            <div class="flexSpread">
+                <div class="form-control author" *ngIf="!currentColumn">
+                    <label>Author:</label>
+                    <p>{{columnAuthor || userFullName}}</p>
+                </div>
+            </div>
+            <form
+                *ngIf="columnForm"
+                class="form rowList"
+                novalidate
+                [formGroup]="columnForm">
+                <div class="flexSpread">
+                    <div class="form-control">
+                        <label>Name of column <span class="requiredStar">*</span></label>
+                        <idr-input-text
+                            [hasError]="columnForm.controls.title.invalid && formSubmitted"
+                            formControlName="title"
+                            placeholder='Name of column'
+                            [control]="columnForm.controls.title">
+                        </idr-input-text>
+                    </div>
+                </div>
+
+                <div class="flexSpread">
+                    <div class="form-control">
+                        <label>Update Needed <span class="requiredStar">*</span></label>
+                        <ng-select [items]="updateIntervalTypes"
+                            placeholder="Not Selected"
+                            bindValue="value"
+                            [ngClass]="{'hasError': columnForm.controls.update_interval.invalid && formSubmitted}"
+                            formControlName="update_interval">
+                        </ng-select>
+                        <idr-validation-message
+                            *ngIf="formSubmitted"
+                            [control]="columnForm.controls.update_interval">
+                        </idr-validation-message>
+                    </div>
+                </div>
+                <div class="flexSpread" *ngIf="!currentColumn">
+                    <div class="form-control">
+                        <label>Show/Hide Column</label>
+                        <ng-select [items]="showHideTypes"
+                            placeholder="Show"
+                            bindValue="value"
+                            formControlName="is_hidden">
+                        </ng-select>
+                    </div>
+                </div>
+
+                <idr-server-error [message]="message"></idr-server-error>
+                <div class="footer flexSpread form-control">
+                    <idr-default-btn
+                        className="default"
+                        (click)="cancel()">
+                        <idr-close-svg class='icon green'></idr-close-svg>
+                        <span>Cancel</span></idr-default-btn>
+                    <idr-default-btn
+                        className="active"
+                        (click)="save()">
+                        <idr-check-svg class='icon'></idr-check-svg>
+                        <span>Save changes</span></idr-default-btn>
+                </div>
+            </form>
+        </mat-dialog-content>
+    </div>
+</idr-modal-wrap>

@@ -1,0 +1,156 @@
+<idr-close-popup-svg (click)="closeDialog()"></idr-close-popup-svg>
+
+<idr-modal-wrap >
+    <header class="header">
+        <span class="headline" >{{popup.header}}</span>
+        <div class="buttons">
+            <idr-default-btn
+                className="default btn-small grey"
+                (click)="closeDialog()"
+                >
+                <idr-close-svg class="icon"></idr-close-svg>
+                Cancel</idr-default-btn>
+            <idr-default-btn
+                *ngIf="listForm.controls.title.value !== 'My Patients' && deleteList "
+                (click)="deleteCreatedList()"
+                className="default btn-small grey"
+                >
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="29" viewBox="0 0 25 29">
+                    <path id="trash" class="cls-1" d="M8947.06,2604.03h-4.58v-3.5a3.5,3.5,0,0,0-3.5-3.5h-6a3.5,3.5,0,0,0-3.5,3.5v3.5h-4.42a1.5,1.5,0,0,0,0,3h0.92v15.5a3.5,3.5,0,0,0,3.5,3.5h13a3.5,3.5,0,0,0,3.5-3.5v-15.5h1.08A1.5,1.5,0,0,0,8947.06,2604.03Zm-14.58-3.5a0.5,0.5,0,0,1,.5-0.5h6a0.508,0.508,0,0,1,.5.5v3.5h-7v-3.5Zm10.5,22a0.5,0.5,0,0,1-.5.5h-13a0.5,0.5,0,0,1-.5-0.5v-15.5h14v15.5Zm-9.5-13a1.5,1.5,0,0,0-1.5,1.5v8a1.5,1.5,0,1,0,3,0v-8A1.5,1.5,0,0,0,8933.48,2609.53Zm5,0a1.5,1.5,0,0,0-1.5,1.5v8a1.5,1.5,0,1,0,3,0v-8A1.5,1.5,0,0,0,8938.48,2609.53Z" transform="translate(-8923.56 -2597.03)"/>
+                </svg>
+                Delete list</idr-default-btn>
+            <idr-default-btn
+                className="active btn-small"
+                (click)="manageList()"
+                >
+                <idr-check-svg class='icon'></idr-check-svg>
+                Save list</idr-default-btn>
+        </div>
+    </header>
+    <div>
+        <mat-dialog-content>
+            <div class="rowList">
+                <div class="columnList">
+                    <div class="flexContainer">
+                        <div class="columnTitle">Search patient</div>
+                        <div class="searchContainer">
+                            <input
+                                class="search"
+                                [(ngModel)]="searchText"
+                                placeholder="Search patient"
+                                >
+                                <idr-search-icon-svg class="searchIcon"></idr-search-icon-svg>
+                        </div>
+                        <p class="desc">Search patient and add to the list</p>
+                    </div>
+                </div>
+                <div class="columnList">
+                    <div class="flexContainer">
+                        <div class="columnTitle">List name</div>
+                        <div class="searchContainer" [formGroup]="listForm">
+                            <idr-input-text
+                                class="search"
+                                placeholder="List name"
+                                [hasError]="listForm.controls.title.invalid && formSubmitted"
+                                [readonly]="listForm.controls.title.value == 'My Patients'"
+                                formControlName="title"
+                                [control]="listForm.controls.title"
+                                >
+                        </idr-input-text>
+                                <span class="asterisk">*</span>
+                        </div>
+                        <p class="desc">New list name</p>
+                    </div>
+                </div>
+            </div>
+            <div class="rowList" *ngIf="listForm.controls.title.value">
+                <div class="columnList">
+                    <div class="table">
+                        <div class="header row">
+                            <div class="rowItem"><mat-checkbox [(ngModel)]="checked" (change)="selectAll2(checked, membersAll)"></mat-checkbox></div>
+                            <div
+                                class="rowItem"
+                                [ngClass]="{'active': active2 === 'first_name', 'asc': (direc && active2 === 'first_name')}"
+                                (click)="sortable('first_name'); active2 = 'first_name'">
+                                All patients
+                                <idr-arrow-svg></idr-arrow-svg>
+                            </div>
+                            <div
+                                class="rowItem"
+                                [ngClass]="{'active': active2 === 'mrn', 'asc': (direc && active2 === 'mrn')}"
+                                (click)="sortable('mrn'); active2 = 'mrn'">
+                                MRN <idr-arrow-svg></idr-arrow-svg>
+                            </div>
+                            <div
+                                class="rowItem"
+                                [ngClass]="{'active': active2 === 'birth_date', 'asc': (direc && active2 === 'birth_date')}"
+                                (click)="sortable('birth_date'); active2 = 'birth_date'">
+                                Birth Date <idr-arrow-svg></idr-arrow-svg>
+                            </div>
+                        </div>
+                        <ng-scrollbar>
+                            <mat-selection-list #membersAll [(ngModel)]="selectedOptions" class="listBody">
+                                <mat-list-option
+                                    *ngFor="let row of patients | select:  keys : searchText;"
+                                    class="row"
+                                    [value]="row"
+                                    [ngStyle]="{'display': row.hidden}"
+                                    >
+                                    <span class="rowItem">{{row.first_name}} {{row.last_name}}</span>
+                                    <span class="rowItem">{{row.mrn}}</span>
+                                    <span class="rowItem">{{row.birth_date}}</span>
+                                </mat-list-option>
+                            </mat-selection-list>
+                        </ng-scrollbar>
+
+                    </div>
+
+                    <idr-default-btn
+                        className="default blue"
+                        (click)="addToList(membersAll)"
+                        >
+                        Add selection to new list</idr-default-btn>
+
+                </div>
+                <div class="columnList">
+                    <div class="table">
+                        <div class="header row">
+                            <div class="rowItem">
+                                <mat-checkbox [(ngModel)]="newListChecked" (change)="selectAll2(newListChecked, newList)"></mat-checkbox>
+                            </div>
+                            <div class="rowItem"
+                                 [ngClass]="{'active': active === 'first_name', 'asc': (direc && active === 'first_name') }"
+                                 (click)="sortableList('first_name'); active = 'first_name'"
+                                 >Name <idr-arrow-svg></idr-arrow-svg></div>
+                            <div class="rowItem"
+                                 [ngClass]="{'active': active === 'mrn', 'asc': (direc && active === 'mrn')}"
+                                 (click)="sortableList('mrn'); active = 'mrn'">MRN<idr-arrow-svg></idr-arrow-svg></div>
+                            <div class="rowItem"
+                                 [ngClass]="{'active': active === 'birth_date', 'asc': (direc && active === 'birth_date')}"
+                                 (click)="sortableList('birth_date'); active = 'birth_date'">Birth Date<idr-arrow-svg></idr-arrow-svg></div>
+                        </div>
+                        <ng-scrollbar>
+                            <mat-selection-list  #newList class="listBody">
+                                <mat-list-option
+                                    *ngFor="let row of membersInList"
+                                    class="row"
+                                    [value]="[row]"
+                                    >
+                                    <span class="rowItem">{{row.first_name}} {{row.last_name}}</span>
+                                    <span class="rowItem">{{row.mrn}}</span>
+                                    <span class="rowItem">{{row.birth_date}}</span>
+                                </mat-list-option>
+                            </mat-selection-list>
+                        </ng-scrollbar>
+                    </div>
+                    <idr-default-btn
+                        className="default blue"
+                        (click)="removeFromList(newList, membersAll)"
+                        >
+                        Remove selection from new list</idr-default-btn>
+                </div>
+            </div>
+        </mat-dialog-content>
+
+    </div>
+</idr-modal-wrap>

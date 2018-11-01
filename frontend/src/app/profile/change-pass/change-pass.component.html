@@ -1,0 +1,53 @@
+<idr-close-popup-svg (click)="closeDialog()"></idr-close-popup-svg>
+
+<idr-modal-wrap>
+        <span class="headline" >{{headerText}}</span>
+    <div>
+        <mat-dialog-content>
+            <form [formGroup]="form" *ngIf="!success">
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <label>Current password</label>
+                        <idr-input-pass
+                            [hasError]="form.controls.current_password.invalid && formSubmitted"
+                            formControlName="current_password"
+                            placeholder='Password'
+                            [required]='true'
+                            [control]="form.controls.current_password"
+                            ></idr-input-pass>
+                    </div>
+                    <div class='control-half'>
+                        <label>New password</label>
+                        <idr-input-pass
+                            [hasError]="form.controls.password.invalid && formSubmitted"
+                            formControlName="password"
+                            placeholder='New Password'
+                            [required]='true'
+                            [control]="form.controls.password"
+                            ></idr-input-pass>
+                    </div>
+                    <div class='control-half'>
+                        <label>Confirm Password</label>
+                        <idr-input-pass
+                            [hasError]="form.controls.confirm_password.invalid && formSubmitted"
+                            formControlName="confirm_password"
+                            placeholder='Confirm Password'
+                            [required]='true'
+                            [control]="form.controls.confirm_password"
+                            ></idr-input-pass>
+                    </div>
+                </div>
+                 <idr-server-error [message]="message"></idr-server-error>
+            </form>
+            <div *ngIf="success">Password successfully changed</div>
+        </mat-dialog-content>
+        <mat-dialog-actions *ngIf="!success">
+            <idr-default-btn
+                className="default"
+                (click)="closeDialog()"><idr-close-svg class='icon'></idr-close-svg><span>Cancel</span></idr-default-btn>
+            <idr-default-btn
+                className="active"
+                (click)="save()"><idr-check-svg class='icon'></idr-check-svg><span>Save changes</span></idr-default-btn>
+        </mat-dialog-actions>
+    </div>
+</idr-modal-wrap>

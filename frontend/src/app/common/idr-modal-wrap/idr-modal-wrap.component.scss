@@ -1,0 +1,39 @@
+@import '~styles.scss';
+
+:host {
+    display: inline-block;
+    background: $white;
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 0 0 25px 5px $shadow-color;
+    position: relative;
+    overflow: hidden;
+}
+
+.iconDecor {
+    border-radius: 50%;
+    background: $link-water;
+    padding: 20px;
+    border: 5px solid $white;
+    width: 100px;
+    height: 100px;
+    vertical-align: middle;
+    margin: 10px auto 0;
+    box-shadow: 0 0 25px lighten($shadow-color, 5%);
+    margin-bottom: 40px;
+
+    ::ng-deep svg {
+        width: 87%;
+        display: inline-block;
+        vertical-align: middle;
+        height: 100%;
+        line-height: 100px;
+    }
+}
+
+h3 {
+    font-size: 20px;
+    margin-top: -17px;
+    margin-bottom: -5px;
+    text-align: center;
+}

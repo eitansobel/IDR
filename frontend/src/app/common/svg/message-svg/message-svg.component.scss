@@ -1,0 +1,114 @@
+@import '~styles.scss';
+:host {
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    box-shadow: 0px 2px 13.4px 0.6px rgba(0, 0, 0, 0.08);
+    background-color: #ffffff;
+    display: inline-block;
+    border: solid 0.5px #e6e6e6;
+    text-align: center;
+    line-height: 33px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all .5s;
+
+
+    &.urgency-4 {
+        background: #1563d7;
+        color: $white;
+        svg {
+            path, rect, .svg-color{
+                fill: $white!important;
+
+            }
+        }
+    }
+    &.urgency-3 {
+        background: #f3d66f;
+        color: $white;
+        svg {
+            path, rect, .svg-color{
+                fill: $white!important;
+
+            }
+        }
+    }
+    &.urgency-2 {
+        background: #eba11f;
+        color: $white;
+    }
+    &.urgency-1 {
+        background: $red;
+        color: $white;
+    }
+    svg {
+        z-index: 2;
+        position: relative;
+        path {
+            transition: all .5s;
+        }
+    }
+
+    &:before,
+    &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        height: 100%;
+        background:  $dull-blue; /* onhover background color */
+        z-index: -1;
+        transform: translate3D(0,-100%,0); /* move elements above button so they don't appear initially */
+        transition: all .5s;
+    }
+
+    &:before{
+        z-index: 1;
+        top: 0;
+        left: 0;
+        width: 150%;
+        background:  $dull-blue;
+        transform-origin: 0 bottom;
+        transform:  translateX(-100%) rotate(-30deg);
+    }
+
+    &:after{
+        top: 0;
+        left: auto;
+        right: 0;
+        width: 150%;
+        transform-origin: right bottom;
+        transform: translateX(100%) rotate(30deg);
+    }
+
+    &:hover {
+        cursor: pointer;
+        color: $white;
+
+        &:after{
+
+            right: 0;
+            transform: rotate(0deg);
+            transition: all .5s;
+        }
+
+        &:before{
+            left: 0;
+            transform: rotate(0deg);
+            transition: all .5s;
+        }
+
+
+        svg {
+            path, rect, .svg-color{
+                fill: $white!important;
+
+            }
+        }
+
+    }
+}

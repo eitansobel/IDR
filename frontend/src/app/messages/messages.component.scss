@@ -1,0 +1,117 @@
+@import '~styles.scss';
+:host {
+
+    @include respond-to('min-large') {
+        height: calc(100vh - 167px);
+    }
+    height: calc(100vh - 100px);
+    display: flex;
+}
+
+.newMsg {
+    display: flex;
+    padding: 15px 20px 0;
+    margin-bottom: 0px;
+    margin-right: 8px;
+    flex-wrap: wrap;
+    position: relative;
+    background: rgba(21, 99, 215, 0.06);
+    hr {
+        flex-basis: 100%;
+        height: 0;
+        margin-top: 10px;
+        border: 0;
+        margin-bottom:0;
+        border-bottom: 1px solid #e4e4e4;
+    }
+}
+
+idr-search-control {
+    margin: 0 10px 30px 10px;
+    display: block;
+}
+
+ng-scrollbar {
+    height: calc(100% - 100px);
+}
+
+.messagesHistory {
+    padding-top: 15px;
+    margin-right: 8px;
+
+    &.active {
+        background: rgba(21, 99, 215, 0.06);
+    }
+}
+
+
+.avatar {
+    width: 45px;
+    height: 45px;
+    flex-basis: 45px;
+    border-radius: 50%;
+    background: #dee1e3;
+    margin-right: 20px;
+    color: #7c8083;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    position: relative;
+}
+
+.message {
+    font-size: $base-font-size + 1;
+    flex-basis: calc(100% - 65px);
+    width: calc(100% - 65px);
+    word-break: break-all;
+    header {
+        display: flex;
+        justify-content: space-between;
+        color: #90979c;
+        font-weight: 600;
+        margin-bottom: 5px;
+        font-size: $base-font-size + 1;
+    }
+}
+
+.chatLog {
+    @include respond-to('min-large') {
+        max-width: 40%;
+        flex-basis: 40%;
+    }
+    flex-basis: 20%;
+    border-right: $border;
+    overflow: hidden;
+    min-width: 300px;
+    margin: 20px 0;
+    ::ng-deep .ng-scrollbar.-vertical {
+        @include respond-to('min-large') {
+            width: 3px;
+        }
+        background: rgba(0, 0, 0, 0.1);
+
+        .ng-scrollbar-thumb  {
+            background: $dull-blue;
+        }
+    }
+}
+.chatRoom {
+    @include respond-to('min-large') {
+        max-width: 60%;
+        flex-basis: 60%;
+    }
+    flex-basis: 80%;
+    max-width: 77%;
+    display: flex;
+}
+
+#infinite-scroller {
+    height: 500px;
+    width: 700px;
+    border: 1px solid #f5ad7c;
+    overflow: scroll;
+    padding: 0;
+    list-style: none;
+}

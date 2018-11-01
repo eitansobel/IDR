@@ -1,0 +1,3 @@
+<div class="pagination">
+    <div class="page" [ngClass]="{'active': selected == i}" (click)="selectPage(i)" *ngFor="let page of pagesArr; let i = index">{{page}}</div>
+</div>

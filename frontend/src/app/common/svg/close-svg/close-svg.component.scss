@@ -1,0 +1,10 @@
+:host {
+    &.green {
+        ::ng-deep svg {
+            width: 12px !important;
+            path {
+                fill: #0BC899;
+            }
+        }
+    }
+}

@@ -1,0 +1,83 @@
+@import '~styles.scss';
+
+label {
+    color: $bombay;
+    display: block;
+    margin-bottom: 5px;
+}
+.ng-select.ng-select-disabled {
+    &:focus {
+        outline: none
+    }
+      ::ng-deep .ng-select .ng-select-container {
+        padding-left: 0!important;
+    }
+    ::ng-deep .ng-select-container {
+        background: none;
+        border: 0;
+        padding-left: 0!important;
+
+        &:hover {
+            box-shadow: none;
+        }
+
+        .ng-value-container {
+            padding: 0;
+            color: $black;
+
+            &:focus {
+                outline: none
+            }
+        }
+
+        .ng-arrow {
+            display: none;
+        }
+    }
+}
+ng-select {
+    position: relative;
+    margin-bottom: 0;
+
+    &.required ::ng-deep .ng-select-container {
+        &:before {
+            content: '*';
+            position: absolute;
+            top: 9px;
+            left: 10px;
+            color: $red;
+            z-index: 2;
+        }
+        &.ng-has-value {
+            &:before {
+                display: none;
+            }
+        }
+    }
+}
+
+::ng-deep .ng-select .ng-select-container {
+    border: $border-control;
+    padding-left: 10px;
+    input{
+        padding-left: 10px;
+    }
+
+}
+
+::ng-deep .ng-dropdown-panel.ng-select-bottom {
+    text-align: left;
+}
+
+::ng-deep  .ng-select.hasError .ng-select-container {
+    border-color: $red;
+}
+
+.state {
+    flex-grow: 1;
+    margin: 0 30px;
+}
+
+.requiredStar {
+    color: $red;
+}

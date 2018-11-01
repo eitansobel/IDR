@@ -1,0 +1,156 @@
+@import '~styles.scss';
+
+:host {
+    background: $spring-wood;
+    display: block;
+    text-align: left;
+    padding: 10px;
+    border: 1px solid $cararra;
+    border-radius: 4px;
+    margin: 20px 0;
+
+    h4 {
+        font-weight: 600;
+        margin: 0 0 20px 0;
+        color: $tide;
+    }
+
+    input {
+        @include placeholder{
+            color: $bombay;
+        }
+        border: $border-control;
+        font-size: $base-font-size;
+        border-radius: 5px;
+        padding: 8px 15px;
+        font-family: $base-font-sans-serif;
+        font-weight: 600;
+        color: $black;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    label {
+        position: relative;
+
+        idr-dropdown-svg {
+            position: absolute;
+            top: 2px;
+            height: 15px;
+            right: 15px;
+            width: 15px;
+        }
+
+        &:nth-child(2){
+            margin-right: 10px;
+        }
+    }
+}
+
+::ng-deep .owl-dt-calendar-cell-content {
+    font-weight: 600;
+}
+::ng-deep .owl-dt-calendar-table .owl-dt-calendar-cell-selected {
+    background: $btn-background;
+}
+
+::ng-deep .owl-dt-control-period-button .owl-dt-control-button-content {
+    font-weight: 600;
+}
+
+::ng-deep .owl-dt-inline-container,
+::ng-deep .owl-dt-popup-container {
+    padding-bottom: 10px;
+
+    .owl-dt-container-row:last-child,
+    .owl-dt-container-row {
+        border: 0!important;
+    }
+
+    .owl-dt-container-control-button {
+        font-weight: 600;
+        font-size: $base-font-size;
+        font-family: $base-font-sans-serif;
+        border: $border;
+        margin: 0 10px;
+        color: $black;
+        box-shadow: 0 5px 10px  lighten($shadow-color, 10%);
+        border-radius: 3px;
+
+        &:hover {
+            background:  $dull-blue;
+            color: $white;
+        }
+    }
+
+    .owl-dt-timer-content
+    .owl-dt-timer-input {
+        line-height: 35px;
+        border: $border;
+        width: 50px;
+        height: 35x;
+    }
+
+    .owl-dt-timer-divider:after,
+    .owl-dt-timer-divider:before {
+        width: .2em;
+        height: .2em;
+        background-color: #dedfe2;
+    }
+
+    .owl-dt-timer-divider:after {
+        bottom: 45%;
+    }
+
+    .owl-dt-timer-divider:before {
+        top: 45%;
+    }
+}
+
+::ng-deep .owl-dt-calendar-cell-active:first-child {
+    color: rgba(0,0,0,.4)!important;
+}
+
+
+::ng-deep .owl-dt-timer-hour12 {
+    position: relative;
+    .topArrow {
+        position: absolute;
+        top: 0;
+        left: 11px;
+
+        svg {
+            path {
+                fill:#d3d5d8;  
+            }
+        }
+
+        &.active {
+            svg {
+                path {
+            fill:$black;  
+                }
+            }
+        }
+    }
+    .bottomArrow {
+        position: absolute;
+        bottom: 0;
+        left: 11px;
+        svg {
+            path {
+                fill:#d3d5d8;  
+            }
+        }
+
+        &.active {
+            svg {
+                path {
+            fill:$black;  
+                }
+            }
+        }
+    }
+}

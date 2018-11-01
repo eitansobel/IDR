@@ -1,0 +1,30 @@
+<div class="flexSpread">
+    <div class='control-half'>
+        <ng-content select=".country"></ng-content>
+    </div>
+    <div class='control-half flexSpread'>
+        <ng-content select=".city"></ng-content>
+        <div class="state">
+            <label>State <span class="requiredStar" *ngIf="!readonly">*</span></label>
+            <ng-select
+                [items]="states"
+                [selectOnTab]="true"
+                [ngClass]="{'hasError': name.invalid && formSubmitted}"
+                bindLabel="iso"
+                bindValue="iso"
+                placeholder="State"
+                (change)="onChange(name.value)"
+                required
+                #name="ngModel"
+                [disabled]="readonly"
+                [(ngModel)]="state">
+            </ng-select>
+   
+            <idr-validation-message
+                *ngIf="formSubmitted"
+                [control]="name"
+                ></idr-validation-message>
+        </div>
+        <ng-content select=".zip"></ng-content>
+    </div>
+</div>

@@ -1,0 +1,166 @@
+@import '~styles.scss';
+
+.form-control {
+  width: 100%;
+  margin-bottom: 10px;
+  label {
+    display: block;
+    margin-bottom: 5px;
+    }
+  idr-default-btn {
+    min-width: 47%;
+    margin: 0;
+    ::ng-deep span {
+      margin-bottom: 0;
+      }
+    }
+  }
+
+.title {
+  margin-bottom: 35px;
+  text-align: center;
+  }
+
+.center {
+  justify-content: center;
+  }
+
+.fieldset-group {
+  .left-radius {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    }
+  .right-radius {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    }
+  .fieldset-sort {
+    border: none;
+    padding: 0;
+    input {
+      display: none;
+      }
+    label {
+      &:last-of-type {
+        span {
+          border: none;
+          }
+        }
+      span {
+        width: 100%;
+        border-right: 1px solid;
+        text-align: center;
+        }
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 83px;
+      height: 26px;
+      border: 1px solid $bombay;
+      float: left;
+      cursor: pointer;
+      margin-bottom: 25px;
+      color: $bombay;
+      font-size: 12px;
+      border-left: none;
+      border-right: none;
+      &:last-of-type {
+        border-right: 1px solid $bombay;
+        }
+      &:first-of-type {
+        border-left: 1px solid $bombay;
+        }
+      }
+
+    }
+  .fieldset-order {
+    border: none;
+    padding: 0;
+    input {
+      display: none;
+      }
+    label {
+      text-align: center;
+      display: flex;
+      align-items: center;
+      width: 208px;
+      height: 26px;
+      border: 1px solid $bombay;
+      float: left;
+      cursor: pointer;
+      margin-bottom: 25px;
+      position: relative;
+      color: $bombay;
+      ::ng-deep .asc {
+        svg {
+          max-width: 20px;
+          position: absolute;
+          right: 5px;
+          top: 50%;
+          transform: translateY(-50%) rotate(180deg);
+          polyline {
+            stroke: $bombay;
+            }
+          }
+        }
+      ::ng-deep .des {
+        svg {
+          max-width: 20px;
+          position: absolute;
+          right: 5px;
+          top: 50%;
+          transform: translateY(-50%);
+          polyline {
+            stroke: $bombay;
+            }
+          }
+        }
+      span {
+        margin-left: 10px;
+        font-size: 14px;
+        float: left
+        }
+      &:not(:last-of-type) {
+        border-right: 0 solid transparent;
+        }
+      }
+    }
+  .picked {
+    background-color: #1740F0;
+    color: white !important;
+    span {
+      border: none !important;
+      }
+    ::ng-deep .des svg polyline {
+      stroke: white !important;
+      }
+
+    ::ng-deep .asc svg polyline {
+      stroke: white !important;
+      }
+
+    }
+  .unborder {
+    span {
+      border-right: none !important;
+      }
+    }
+  }
+
+idr-modal-wrap.form-control {
+  overflow: unset !important;
+  div {
+    mat-dialog-content.mat-dialog-content {
+      overflow: unset !important;
+      }
+    &.new-field-wrapper {
+      position: relative;
+      }
+    }
+  }
+
+::ng-deep .mat-dialog-container {
+  padding: 0;
+  box-shadow: none;
+  overflow: visible;
+  }

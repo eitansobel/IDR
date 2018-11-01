@@ -1,0 +1,16 @@
+<div class="avatar" [ngStyle]="{'background-image': 'url(' + imageUrl + chat.display_data.full_photo + ')', 'background-size': 'cover'}">
+    <span class="acronym" *ngIf="!chat.display_data.full_photo" >{{chat.display_data.full_name | acronym}}</span>
+    <span class="count urgency-{{urgency}}" *ngIf="not_read">{{chat.history.count_of_unread_messages}}</span>
+</div>
+<div class="message">
+    <header>
+        <span class="name">{{chat.display_data.full_name }}</span>
+        <span class="time">{{chat.history.last_message_time | date: 'H:mm'}}</span>
+    </header>
+    <div class="subject" *ngIf="chat.title || chat.patient">Re: {{chat.title}}{{chat.patient_name}} <span class="newIndicator" *ngIf="newPatient">(New)</span></div>
+    <div class="messageBody">
+        {{chat.history.last_message}}
+    </div>
+</div>
+<span class="removeChat" (click)="deleteChat(chat.id)"></span>
+<hr />

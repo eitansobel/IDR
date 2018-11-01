@@ -1,0 +1,44 @@
+<div class="chatLog">
+    <idr-search-control placeholder="Search" (ngModelChange)="changeSearch($event)" [(ngModel)]="search"></idr-search-control>
+    <ng-scrollbar>
+        <div *ngIf="newChatShow && !choosedChat" class="newMsg">
+            <div class="avatar">
+                <span class="acronym" >N</span>
+            </div>
+            <div class="message">
+                <header>
+                    <span class="name">New Dialogue</span>
+                </header>
+                <div class="messageBody">
+                    Your conversation starts here...
+                </div>
+            </div>
+            <hr />
+        </div>
+        <div class="messagesHistory"
+             [ngClass]="{'active': choosedChat && (chat.id === choosedChat.id)}"
+             *ngFor="let chat of chatsLog | sortBy: 'history', 'asc'">
+           
+             <idr-messages-log
+                 [myPatients]="myPatients"
+                (removeChat)="removeChat($event)"
+                (click)="
+                choosedChat = chat;
+                patient = chat.patient"
+                [chat]="chat"
+                [choosedChat]="choosedChat"
+                alertType="immediate"></idr-messages-log>
+        </div>
+    </ng-scrollbar>
+</div>
+<div class="chatRoom">
+    <idr-create-message
+        [title]="title"
+        [chat]="choosedChat"
+        [messagesL]="messages.length"
+        [myPatients]="myPatients"
+        (changeMyPatient)="changeMyPatient($event)"
+        (createdChat)="createdChat($event)">
+        <idr-chat [chat]="choosedChat"></idr-chat>
+    </idr-create-message>
+</div>

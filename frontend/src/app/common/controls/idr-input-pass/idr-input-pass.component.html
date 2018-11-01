@@ -1,0 +1,20 @@
+<div class='form-control' [ngClass]="{'hasError' : hasError}"> 
+     <input
+        #input
+        [type]="showPassword ? 'text' : 'password'"
+        [value]="value"
+        [placeholder]="placeholder"
+        (change)="onChange($event)" 
+        (keyup)="onChange($event)">
+        <i class="showPass" [ngClass]="{'show': showPassword}" (click)="showPassword = !showPassword">
+           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 40 40" preserveAspectRatio="none">
+                <path fill="#E4E4E4"  fill-rule="evenodd" d="M27.379 13.121l-4.394 4.394a11.962 11.962 0 0 1-8.485 3.514 11.962 11.962 0 0 1-8.485-3.514l-4.394-4.394a3 3 0 0 1 0-4.242l4.394-4.394A11.962 11.962 0 0 1 14.5.971c3.071 0 6.142 1.171 8.485 3.514l4.394 4.394a3 3 0 0 1 0 4.242zm-6.515-6.514A8.94 8.94 0 0 0 14.5 3.971a8.94 8.94 0 0 0-6.364 2.636L3.743 11l4.393 4.393a8.94 8.94 0 0 0 6.364 2.636 8.94 8.94 0 0 0 6.364-2.636L25.257 11l-4.393-4.393zM14.5 16a5 5 0 1 1 .001-10.001A5 5 0 0 1 14.5 16z"/>
+            </svg>
+        </i>
+        <span *ngIf="required" class='required'>*</span>
+      <idr-validation-message
+        *ngIf="hasError"
+        [control]="control"
+        ></idr-validation-message>
+</div>
+

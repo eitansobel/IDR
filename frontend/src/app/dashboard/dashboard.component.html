@@ -1,0 +1,104 @@
+<div class="dashboardWrap">
+    <aside>
+        <nav>
+            <ul class="topNav" *ngIf="is_approved">
+                <li routerLinkActive="active" [routerLink]="['/dashboard/home']">
+                    <span class="navIcon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="43.969" height="43.969"
+                            viewBox="0 0 43.969 43.969">
+                            <path id="home"
+                                d="M89,102H63a4,4,0,0,1-4-4V75h4V98H89V75h4V98A4,4,0,0,1,89,102Zm7-20a1.993,1.993,0,0,1-1.414-.586L76,62.829,57.414,81.414a2,2,0,0,1-2.828-2.828l20-20a2,2,0,0,1,2.828,0l20,20A2,2,0,0,1,96,82ZM81,100.5a2,2,0,0,1-2-2v-13H73v13a2,2,0,1,1-4,0v-15a2,2,0,0,1,2-2H81a2,2,0,0,1,2,2v15A2,2,0,0,1,81,100.5Z"
+                                transform="translate(-54.031 -58.031)"/>
+                        </svg>
+                    </span>
+                    Home
+                </li>
+                <li routerLinkActive="active" [routerLink]="['/dashboard/messages']">
+                    <span class="navIcon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="44" height="37.313" viewBox="0 0 44 37.313">
+                            <path id="messages"
+                                d="M93,260.354H57a4,4,0,0,1-4-4V227.021a4,4,0,0,1,4-4H93a4,4,0,0,1,4,4v29.333A4,4,0,0,1,93,260.354ZM57,227.021v29.333H93l0-29.333H57Zm18,20a2,2,0,0,1-1.414-.586l-20-20,2.828-2.828L75,242.192l18.586-18.585,2.828,2.828-20,20A2,2,0,0,1,75,247.021ZM56.414,259.768l-2.828-2.828,16.666-16.667,2.828,2.828Zm37.172,0L76.919,243.1l2.828-2.828L96.414,256.94Z"
+                                transform="translate(-53 -223.031)"/>
+                        </svg>
+                    </span>
+                    Messages
+                </li>
+                <li routerLinkActive="active" [routerLink]="['/dashboard/data-columns']">
+                    <span class="navIcon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="47" height="40" viewBox="0 0 47 40">
+                            <path id="data"
+                                d="M94,422H57a5.006,5.006,0,0,1-5-5v-6a5.006,5.006,0,0,1,5-5H94a5.006,5.006,0,0,1,5,5v6A5.006,5.006,0,0,1,94,422ZM57,410a1,1,0,0,0-1,1v6a1,1,0,0,0,1,1H94a1,1,0,0,0,1-1v-6a1,1,0,0,0-1-1H57Zm32.5,6h-20a2,2,0,0,1,0-4h20A2,2,0,0,1,89.5,416ZM62,416a1.994,1.994,0,0,1-1.41-3.41,2.049,2.049,0,0,1,2.821,0A1.983,1.983,0,0,1,64,414,2,2,0,0,1,62,416Zm32-6H57a5.006,5.006,0,0,1-5-5v-6a5.006,5.006,0,0,1,5-5H94a5.006,5.006,0,0,1,5,5v6A5.006,5.006,0,0,1,94,410ZM57,398a1,1,0,0,0-1,1v6a1,1,0,0,0,1,1H94a1,1,0,0,0,1-1v-6a1,1,0,0,0-1-1H57Zm32.5,6h-20a2,2,0,0,1,0-4h20A2,2,0,0,1,89.5,404ZM62,404a2,2,0,0,1-1.42-3.41,2.061,2.061,0,0,1,2.83,0A1.967,1.967,0,0,1,64,402,2,2,0,0,1,62,404Zm32-6H57a5.006,5.006,0,0,1-5-5v-6a5.006,5.006,0,0,1,5-5H94a5.006,5.006,0,0,1,5,5v6A5.006,5.006,0,0,1,94,398ZM57,386a1,1,0,0,0-1,1v6a1,1,0,0,0,1,1H94a1,1,0,0,0,1-1v-6a1,1,0,0,0-1-1H57Zm32.5,6h-20a2,2,0,0,1,0-4h20A2,2,0,0,1,89.5,392ZM62,392a2,2,0,0,1-1.42-3.41,2.071,2.071,0,0,1,2.83-.01A2,2,0,0,1,62,392Z"
+                                transform="translate(-52 -382)"/>
+                        </svg>
+                    </span>
+                    Data Column
+                </li>
+                <li routerLinkActive="active" [routerLink]="['/dashboard/patients']">
+                    <span class="navIcon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="55" height="44.5" viewBox="0 0 55 44.5">
+                            <path id="patients" class="cls-1"
+                                d="M81,582.031H50a2,2,0,0,1-2-2v-9.5a8.009,8.009,0,0,1,8-8H75a8.009,8.009,0,0,1,8,8v9.5A2,2,0,0,1,81,582.031Zm-29-4H79v-7.5a4,4,0,0,0-4-4H56a4,4,0,0,0-4,4v7.5Zm13.5-18.5a9.511,9.511,0,0,1-9.5-9.5v-3a9.5,9.5,0,0,1,19,0v3A9.511,9.511,0,0,1,65.5,559.531Zm0-18a5.507,5.507,0,0,0-5.5,5.5v3a5.5,5.5,0,1,0,11,0v-3A5.507,5.507,0,0,0,65.5,541.531Zm35.5,40.5H81a2,2,0,1,1,0-4H99v-2.5a4,4,0,0,0-4-4H81.583a2,2,0,1,1,0-4H95a8.009,8.009,0,0,1,8,8v4.5A2,2,0,0,1,101,582.031Zm-12.5-17.5a8.51,8.51,0,0,1-8.5-8.5v-4a8.5,8.5,0,0,1,17,0v4A8.51,8.51,0,0,1,88.5,564.531Zm0-17a4.505,4.505,0,0,0-4.5,4.5v4a4.5,4.5,0,0,0,9,0v-4A4.505,4.505,0,0,0,88.5,547.531Z"
+                                transform="translate(-48 -537.531)"/>
+                        </svg>
+                    </span>
+                    Patients
+                </li>
+                <li routerLinkActive="active" [routerLink]="['/dashboard/staff']">
+                    <span class="navIcon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="49" height="49" viewBox="0 0 49 49">
+                            <path id="staff"
+                                d="M93,746.969H56a6.007,6.007,0,0,1-6-6v-37a6.006,6.006,0,0,1,6-6H93a6.006,6.006,0,0,1,6,6v37A6.007,6.007,0,0,1,93,746.969Zm-37-45a2,2,0,0,0-2,2v37a2,2,0,0,0,2,2H93a2,2,0,0,0,2-2v-37a2,2,0,0,0-2-2H56Zm11,32.5a2,2,0,0,1-2-2v-20a2,2,0,1,1,4,0v20A2,2,0,0,1,67,734.469Zm15-10H67a2,2,0,0,1,0-4H82A2,2,0,0,1,82,724.469Zm0,10a2,2,0,0,1-2-2v-20a2,2,0,1,1,4,0v20A2,2,0,0,1,82,734.469Z"
+                                transform="translate(-50 -697.969)"/>
+                        </svg>
+                    </span>
+                    Staff
+                </li>
+            </ul>
+            <ul class="bottomNav" [ngClass]="{'non_approved': !is_approved}">
+                <li routerLinkActive="active" [routerLink]="['/dashboard/profile']">
+                    <span class="navIcon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="39" height="44.5" viewBox="0 0 39 44.5">
+                            <path id="profile"
+                                d="M90,1096.03H55a2,2,0,0,1-2-2v-9.5a8.01,8.01,0,0,1,8-8H84a8.01,8.01,0,0,1,8,8v9.5A2,2,0,0,1,90,1096.03Zm-33-4H88v-7.5a4.008,4.008,0,0,0-4-4H61a4.008,4.008,0,0,0-4,4v7.5Zm15.5-18.5a9.51,9.51,0,0,1-9.5-9.5v-3a9.5,9.5,0,0,1,19,0v3A9.51,9.51,0,0,1,72.5,1073.53Zm0-18a5.508,5.508,0,0,0-5.5,5.5v3a5.5,5.5,0,1,0,11,0v-3A5.508,5.508,0,0,0,72.5,1055.53Z"
+                                transform="translate(-53 -1051.53)"/>
+                        </svg>
+                    </span>
+                    Profile
+                </li>
+                <li (click)="logout()">
+                    <span class="navIcon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36.5" height="44" viewBox="0 0 36.5 44">
+                            <path id="log_out" data-name="log out"
+                                d="M89,1425H59a2,2,0,0,1-2-2v-5.5a2,2,0,1,1,4,0v3.5H87v-36H61v3.5a2,2,0,1,1-4,0V1383a2,2,0,0,1,2-2H89a2,2,0,0,1,2,2v40A2,2,0,0,1,89,1425Zm-7.5-20h-25a2,2,0,0,1,0-4h25A2,2,0,1,1,81.5,1405ZM64,1412.5a2,2,0,0,1-1.414-.59l-7.5-7.5a1.989,1.989,0,0,1,0-2.82l7.5-7.5a2,2,0,0,1,2.828,2.82L59.329,1403l6.085,6.09A2,2,0,0,1,64,1412.5Z"
+                                transform="translate(-54.5 -1381)"/>
+                        </svg>
+                    </span>
+                    Log Out
+                </li>
+            </ul>
+        </nav>
+    </aside>
+    <div class="contentWrap">
+        <header class="header">
+            <div class="headerLeftSide">
+                <div class="avatar"
+                    [ngStyle]="{'background-image': 'url(' + avatar + ')', 'background-size': backSize}">
+                </div>
+
+                <h3>{{firstName }} {{lastName}} <span>| {{role}}</span>
+                    <idr-default-btn
+                        *ngIf="router.url === '/dashboard/messages'"
+                        (click)="newChat()"
+                        className="active">
+                        <idr-check-svg class='icon'></idr-check-svg>
+                        <span>New message</span></idr-default-btn>
+                </h3>
+            </div>
+            <div class="currentTime">
+                {{currentTime}}
+            </div>
+            <div class="status"></div>
+        </header>
+        <router-outlet></router-outlet>
+    </div>
+</div>

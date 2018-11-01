@@ -1,0 +1,86 @@
+<div class="receiverWrap">
+    <div>
+        <div class="responderWrap">
+            <label><span class="requiredAsterics">*</span> To: </label>
+            <idr-input-text
+                class="requiredField"
+                [(ngModel)]="chatOpened.receiver"
+                readonly="true"
+                ></idr-input-text>
+            <span class="addIcon" *ngIf="!choosedChat.id" (click)="showReceiver($event)"></span>
+        </div>
+        <div class='list' [ngClass]="{'hide': !showAllReceivers}"  >
+            <ng-scrollbar *ngIf="receivers?.length" #scrollRef>
+                <mat-selection-list #selectedReceiver  (selectionChange)="selectReceiver($event)" >
+                    <mat-list-option
+                        [value]="receiver"
+                        *ngFor="let receiver of receivers | sortBy: 'first_name'">
+                        {{receiver.first_name}} {{receiver.last_name}}
+                </mat-list-option>
+            </mat-selection-list>
+        </ng-scrollbar>
+    </div>
+
+</div>
+<div>
+    <div class="responderWrap">
+    <label>Re:</label>
+    <idr-input-text
+        *ngIf="!chatOpened.patient"
+        [(ngModel)]="chatOpened.title"
+        [maxLength]="50"
+        (ngModelChange)="titleChanged(chatOpened.patient)"
+        ></idr-input-text>
+    <idr-input-text
+        *ngIf="chatOpened.patient"
+        readonly="true"
+        [(ngModel)]="chatOpened.patient"
+        ></idr-input-text>
+    <div *ngIf="newPatient" class="addNewToList" (click)="addToMy()">+ add to list</div>
+    <span class="addIcon"  *ngIf="!chatOpened.patient && patients.length" (click)="showAllPatientsFunc()"></span>
+    </div>
+    <div class='list' [ngClass]="{'hide': !showAllPatients}" >
+        <ng-scrollbar>
+            <mat-selection-list #selectedPatients  (selectionChange)="selectPatients($event)">
+                <mat-list-option
+                    [value]="patient"
+                    *ngFor="let patient of patients  | sortBy: 'first_name'">
+                    {{patient.first_name}} {{patient.last_name}}
+            </mat-list-option>
+        </mat-selection-list>
+    </ng-scrollbar>
+</div>
+</div>
+</div>
+<ng-content select="idr-chat"></ng-content>
+<div class="formSendMessage">
+    <textarea
+        [(ngModel)]="message.text"
+        name="msg"
+        rows="7"
+        class="form-control"
+        placeholder="Write your messages..."></textarea>
+    <div class="newMessageControls">
+       
+        <div class="attach">
+            <span *ngIf="message.attachment">{{message.attachment.name}}</span>
+            <idr-close-svg (click)="removeFile()" *ngIf="message.attachment"></idr-close-svg>
+            <idr-attach-svg ></idr-attach-svg>
+            <input (change)="selectFile($event)" #fileInput  type="file" />
+        </div>
+        <ng-select
+            [items]="alerts"
+            [selectOnTab]="true"
+            bindLabel="label"
+            bindValue="value"
+            placeholder="Alert"
+            class="alertMsg"
+            [(ngModel)]="message.alert"
+            [ngClass]="{'hasError': alertReq && !message.alert }"
+            >
+    </ng-select>
+    <idr-default-btn
+        [className]="(!chatOpened.receiver || (!message.text && !message.attachment) || !message.alert ) ? 'default disable' : 'active' "
+        (click)="blockSendbtn && chatOpened.receiver && (message.text || message.attachment) && message.alert && sendMsg() "><idr-send-svg class='icon'></idr-send-svg><span>Send</span></idr-default-btn>
+</div>
+</div>

@@ -1,0 +1,51 @@
+@import '~styles.scss';
+
+.form-control {
+    margin-bottom: 10px;
+    width: 100%;
+    position: relative;
+
+    input {
+        @include placeholder {
+            color: $bombay;
+            -webkit-text-fill-color: $bombay;
+        }
+        width: 100%;
+        border: $border-control;
+        font-size: $base-font-size;
+        border-radius: 5px;
+        font-family: $base-font-sans-serif;
+        font-weight: 600;
+        padding: 8px 15px 8px 20px;
+        color: $black;
+        -webkit-text-fill-color: $black;
+
+        &:focus {
+            outline: none;
+        }
+
+        &[readonly] {
+            border: 0;
+            padding-left: 0;
+             font-size: $base-font-size + 1;
+
+            & + .required {
+                display: none;
+            }
+        }
+    }
+
+
+    &.hasError {
+        input {
+            border-color: $red;
+        }
+    }
+}
+
+.required {
+    position: absolute;
+    top: 9px;
+    left: 10px;
+    color: $red;
+}

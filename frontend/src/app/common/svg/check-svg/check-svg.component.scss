@@ -1,0 +1,18 @@
+@import '~styles.scss';
+.btn :host {
+    display: inline-block;
+    svg {
+        width: 14px;
+        path{
+            fill: $white;
+        }
+    }
+}
+
+.btn-default :host {
+    svg {
+        path{
+            fill: $btn-background;
+        }
+    }
+}

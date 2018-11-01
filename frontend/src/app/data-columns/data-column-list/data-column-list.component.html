@@ -1,0 +1,75 @@
+<ng-content></ng-content>
+<div class="searchContainer">
+    <idr-search-control [placeholder]="searchHolder" (ngModelChange)="filterUsers(searchText)"
+        [(ngModel)]="searchText"></idr-search-control>
+</div>
+
+<div class="table tableList">
+    <div class="header row" [ngStyle]="{'transform': 'translate(-' + slideLeft + 'px, 0px)'}">
+        <div class='mainInfo'>
+            <div class="rowItem">#</div>
+            <div class="rowItem"
+                [ngClass]="{'active': active === i, 'asc': (direc && active === i), 'main-column': index === 1 }"
+                (click)="sortable(i); active = i"
+                *ngFor="let headling of listHeader; let i = index">
+                {{headling}}
+                <idr-arrow-svg></idr-arrow-svg>
+            </div>
+        </div>
+        <span class="action"><div class="rowItem center">Actions</div></span>
+    </div>
+    <ng-scrollbar [trackX]="true" (scrollState)="scrollDetect($event)">
+        <div class="listBody ngx-dnd-container"
+            ngxDroppable [model]="dataColumnList" (drop)="setNewColumnOrder($event)">
+            <div class="row ngx-dnd-item has-handle"
+                ngxDraggable [model]="row"
+                *ngFor="let row of dataColumnList | filter:  searchKeys : searchText; let i = index"
+                [ngClass]="{'hide': (i > (end - 1) || (i < start))}">
+                <div class='mainInfo gu-unselectable'>
+                    <div class="rowItem">{{i + 1}}</div>
+                    <div class="rowItem" *ngFor="let key of sortableKeys">
+                        <span *ngIf="!['is_hidden', 'title', 'update_interval'].includes(key)">{{row[key]}}</span>
+                        <span *ngIf="key === 'title'">
+                        <span>{{row[key]}},</span>
+                        <span class="blue-text">{{row.author.full_name}}</span>
+                        <span>({{row.author.job}})</span>
+                    </span>
+                        <div class="showHide" *ngIf="key === 'is_hidden'">
+                            <mat-slide-toggle
+                                class='mat-slide-toggle mat-accent'
+                                (change)="toggleColumn($event, row['id'], i)"
+                                [checked]="row['is_hidden']">
+                                <span class='show'>Show</span>
+                                <span class='hide'>Hide</span>
+                            </mat-slide-toggle>
+                        </div>
+                        <span class="" *ngIf="key === 'update_interval'">{{updateNeededMap[row.update_interval]}}</span>
+                    </div>
+                </div>
+                <span class="action">
+                <div class="center rowItem gu-unselectable">
+                    <idr-wrench-icon-svg
+                        *ngIf="userCanSeeButton('edit', row)"
+                        (click)="editDataColumn(row)">
+                    </idr-wrench-icon-svg>
+                </div>
+                <div class="center rowItem gu-unselectable">
+                    <idr-copy-icon-svg
+                        *ngIf="userCanSeeButton('copyIsAllowed', row)"
+                        (click)="userCanSeeButton('copyIsAllowed', row) && copyRow(i, row.id)"></idr-copy-icon-svg>
+                </div>
+                <div class="center rowItem gu-unselectable">
+                    <idr-trash-icon-svg
+                        *ngIf="userCanSeeButton('delete', row)"
+                        (click)="deleteRow(i, row)"></idr-trash-icon-svg>
+                </div>
+                <div class="center rowItem">
+                    <idr-move-icon-svg ngxDragHandle></idr-move-icon-svg>
+                </div>
+            </span>
+            </div>
+        </div>
+    </ng-scrollbar>
+</div>
+
+<idr-pagination *ngIf="dataColumnList?.length" [pages]="pages" (activePage)="activePage($event)"></idr-pagination>

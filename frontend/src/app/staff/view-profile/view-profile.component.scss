@@ -1,0 +1,266 @@
+@import '~styles.scss';
+$imageW: 100%;
+$height: $imageW / 1.27;
+:host {
+      ::ng-deep .ng-scrollbar.-vertical {
+        @include respond-to('min-large') {
+            width: 3px;
+        }
+        background: rgba(0, 0, 0, 0.1);
+
+        .ng-scrollbar-thumb  {
+            background: $dull-blue;
+        }
+    }
+    .form-control {
+        margin-bottom: 10px;
+        width: 100%;
+        position: relative;
+
+        input {
+            @include placeholder {
+                color: $bombay;
+                -webkit-text-fill-color: $bombay;
+            }
+            width: 100%;
+            border: $border-control;
+            font-size: $base-font-size;
+            border-radius: 5px;
+            font-family: $base-font-sans-serif;
+            font-weight: 600;
+            padding: 8px 15px 8px 20px;
+            color: $black;
+            -webkit-text-fill-color: $black;
+
+            &:focus {
+                outline: none;
+            }
+
+            &[readonly] {
+                border: 0;
+                padding-left: 0;
+                 font-size: $base-font-size + 1;
+
+                & + .required {
+                    display: none;
+                }
+            }
+        }
+
+
+        &.hasError {
+            input {
+                border-color: $red;
+            }
+        }
+        .required {
+            position: absolute;
+            top: 9px;
+            left: 10px;
+            color: $red;
+        }
+
+    }
+}
+
+
+header {
+    border-bottom: $border;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    color: $bombay;
+    font-size: $base-font-sans-serif + 1;
+}
+.scrollWrap {
+    overflow: hidden;
+    height: calc(100% - 70px);
+    padding-right: 0px;
+}
+
+label {
+    color: $bombay;
+}
+
+svg {
+    position: relative;
+    top: -2px;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-right: 15px;
+
+    ::ng-deep svg {
+        height: 33px;
+        vertical-align: middle;
+
+        path {
+            fill: $bombay;
+            stroke: $white;
+        }
+    }
+}
+
+.name {
+    font-weight: 600;
+    color: $black;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: calc(100% - 250px);
+    display: inline-block;
+    line-height: 23px;
+    vertical-align: middle;
+}
+
+.position {
+    text-transform: capitalize;
+}
+.editProfileIcon {
+    float: right;
+    margin-top: -15px;
+    cursor: pointer;
+    idr-edit-icon-svg {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 15px;
+    }
+
+    span {
+        margin-top: 17px;
+        float: right;
+    }
+}
+
+.ng-select {
+    ::ng-deep .ng-select-container {
+        border: $border;
+    }
+}
+
+.ng-select.ng-select-disabled {
+    &:focus {
+        outline: none
+    }
+
+    ::ng-deep .ng-select-container {
+        background: none;
+        border: 0;
+
+        &:hover {
+            box-shadow: none;
+        }
+
+        .ng-value-container {
+            padding: 0;
+            color: $black;
+
+            &:focus {
+                outline: none
+            }
+        }
+
+        .ng-arrow {
+            display: none;
+        }
+    }
+}
+
+ng-select {
+    position: relative;
+    margin-bottom: 15px;
+
+    &.required ::ng-deep .ng-select-container {
+        &:before {
+            content: '*';
+            position: absolute;
+            top: 9px;
+            left: 10px;
+            color: $red;
+            z-index: 2;
+        }
+
+        &.ng-has-value {
+            &:before {
+                display: none;
+            }
+        }
+
+        .ng-value-container .ng-placeholder {
+            padding-left: 15px;
+        }
+    }
+}
+
+.formContainer {
+    display: flex;
+
+    .form {
+        flex-basis: calc(100% - 300px);
+        padding-right: 30px;
+    }
+}
+
+
+.ng-select.ng-select-disabled {
+    &:focus {
+        outline: none
+    }
+
+    ::ng-deep .ng-select-container {
+        background: none;
+        border: 0;
+
+        &:hover {
+            box-shadow: none;
+        }
+
+        .ng-value-container {
+            padding: 0;
+            color: $black;
+
+            &:focus {
+                outline: none
+            }
+        }
+
+        .ng-arrow {
+            display: none;
+        }
+    }
+}
+
+
+.footerNavigation {
+    display: block;
+    flex-basis: 100%;
+    margin-top: 20px;
+
+    idr-default-btn {
+        display: inline-block;
+    }
+}
+
+.photo {
+    position: relative;
+    flex-basis: 300px;
+    margin-right: 15px;
+
+}
+
+.avatarWrap {
+    width: $imageW;
+    overflow: hidden;
+    padding-top: $height;
+    height: 0;
+    border-radius: 10px;
+    background:$gray url('/assets/images/placeholder.svg') no-repeat 50% 50%;
+    position: relative;
+
+    img {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}

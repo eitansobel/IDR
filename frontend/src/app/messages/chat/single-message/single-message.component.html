@@ -1,0 +1,24 @@
+<div class="avatar" [ngStyle]="{'background-image': 'url(' + imageUrl + message.display_data.full_photo + ')', 'background-size': 'cover'}">
+    <span class="acronym" *ngIf="!message.display_data.full_photo" >{{message.display_data.full_name | acronym}}</span>
+</div>
+<div class="message">
+    <header>
+        <span class="name">{{message.display_data.full_name}}</span>
+        <span class="time">{{message.created_at | date: 'H:mm'}}</span>
+    </header>
+    <div class="messageBody">
+        <pre>{{message.text}}</pre><br />
+        <a class="attachment" *ngIf="message.attachment" target="_target" [attr.href]="message.attachment" [attr.download]="message.attachment">
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 96 96" xml:space="preserve">
+
+           <g id="XMLID_1_">
+               <path id="XMLID_5_" d="M52.1,64.3h8.1L48,76.4L35.8,64.3h8.1V43.9h8.1V64.3z M64.3,31.8c0-1.8-3.7-12.2-18.3-12.2
+                   c-9.8,0-18.3,7.8-18.3,16.3c-8,0-12.2,6.2-12.2,12.2c0,6.2,4.1,12.2,12.2,12.2h12.2v-5.3H27.7c-6.6,0-6.9-5.8-6.9-6.9
+                   c0-0.7,0.2-6.9,6.9-6.9H33v-5.3c0-5.6,6.3-11,13-11c10.4,0,12.7,6.3,13,7.3V37h5.3c3.3,0,11,0.9,11,8.9c0,8.5-9.1,8.9-11,8.9h-8.1
+                   v5.3h8.1c8.5,0,16.3-4.7,16.3-14.2C80.5,36.1,72.7,31.8,64.3,31.8z"/>
+           </g>
+           </svg>
+            {{message.attachment | fileName}}</a>
+    </div>
+</div>

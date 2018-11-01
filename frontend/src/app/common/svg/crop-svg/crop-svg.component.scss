@@ -1,0 +1,21 @@
+@import '~styles.scss';
+
+:host {
+    background: $white;
+    border-radius: 3px;
+    padding: 4px 4px 2px;
+    svg {
+        width: 24px;
+        height: 22px;
+        path {
+            fill: #E4E6E8;
+            transition: all 0.5s;
+        }
+    
+        &:hover{
+            path:last-child {
+                fill: $dull-blue
+            }
+        }
+    }
+}

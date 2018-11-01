@@ -1,0 +1,11 @@
+@import '~styles.scss';
+
+
+:host {
+    text-align: left;
+    margin-top: 5px;
+    color: $red;
+    display: block;
+    margin-bottom: 15px;
+    text-transform: capitalize;
+}

@@ -1,0 +1,68 @@
+<div class="swipeIcon" (click)="toggleLists(val=!val)">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="36" viewBox="0 0 18 36">
+        <path id="hide_icon" class="cls-1" d="M12674,3186a0.972,0.972,0,0,1,1,1v34a1,1,0,0,1-2,0v-34A0.972,0.972,0,0,1,12674,3186Zm8,0a0.972,0.972,0,0,1,1,1v34a1,1,0,0,1-2,0v-34A0.972,0.972,0,0,1,12682,3186Zm8,0a0.972,0.972,0,0,1,1,1v34a1,1,0,0,1-2,0v-34A0.972,0.972,0,0,1,12690,3186Z" transform="translate(-12673 -3186)"/>
+    </svg>
+</div>
+<div class="leftColumn">
+    <div class="flexContainer">
+        <h3 class="listHeadling">List of Patients</h3>
+        <idr-default-btn
+            className="active btn-small"
+            (click)="newList()"
+            *ngIf="myRole"
+            ><idr-plus-svg class="icon"></idr-plus-svg><span>New List</span></idr-default-btn>
+    </div>
+    <idr-sortable-list
+        className="list"
+        (chosedData)="onChooseData($event)"
+        [keys]="['title', 'qty', 'update_time']"
+        [listData]="combinedPatientLists"
+        searchHolder="Search lists"
+        typeName="patients"
+        [listHeader]="header"></idr-sortable-list>
+</div>
+<div class="rightColumn usersInfo">
+  
+    <idr-sortable-list
+        *ngIf="patientsListSingle"
+        className="tableList"
+        typeName="patients"
+        searchHolder="Search patients"
+        [listTitle]="chosenPatientListTitle"
+        [keys]="['first_name', 'middle_name', 'last_name', 'birth_date', 'age']"
+        [listData]="patientsListSingle"
+        (chosedData)="chosedPfData($event)"
+        [myRole]="myRole"
+        [list_id]="editableListId"
+        [listHeader]="listHeaderSingle">
+        <div class="buttons">
+            <idr-default-btn
+                (click)="newMember()"
+                className="active btn-small"
+                *ngIf="myRole"
+                ><idr-plus-svg class="icon"></idr-plus-svg><span>Create New Patient</span></idr-default-btn>
+            <idr-default-btn
+                className="active btn-small"
+                (click)="multipleUpload()"
+                *ngIf="myRole"
+                class="multyBtn"
+                ><idr-plus-svg class="icon"></idr-plus-svg><span>Multiple Upload</span></idr-default-btn>
+            <idr-default-btn
+                className="active btn-small"
+                *ngIf="chosenPatientListTitle == 'My Patients' || (editableListId && myRole)"
+                (click)="editList()"
+                ><idr-edit-svg class='icon'></idr-edit-svg><span>Edit list</span></idr-default-btn>
+        </div>
+    </idr-sortable-list>
+
+    <div class='profile' [ngClass]="{'show': loadProfile}">
+         <idr-patient-view-profile  (closeAll)="closeProfile($event)" [viewProfile]="chosedProfile">
+
+        </idr-patient-view-profile>
+    </div>
+    <div class="overlay" *ngIf="loadProfile"></div>
+</div>
+<div class="spinner" *ngIf="spinner">
+    <div class="dot1"></div>
+    <div class="dot2"></div>
+</div>

@@ -1,0 +1,10 @@
+<ng-scrollbar (scrollState)="onScroll($event)" [autoUpdate]="update">
+    <div class="messages" *ngFor="let msg of messages;  index as i; trackBy: trackByFn ">
+         <div class="separator" *ngIf="(i > 0) && (msg.created_at | date: 'shortDate') !== (messages[i - 1].created_at | date: 'shortDate')">
+            <hr  />
+            <span>{{msg.created_at | date: 'fullDate'}}</span>
+        </div>
+
+        <idr-single-message [ngClass]="{'ownMess': this.userId == msg.sender}" [message]="msg"></idr-single-message>
+    </div>
+</ng-scrollbar>

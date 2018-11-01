@@ -1,0 +1,201 @@
+@import '~styles.scss';
+
+h3 {
+    margin-top: 0;
+    color: $bombay;
+    font-size: $base-font-size + 5;
+}
+
+
+h4 {
+    font-size: $base-font-size + 2;
+}
+
+:host {
+    display: block;
+    width: 100%;
+    
+    idr-modal-wrap {
+        display: block;
+    }
+    
+    ::ng-deep .mat-dialog-actions {
+        display: block;
+    }
+    .form-control.phoneMask {
+        margin-bottom: 10px;
+        width: 100%;
+        position: relative;
+    
+        input {
+            @include placeholder {
+                color: $bombay;
+                -webkit-text-fill-color: $bombay;
+            }
+            width: 100%;
+            border: $border-control;
+            font-size: $base-font-size;
+            border-radius: 5px;
+            font-family: $base-font-sans-serif;
+            font-weight: 600;
+            padding: 8px 15px 8px 20px;
+            color: $black;
+            -webkit-text-fill-color: $black;
+    
+            &:focus {
+                outline: none;
+            }
+    
+            &[readonly] {
+                border: 0;
+                padding-left: 0;
+                 font-size: $base-font-size + 1;
+    
+                & + .required {
+                    display: none;
+                }
+            }
+        }
+    
+    
+        &.hasError {
+            input {
+                border-color: $red;
+            }
+        }
+        .required {
+            position: absolute;
+            top: 9px;
+            left: 10px;
+            color: $red;
+        }
+        
+    }
+}
+
+.dragDrop {
+    min-width: 22%;
+}
+
+.csvError {
+    color: $red;
+    white-space: pre-line;
+}
+
+::ng-deep .mat-dialog-container {
+    padding: 0;
+    box-shadow: none;
+    overflow: visible;
+}
+
+.formWrap {
+    border: $border;
+    padding: 0 15px 0px;
+    display: block;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+mat-dialog-content {
+    padding: 20px 20px;
+}
+
+label {
+    color: $bombay;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.footer {
+    display: flex;
+    justify-content: flex-end;
+    
+    idr-default-btn {
+        margin: 0 0 0 15px;
+        
+        ::ng-deep span {
+            margin-bottom: 0;
+        }
+    }
+}
+
+ng4-files-click ::ng-deep label {
+    @include respond-to('medium-large') {
+        line-height: 7px;
+    }
+    white-space: pre-line;
+    display: inline-block;
+    text-align: center;
+    line-height: 3px;
+    vertical-align: middle;
+    
+    svg {
+        margin-right: 15px;
+        width: 22px;
+        vertical-align: middle;
+        height: 22px;
+    }
+}
+
+ng-select {
+    position: relative;
+    margin-bottom: 15px;
+    
+    &.required ::ng-deep .ng-select-container {
+        &:before {
+            content: '*';
+            position: absolute;
+            top: 9px;
+            left: 10px;
+            color: $red;
+            z-index: 2;
+        }
+        &.ng-has-value {
+            &:before {
+                display: none;
+            }
+        }
+    }
+}
+
+::ng-deep .ng-select .ng-select-container {
+    border: $border-control;
+    padding-left: 10px;
+    input{
+        padding-left: 10px;
+    }
+}
+
+::ng-deep .ng-dropdown-panel.ng-select-bottom {
+    text-align: left;
+}
+
+::ng-deep  .ng-select.hasError .ng-select-container {
+    border-color: $red;
+}
+
+.importWrap {
+    @include respond-to('min-large') {
+        display: none;
+    }
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 10px 0;
+    background: $gray;
+    
+    idr-default-btn {
+        @include respond-to('medium-large') {
+            min-width: 20%;
+            margin-left: 10px;
+        }
+        min-width: 25%;
+        margin: 0;
+        
+        ::ng-deep span {
+            margin-bottom: 0;
+        }
+    }
+}

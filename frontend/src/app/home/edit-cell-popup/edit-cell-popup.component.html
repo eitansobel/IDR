@@ -1,0 +1,111 @@
+<idr-close-popup-svg (click)="closeDialog()"></idr-close-popup-svg>
+
+<idr-modal-wrap class="form-control">
+    <div>
+        <mat-dialog-content>
+            <h3 class="title center">{{headerText}}</h3>
+            <div class="flexSpread">
+                <div class="form-control author" *ngIf="!currentCell">
+                    <label>Author:</label>
+                    <p>{{ cellAuthor || userFullName}}</p>
+                </div>
+            </div>
+            <form
+                *ngIf="cellForm"
+                class="form rowList"
+                novalidate
+                [formGroup]="cellForm">
+                <div class="flexSpread">
+                    <div class="form-control">
+                        <label>Name Of Cell <span class="requiredStar">*</span></label>
+                        <idr-input-text
+                            [hasError]="cellForm.controls.title.invalid && formSubmitted"
+                            formControlName="title"
+                            placeholder='Name of cell'
+                            [control]="cellForm.controls.title">
+                        </idr-input-text>
+                    </div>
+                </div>
+
+                <div class="flexSpread">
+                    <div class="form-control">
+                        <label>Update Needed</label>
+                        <ng-select [items]="updateIntervalTypes"
+                            placeholder="Not Selected"
+                            bindValue="value"
+                            [ngClass]="{'hasError': cellForm.controls.update_interval.invalid && formSubmitted}"
+                            formControlName="update_interval">
+                        </ng-select>
+                        <idr-validation-message
+                            *ngIf="formSubmitted"
+                            [control]="cellForm.controls.update_interval">
+                        </idr-validation-message>
+                    </div>
+                </div>
+                <ng-scrollbar>
+                    <div formArrayName="fields" class="added-fields-wrapper">
+                        <div class="flexSpread"
+                            *ngFor="let fieldForm of cellForm.controls.fields.controls; let fi=index"
+                            [formGroupName]="fi">
+                            <div class='form-control' *ngIf="!fieldForm['controls'].is_deleted.value">
+                                <label>{{fieldForm['controls'].title.value}}:</label>
+                                <div class="field-wrapper"
+                                    [ngClass]="{'delete-padding': userCanDeleteCellField(fieldForm.value)}">
+                                    <idr-input-text
+                                        [hasError]="fieldForm['controls'].value.invalid && formSubmitted"
+                                        formControlName="value"
+                                        placeholder=""
+                                        [readonly]="!userCanEditCellField(fieldForm.value)"
+                                        [control]="fieldForm['controls'].value">
+                                    </idr-input-text>
+                                    <idr-default-btn
+                                        *ngIf="userCanDeleteCellField(fieldForm.value)"
+                                        className="active btn-small delete-field-button"
+                                        (click)="deleteField(fieldForm, fi)">
+                                        <idr-minus-svg class="icon grey-button">
+                                        </idr-minus-svg>
+                                        <span>Remove Field</span>
+                                    </idr-default-btn>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-scrollbar>
+
+                <div class="flexSpread" *ngIf="userCanCreateCellField">
+                    <div class="form-control" [formGroup]="newFieldTitleForm" *ngIf="newFieldTitleForm">
+                        <label>Field Title:</label>
+                        <div class="new-field-wrapper">
+                            <idr-input-text
+                                [hasError]="newFieldTitleForm.controls.title.invalid && newFieldFormSubmitted"
+                                formControlName="title"
+                                placeholder='Field title'
+                                [control]="newFieldTitleForm.controls.title">
+                            </idr-input-text>
+                            <idr-default-btn
+                                className="active btn-small new-field-button"
+                                (click)="addField()">
+                                <idr-cross-svg class="icon rotated-and-uncolored">
+                                </idr-cross-svg>
+                                <span>Add Field</span>
+                            </idr-default-btn>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer flexSpread">
+                    <idr-default-btn
+                        className="default"
+                        (click)="cancel()">
+                        <idr-close-svg class='icon green'></idr-close-svg>
+                        <span>Cancel</span></idr-default-btn>
+                    <idr-default-btn
+                        className="active"
+                        (click)="saveCell()">
+                        <idr-check-svg class='icon'></idr-check-svg>
+                        <span>Save changes</span></idr-default-btn>
+                </div>
+            </form>
+        </mat-dialog-content>
+    </div>
+</idr-modal-wrap>

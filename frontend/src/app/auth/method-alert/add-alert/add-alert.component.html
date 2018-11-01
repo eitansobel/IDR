@@ -1,0 +1,100 @@
+<idr-close-popup-svg (click)="closeDialog()"></idr-close-popup-svg>
+<idr-modal-wrap>
+    <span class="headline" >{{headerText}}</span>
+
+    <div>
+        <mat-dialog-content>
+            <form
+                (keyup.enter)="save()"
+                (ngSubmit)="save()"
+                novalidate
+                #formDir="ngForm"
+                [formGroup]="form"
+                >
+                <div *ngIf="data.edit" class="form-control">
+                    <ng-select
+                        [items]="contactList"
+                        (change)="onContact($event)"
+                        formControlName="contact"
+                        bindLabel="title"
+                        bindValue="id">
+                        <ng-template
+                            ng-label-tmp
+                            let-item="item">
+                            <b>{{item.title}}</b>
+                        </ng-template>
+                    </ng-select>
+                </div>
+
+                <div class="form-control">
+                    <ng-select
+                        [items]="alert_type"
+                        [selectOnTab]="true"
+                        placeholder="Type of alert"
+                        bindValue="value"
+                        [ngClass]="{'hasError': form.controls.alert_type.invalid && formSubmitted } "
+                        (change)="onTypeChange($event)"
+                        formControlName="alert_type">
+                </ng-select>
+                <idr-validation-message
+                    *ngIf="formSubmitted"
+                    [control]="form.controls.alert_type"
+                    ></idr-validation-message>
+            </div>
+            <idr-input-text
+                [hasError]="form.controls.value.invalid && formSubmitted"
+                formControlName="value"
+                [placeholder]="valuePlaceholder"
+                [control]="form.controls.value"
+                *ngIf="form.controls.alert_type.value == 5 || !form.controls.alert_type.value"
+                ></idr-input-text>
+
+                <div class='form-control phoneMask'  *ngIf="form.controls.alert_type.value !== 5 && form.controls.alert_type.value" [ngClass]="{'hasError' : form.controls.value.invalid && formSubmitted}">
+                    <input
+                       
+                       [attr.placeholder]="valuePlaceholder"
+                       [attr.maxlength]="maxLength"
+                       phoneMask
+                       formControlName="value"
+                        
+                       >
+                   <span class='required'>*</span>
+                   <idr-validation-message
+                       *ngIf="form.controls.value.invalid && formSubmitted"
+                       [control]="form.controls.value"
+                       ></idr-validation-message>
+               </div>
+
+            <idr-input-text
+                [hasError]="form.controls.title.invalid && formSubmitted || title_uniq"
+                formControlName="title"
+                placeholder='Alert nickname'
+                [control]="form.controls.title"
+                ></idr-input-text>
+
+            <h4>Apply contact to:</h4>
+
+            <ul id="grouplist" class="list-group">
+                <li class="list-group-item"  *ngFor="let item of alertsList">
+                    <idr-alert-checkbox [ngClass]="{'active': selectedItem == item.value}" (click)="listClick($event, item)">
+                        {{ item.label }}
+                        <idr-check-svg *ngIf="selectedItem == item.value"></idr-check-svg>
+                    </idr-alert-checkbox>
+                </li>
+            </ul>
+
+        <idr-server-error [message]="message"></idr-server-error>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button class="btn btn-default"  mat-button [mat-dialog-close]="false"><i><idr-close-svg></idr-close-svg></i><span>Cancel</span></button>
+    <idr-default-btn
+        className="active"
+        (click)="save()"><idr-check-svg class='icon'></idr-check-svg><span>{{ok}}</span></idr-default-btn>
+    <idr-default-btn
+        className="active"
+        *ngIf="data.edit && form.controls.contact.value"
+        (click)="deleteContact()" ><idr-close-svg class='icon'></idr-close-svg><span>Delete method</span></idr-default-btn>
+</mat-dialog-actions>
+</div>
+</idr-modal-wrap>

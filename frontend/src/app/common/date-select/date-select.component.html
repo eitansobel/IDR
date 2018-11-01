@@ -1,0 +1,28 @@
+<ng-select
+    [items]="days"
+    [selectOnTab]="true"
+    bindValue="value"
+    placeholder="DD"
+    [(ngModel)]="birthday.dayId"
+    (change)="onChange(birthday); birthday.yearId"
+    [ngClass]="{'readonly': readonly}"
+    >
+</ng-select>
+<ng-select [items]="months"
+    [selectOnTab]="true"
+    bindValue="id"
+    placeholder="MM"
+    [(ngModel)]="birthday.monthId"
+    (change)="calcDaysofMonth(); onChange(birthday)"
+       [ngClass]="{'readonly': readonly}"
+    >
+</ng-select>
+<ng-select [items]="years"
+    [selectOnTab]="true"
+    bindValue="value"
+    placeholder="YYYY"
+    [(ngModel)]="birthday.yearId"
+    (change)="calcMonthOfYear(); onChange(birthday)"
+       [ngClass]="{'readonly': readonly}"
+    >
+</ng-select>

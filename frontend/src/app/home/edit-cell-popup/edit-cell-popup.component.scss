@@ -1,0 +1,207 @@
+@import '~styles.scss';
+
+.title {
+    margin-bottom: 35px;
+    text-align: center;
+}
+
+.author {
+    font-size: 13px;
+    font-weight: 600;
+    p {
+        color: $bombay;
+    }
+}
+
+.form-control {
+    width: 100%;
+    margin-bottom: 10px;
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: $base-font-size + 1;
+        text-transform: capitalize;
+    }
+    idr-default-btn {
+        min-width: 47%;
+        margin: 0;
+        ::ng-deep span {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.center {
+    justify-content: center;
+}
+
+.mat-slide-toggle {
+
+    ::ng-deep .mat-slide-toggle-label {
+        position: relative;
+        .cdk-visually-hidden {
+            border: 0;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+            outline: 0;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+        .mat-slide-toggle-thumb {
+            width: 47.5px;
+            height: 30px;
+            border-radius: 4px;
+            background-color: #fafafa;
+        }
+        .mat-slide-toggle-bar {
+            background-color: $dull-blue;
+            transition: all 80ms linear;
+            transition-property: background-color;
+            transition-delay: 50ms;
+            position: relative;
+            width: 100px;
+            height: 35px;
+
+        }
+        .mat-slide-toggle-thumb-container {
+            top: 2px;
+            transform: translate3d(3px, 0, 0);
+        }
+
+        .mat-slide-toggle-content {
+            position: absolute;
+            z-index: 3;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            width: 81px;
+            left: 9px;
+
+            .show {
+                color: #10161d;
+
+            }
+
+            .hide {
+                color: #fff;
+            }
+        }
+    }
+
+    &.mat-checked {
+        ::ng-deep .mat-slide-toggle-thumb-container {
+            transform: translate3d(49px, 0, 0);
+
+        }
+
+        ::ng-deep .mat-slide-toggle-label .mat-slide-toggle-bar {
+            background: #f8f7f7;
+        }
+
+        ::ng-deep .mat-slide-toggle-content {
+
+            .show {
+                color: #babfc4;
+            }
+
+            .hide {
+                color: #10161d;
+            }
+        }
+    }
+}
+
+::ng-deep .mat-dialog-container {
+    padding: 0;
+    box-shadow: none;
+    overflow: visible;
+}
+
+.requiredStar {
+    color: $red;
+}
+
+ng-select {
+    position: relative;
+    margin-bottom: 15px;
+
+    &.required ::ng-deep .ng-select-container {
+        &:before {
+            content: '*';
+            position: absolute;
+            top: 9px;
+            left: 10px;
+            color: $red;
+            z-index: 2;
+        }
+        &.ng-has-value {
+            &:before {
+                display: none;
+            }
+        }
+    }
+}
+
+::ng-deep .ng-select .ng-select-container {
+    border: $border-control;
+    padding-left: 10px;
+    input {
+        padding-left: 10px;
+    }
+
+}
+
+::ng-deep .ng-dropdown-panel.ng-select-bottom {
+    text-align: left;
+}
+
+::ng-deep .ng-select.hasError .ng-select-container {
+    border-color: $red;
+}
+
+idr-modal-wrap.form-control {
+    overflow: unset !important;
+    div {
+        mat-dialog-content.mat-dialog-content {
+            overflow: unset !important;
+        }
+        &.new-field-wrapper {
+            position: relative;
+
+            ::ng-deep {
+                div.form-control {
+                    input {
+                        padding-right: 140px;
+                    }
+                }
+            }
+        }
+        &.field-wrapper {
+            position: relative;
+            &.delete-padding {
+                ::ng-deep {
+                    div.form-control {
+
+                        input {
+                            padding-right: 165px;
+                        }
+                    }
+                }
+            }
+        }
+        ::ng-deep {
+            div.ng-scrollbar-view {
+                overflow-x: hidden;
+            }
+        }
+    }
+}
+
+.added-fields-wrapper {
+    max-height: 315px;
+}

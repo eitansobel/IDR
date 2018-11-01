@@ -1,0 +1,16 @@
+<div class='form-control' [ngClass]="{'hasError' : hasError}">
+     <textarea
+        #input
+        [readonly]="readonly"
+        [value]="value"
+        [placeholder]="placeholder"
+        (change)="onChange($event)"
+        rows="10"
+        (keyup)="onChange($event)">
+    </textarea>
+    <span *ngIf="required" class='required'>*</span>
+    <idr-validation-message
+        *ngIf="hasError"
+        [control]="control"
+        ></idr-validation-message>
+</div>

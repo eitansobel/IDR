@@ -1,0 +1,42 @@
+@import '~styles.scss';
+
+.searchContainer {
+    position: relative;
+    width: 100%;
+
+    input{
+        @include placeholder{
+            color: $bombay;
+            -webkit-text-fill-color: $bombay;
+        }
+        min-width: 277px;
+        width: 100%;
+        border: $border-control;
+        color: $bombay;
+        font-size: $base-font-size;
+        border-radius: 5px;
+        padding: 9px 25px 8px 20px;
+        font-family: $base-font-sans-serif;
+        font-weight: 600;
+        color: $black;
+        -webkit-text-fill-color: $black;
+
+        &:focus{
+            outline: none;
+        }
+    }
+
+    .searchIcon {
+        position: absolute;
+        right: 9px;
+        top: 7px;
+
+        ::ng-deep svg {
+            width: 15px;
+
+            path {
+                fill: $bombay;
+            }
+        }
+    }
+}

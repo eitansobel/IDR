@@ -1,0 +1,94 @@
+<h2 class="title" *ngIf="className === 'tableList'">{{listTitle}}</h2>
+<div class="flexContainer">
+    <div class="searchContainer">
+        <idr-search-control [placeholder]="searchHolder" (ngModelChange)="filterUsers(searchText)"
+            [(ngModel)]="searchText"></idr-search-control>
+    </div>
+    <ng-content *ngIf="className === 'tableList'"></ng-content>
+</div>
+
+<div class="table {{className}}">
+    <div class="header row" [ngStyle]="{'transform': 'translate(-' + slideLeft + 'px, 0px)'}">
+        <div class='mainInfo' [ngClass]="{'viewProfile': className === 'tableList'}">
+           <div class="rowItem mrn"  *ngIf="className === 'tableList' && listData[0]?.mrn">MRN</div>
+            <div class="rowItem index" *ngIf="className === 'tableList'">#</div>
+            <div
+                class="rowItem"
+                [ngClass]="{'active': active === i, 'asc': (direc && active === i) }"
+                (click)="sortable(i); active = i"
+                *ngFor="let headling of listHeader; let i = index"
+            >
+                {{headling}}
+                <idr-arrow-svg *ngIf="!(headling == 'Edited')"></idr-arrow-svg>
+
+            </div>
+        </div>
+        <div class="rowItem center showHide"
+            *ngIf="className === 'tableList' && typeName === 'patients' && myRole == 1 && listTitle == 'My Patients'">
+            Show/Hide
+        </div>
+        <div class="rowItem center" *ngIf="className === 'tableList' && typeName === 'stafflist' && myRole == 1">
+            Privilege
+        </div>
+        <div class="rowItem center" *ngIf="className === 'tableList' ">Remove</div>
+
+    </div>
+
+    <div class="listBody" *ngIf="className === 'list'">
+        <ng-scrollbar>
+            <div
+                class="row"
+                *ngFor="let row of listData | filter:  keys : searchText; let i = index"
+                [ngClass]="{'active': selectedItem.title == row.title, 'show': (i <= (end - 1) && (i >= start)), 'pended': row.title == 'Pended Users', 'red': (row.title == 'Pended Users' && row.qty > 1) }"
+                (click)="getData(row)"
+            >
+                <div class="rowItem" *ngFor="let key of keys">{{row[key]}}</div>
+            </div>
+        </ng-scrollbar>
+    </div>
+    <ng-scrollbar *ngIf="className === 'tableList'" [trackX]="className === 'tableList'" (scrollState)="scrollDetect($event)">
+        <div class="listBody" >
+                <div
+                    class="row"
+                    *ngFor="let row of listData | filter:  keys : searchText; let i = index"
+                    [ngClass]="{'active': selectedItem == row, 'show': (i <= (end - 1) && (i >= start))}"
+
+                >
+                    <div class='mainInfo' (click)="getData(row, item)"
+                        [ngClass]="{'viewProfile viewBody': className === 'tableList'}">
+                        <div class="rowItem mrn"  *ngIf="className === 'tableList' && row?.mrn">{{row.mrn}}</div>
+                        <div class="rowItem index" *ngIf="className === 'tableList'">{{i + 1}}</div>
+                        <div class="rowItem hide-overflow-text" *ngFor="let key of keys">{{row[key]}}</div>
+                    </div>
+                    <div class="rowItem center showHide"
+                        *ngIf="className === 'tableList' && typeName === 'patients' && listTitle == 'My Patients'">
+                        <mat-slide-toggle
+                            class='mat-slide-toggle mat-accent'
+                            (change)="changeStatuspat($event, row['id'])"
+                            [checked]="!row['show']">
+                            <span class='show'>Show</span>
+                            <span class='hide'>Hide</span>
+                        </mat-slide-toggle>
+                    </div>
+                    <div
+                        *ngIf="className === 'tableList' && myRole == 1 && typeName === 'stafflist'"
+                        (click)="disableClick && setPrivileges(row.remote_id)"
+                        class="privilage center rowItem">
+                        <idr-key-icon-svg></idr-key-icon-svg>
+                    </div>
+                    <div *ngIf="className === 'tableList' && typeName !== 'patients'" class="center rowItem">
+                        <idr-trash-icon-svg (click)="deleteRow(i, row.id)"
+                            *ngIf="(id == row.id || listTitle == 'Pended Users')"></idr-trash-icon-svg>
+                    </div>
+                    <div *ngIf="className === 'tableList' && typeName == 'patients'" class="center rowItem">
+                        <idr-trash-icon-svg (click)="deleteRow(i, row.remote_id)"></idr-trash-icon-svg>
+                    </div>
+                </div>
+
+        </div>
+    </ng-scrollbar>
+</div>
+
+<idr-pagination *ngIf="className === 'tableList' && listData.length" [listTitle]="listTitle" [pages]="pages"
+    (activePage)="activePage($event)"></idr-pagination>
+

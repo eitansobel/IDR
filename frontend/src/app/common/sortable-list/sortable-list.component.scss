@@ -1,0 +1,420 @@
+@import '~styles.scss';
+
+:host {
+    display: block;
+    flex-flow: column nowrap;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+
+    &[classname="list"] {
+        flex-basis: 100%;
+        div.flexContainer {
+            width: calc(100% - 8px);
+        }
+    }
+    &[classname="tableList"] {
+        flex-basis: 100%;
+    }
+    
+    
+}
+
+.table {
+    line-height: 1.5;
+    width: 100%;
+    font-size: $base-font-size;
+
+    &.list {
+        width: 104%;
+
+    }
+}
+
+.title {
+    float: left;
+    margin: 0;
+    font-size: $base-font-size + 4;
+    font-weight: 600;
+    line-height: 42px;
+    max-width: 40%;
+    margin-right: 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.list,
+.tableList {
+    height: calc(100vh - 256px);
+
+    .listBody {
+        height: calc(100% - 44px);
+    }
+}
+
+.tableList {
+    padding-bottom: 55px;
+
+    .listBody,
+    .header {
+        min-width: 980px;
+    }
+}
+
+.row {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    border: $border;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    cursor: pointer;
+
+    &.pended {
+        border-color: #e8c3c6;
+    }
+
+    .tableList & {
+        display: none;
+        cursor: default;
+        width: 98%;
+    }
+    .tableList &.header,
+    .tableList &.show {
+        display: flex;
+    }
+
+    &.header {
+        border: solid 1px transparent;
+        color: $modal-text-color;
+
+        &:hover {
+            background: none;
+        }
+
+        .rowItem {
+            color: $modal-text-color !important;
+            white-space: nowrap;
+
+            &.mrn {
+                max-width: 140px;
+                margin-left: 7px;
+            }
+
+            &.index {
+                flex-grow: 1;
+            }
+        }
+    }
+
+    .list & {
+        width: calc(100% - 22px);
+    }
+
+    .list &:hover,
+    .list &.active {
+        border: solid 1px transparent;
+        background-image: linear-gradient(#f1f4f8, #f1f4f8), linear-gradient(to top, #3b7fcb, #32bbe3);
+        background-origin: border-box;
+        background-clip: content-box, border-box;
+
+    }
+
+    .list &.pended:hover,
+    .list &.pended.red,
+    .list &.pended.active {
+        background: rgba(#e8c3c6, 0.4);
+        color: $red;
+        border-color: #e8c3c6;
+
+        .rowItem {
+            color: $red;
+        }
+    }
+
+    .list &.header:hover {
+        background: none;
+    }
+
+    &Item {
+        display: flex;
+        flex-flow: row nowrap;
+        flex-basis: 0;
+        padding: 19px 10px;
+        word-break: break-word;
+        color: #abb3bf;
+        flex-grow: 2;
+        font-weight: 600;
+        align-items: center;
+
+        ::ng-deep svg {
+            width: 15px;
+            margin-top: 1px;
+
+            polyline {
+                stroke: $modal-text-color;
+            }
+        }
+
+        &.active {
+            ::ng-deep svg {
+                width: 15px;
+
+                polyline {
+                    stroke: $dull-blue;
+                }
+            }
+        }
+
+        &.asc {
+            ::ng-deep svg {
+                transform: rotate(180deg);
+                margin-top: 3px;
+            }
+        }
+
+        idr-arrow-svg {
+            margin-left: 5px;
+        }
+
+        .list &:first-child {
+            word-break: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            display: inline-block;
+            color: $black;
+            flex-grow: 3;
+        }
+
+        .list &:nth-child(2) {
+            flex-grow: 1;
+        }
+
+        .tableList &.index {
+            word-break: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            display: inline-block;
+            color: $black;
+            text-align: center;
+            flex-grow: 1;
+            align-items: center;
+        }
+        .tableList &.mrn {
+            max-width: 140px;
+        }
+        .tableList &:nth-child(2),
+        .tableList &:nth-child(3),
+        .tableList &:nth-child(4) {
+            color: $black;
+        }
+
+        .tableList & {
+            flex-grow: 3;
+            overflow: hidden;
+        }
+
+    }
+}
+
+.showHide {
+    min-width: 115px;
+    max-width: 115px;
+}
+
+.searchContainer {
+    float: right;
+    position: relative;
+
+    input {
+        @include placeholder {
+            color: $bombay;
+            -webkit-text-fill-color: $bombay;
+        }
+        min-width: 277px;
+        border: $border-control;
+        font-size: $base-font-size;
+        border-radius: 5px;
+        padding: 11px 15px 11px 20px;
+        font-family: $base-font-sans-serif;
+        font-weight: 600;
+        color: $black;
+        -webkit-text-fill-color: $black;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .searchIcon {
+        position: absolute;
+        right: 9px;
+        top: 9px;
+
+        ::ng-deep svg {
+            width: 15px;
+            path {
+                fill: $bombay;
+            }
+        }
+    }
+
+}
+
+.flexContainer {
+    display: flex;
+    justify-content: flex-end;
+
+    idr-default-btn {
+        margin: 0;
+
+        ::ng-deep span {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.center {
+    justify-content: center;
+}
+
+.mainInfo {
+    width: 100%;
+    display: flex;
+
+    &.viewProfile {
+        width: 84%;
+        position: relative;
+        cursor: pointer;
+        align-items: center;
+
+        &.viewBody {
+
+            &:hover:after {
+                content: '...View profile';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: calc(100% - 20px);
+                height: calc(100% - 20px);
+                text-align: center;
+                color: $white;
+                background: rgba($dull-blue, .95);
+                font-weight: 600;
+                font-size: $base-font-size + 3;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 10px;
+                border-radius: 5px;
+            }
+        }
+    }
+
+}
+
+:host {
+    ::ng-deep .ng-scrollbar.-vertical {
+        @include respond-to('min-large') {
+            width: 3px;
+        }
+        background: rgba(0, 0, 0, 0.1);
+
+        .ng-scrollbar-thumb {
+            background: $dull-blue;
+        }
+    }
+}
+
+.mat-slide-toggle {
+
+    ::ng-deep .mat-slide-toggle-label {
+        position: relative;
+        .cdk-visually-hidden {
+            border: 0;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+            outline: 0;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+        .mat-slide-toggle-thumb {
+            width: 47.5px;
+            height: 30px;
+            border-radius: 4px;
+            background-color: #fafafa;
+        }
+        .mat-slide-toggle-bar {
+            background-color: $dull-blue;
+            transition: all 80ms linear;
+            transition-property: background-color;
+            transition-delay: 50ms;
+            position: relative;
+            width: 100px;
+            height: 35px;
+
+        }
+        .mat-slide-toggle-thumb-container {
+            top: 2px;
+            transform: translate3d(3px, 0, 0);
+        }
+
+        .mat-slide-toggle-content {
+            position: absolute;
+            z-index: 3;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            width: 81px;
+            left: 9px;
+
+            .show {
+                color: #10161d;
+
+            }
+
+            .hide {
+                color: #fff;
+            }
+        }
+    }
+
+    &.mat-checked {
+        ::ng-deep .mat-slide-toggle-thumb-container {
+            transform: translate3d(49px, 0, 0);
+
+        }
+
+        ::ng-deep .mat-slide-toggle-label .mat-slide-toggle-bar {
+            background: #f8f7f7;
+        }
+
+        ::ng-deep .mat-slide-toggle-content {
+
+            .show {
+                color: #babfc4;
+            }
+
+            .hide {
+                color: #10161d;
+            }
+        }
+    }
+}
+
+::ng-deep idr-dialog-overview mat-dialog-content {
+    white-space: pre-line;
+}
+
+::ng-deep .mat-list-item-content {
+        width: 100%!important;
+    }

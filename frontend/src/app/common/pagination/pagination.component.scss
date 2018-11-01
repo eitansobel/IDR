@@ -1,0 +1,33 @@
+@import '~styles.scss';
+
+:host {
+    // @include respond-to('min-large') {
+        display: block;
+        margin-top: 30px;
+    // }
+}
+.pagination {
+    display: block;;
+    text-align: center;
+
+    .page {
+        border: $border;
+        border-radius: 3px;
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+        font-size: $base-font-size;
+        display: inline-block;
+        color: $bombay;
+        margin: 0 5px;
+        
+        &.active, 
+        &:hover, {
+            cursor: pointer;
+            border: solid 1px transparent;
+            background-image: linear-gradient(#f1f4f8, #f1f4f8), linear-gradient(to top, #3b7fcb, #32bbe3);
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+        }
+    }
+}

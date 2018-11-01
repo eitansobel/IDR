@@ -1,0 +1,854 @@
+<header>
+    <svg (click)="close()" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+        <path fill="#E2E4E6" fill-rule="evenodd"
+              d="M20 0c11.046 0 20 8.955 20 20 0 11.046-8.954 20-20 20C8.955 40 0 31.046 0 20 0 8.955 8.955 0 20 0z"/>
+        <path fill="#FFF" fill-rule="evenodd"
+              d="M13.778 11.515l14.708 14.708a1.602 1.602 0 0 1 0 2.263 1.603 1.603 0 0 1-2.264 0L11.514 13.778a1.601 1.601 0 0 1 2.264-2.263z"/>
+        <path fill="#FFF" fill-rule="evenodd"
+              d="M28.486 11.515a1.602 1.602 0 0 1 0 2.263L13.778 28.486a1.603 1.603 0 0 1-2.264 0 1.602 1.602 0 0 1 0-2.263l14.708-14.708a1.601 1.601 0 0 1 2.264 0z"/>
+    </svg>
+
+
+    <span class="name">{{patient.controls.first_name.value }} {{patient.controls.last_name.value}}</span>
+    <span (click)="startEditProfile()" class="editProfileIcon">
+        <idr-edit-icon-svg></idr-edit-icon-svg> <span>Edit</span>
+    </span>
+</header>
+<div class="scrollWrap">
+    <ng-scrollbar [autoUpdate]="true">
+
+        <div class="formContainer">
+            <form
+                class="form"
+                novalidate
+                [formGroup]="patient"
+                >
+                <div class="flexSpread">
+                    <div class='control-quarter'>
+                        <label>First Name <span *ngIf="!personalEdit" class="requiredStar">*</span></label>
+                        <idr-input-text
+                            [hasError]="patient.controls.first_name.invalid && formSubmitted"
+                            formControlName="first_name"
+                            [readonly]="personalEdit"
+                            [control]="patient.controls.first_name"
+                            ></idr-input-text>
+                    </div>
+                    <div class='control-quarter'>
+                        <label>Last Name <span *ngIf="!personalEdit" class="requiredStar">*</span></label>
+                        <idr-input-text
+                            [hasError]="patient.controls.last_name.invalid && formSubmitted"
+                            formControlName="last_name"
+                            [readonly]="personalEdit"
+                            [control]="patient.controls.last_name"
+                            ></idr-input-text>
+                    </div>
+
+                    <div class='control-quarter'>
+                        <label>Middle Name</label>
+                        <idr-input-text
+                            [hasError]="patient.controls.middle_name.invalid && formSubmitted"
+                            formControlName="middle_name"
+                            [readonly]="personalEdit"
+                            [control]="patient.controls.middle_name"
+                            ></idr-input-text>
+                    </div>
+                    <div class='control-quarter'>
+                        <label>Sex <span *ngIf="!personalEdit" class="requiredStar">*</span></label>
+                        <ng-select
+                            [items]="sex"
+                            [selectOnTab]="true"
+                            bindLabel="label"
+                            bindValue="value"
+                            placeholder="Sex"
+                            [ngClass]="{'hasError': patient.controls.sex.invalid && formSubmitted}"
+                            formControlName="sex">
+                        </ng-select>
+                        <idr-validation-message
+                            *ngIf="formSubmitted"
+                            [control]="patient.controls.sex"
+                            ></idr-validation-message>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-quarter'>
+                        <label>Prefix</label>
+                        <idr-input-text
+                            [hasError]="patient.controls.prefix.invalid && formSubmitted"
+                            formControlName="prefix"
+                            [readonly]="personalEdit"
+                            [control]="patient.controls.prefix"
+                            ></idr-input-text>
+                    </div>
+                    <div class='control-quarter'>
+                        <label>Suffix</label>
+                        <idr-input-text
+                            [hasError]="patient.controls.suffix.invalid && formSubmitted"
+                            formControlName="suffix"
+                            [readonly]="personalEdit"
+                            [control]="patient.controls.suffix"
+                            ></idr-input-text>
+                    </div>
+
+                    <div class='control-quarter'>
+                        <label>Preferred Name</label>
+                        <idr-input-text
+                            [hasError]="patient.controls.preferred_name.invalid && formSubmitted"
+                            formControlName="preferred_name"
+                            [readonly]="personalEdit"
+                            [control]="patient.controls.preferred_name"
+                            ></idr-input-text>
+
+                    </div>
+                    <div class='control-quarter'>
+                        <label>Date of Birth <span *ngIf="!personalEdit" class="requiredStar">*</span></label>
+                        <p *ngIf="personalEdit">{{this.patient.controls.birth_date.value}}</p>
+                        <idr-date-select
+                            [readonly]="personalEdit"
+                            [date]="this.patient.controls.birth_date.value"
+                            formControlName="birth_date"
+                            ></idr-date-select>
+                        <idr-validation-message
+                            *ngIf="formSubmitted"
+                            [control]="patient.controls.birth_date"
+                            ></idr-validation-message>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-quarter'>
+                        <label>Previous Last Name</label>
+                        <idr-input-text
+                            [hasError]="patient.controls.previous_last_name.invalid && formSubmitted"
+                            formControlName="previous_last_name"
+                            [readonly]="personalEdit"
+                            [control]="patient.controls.previous_last_name"
+                            ></idr-input-text>
+                    </div>
+                    <div class='control-quarter'>
+                        <label>Mother's Maiden Name</label>
+                        <idr-input-text
+                            [hasError]="patient.controls.mother_maiden_name.invalid && formSubmitted"
+                            formControlName="mother_maiden_name"
+                            [readonly]="personalEdit"
+                            [control]="patient.controls.mother_maiden_name"
+                            ></idr-input-text>
+                    </div>
+
+                    <div class='control-quarter'>
+                        <label>Preferred Language</label>
+                        <idr-input-text
+                            [hasError]="patient.controls.preferred_language.invalid && formSubmitted"
+                            formControlName="preferred_language"
+                            [readonly]="personalEdit"
+                            [control]="patient.controls.preferred_language"
+                            ></idr-input-text>
+                    </div>
+                    <div class='control-quarter'>
+                        <label>Ethnicity/Race</label>
+                        <idr-input-text
+                            [hasError]="patient.controls.ethnicity.invalid && formSubmitted"
+                            formControlName="ethnicity"
+                            [readonly]="personalEdit"
+                            [control]="patient.controls.ethnicity"
+                            ></idr-input-text>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-quarter'>
+                        <label>Home Phone <span class="requiredStar" *ngIf="!personalEdit">* At least one phone number required</span></label>
+
+                        <div class='form-control phoneMask' [ngClass]="{'hasError' : (patient.controls.home_phone.invalid || (patient.controls.mobile_phone.invalid && patient.controls.work_phone.invalid)) && formSubmitted}">
+                             <input
+                                placeholder="(XXX) XXX-XXXX"
+                                phoneMask
+                                [readonly]="personalEdit"
+                                formControlName="home_phone"
+                                >
+                                <span class='required'>*</span>
+                                <idr-validation-message
+                                    *ngIf="patient.controls.home_phone.invalid && formSubmitted && !personalEdit"
+                                    [control]="patient.controls.home_phone"
+                                    ></idr-validation-message>
+                        </div>
+                    </div>
+                    <div class='control-quarter'>
+                        <label>Mobile Phone</label>
+                        <div class='form-control phoneMask' [ngClass]="{'hasError' : (patient.controls.mobile_phone.invalid || (patient.controls.work_phone.invalid && patient.controls.home_phone.invalid))  && formSubmitted}">
+                             <input
+                                placeholder="(XXX) XXX-XXXX"
+                                phoneMask
+                                [readonly]="personalEdit"
+                                formControlName="mobile_phone"
+                                >
+                                <idr-validation-message
+                                    *ngIf="patient.controls.mobile_phone.invalid && formSubmitted && !personalEdit"
+                                    [control]="patient.controls.mobile_phone"
+                                    ></idr-validation-message>
+                        </div>
+                    </div>
+
+                    <div class='control-quarter'>
+                        <label>Work Phone</label>
+                        <div class='form-control phoneMask' [ngClass]="{'hasError' : (patient.controls.work_phone.invalid || (patient.controls.mobile_phone.invalid && patient.controls.home_phone.invalid))  && formSubmitted}">
+                             <input
+                                placeholder="(XXX) XXX-XXXX"
+                                phoneMask
+                                [readonly]="personalEdit"
+                                formControlName="work_phone"
+                                >
+                                <idr-validation-message
+                                    *ngIf="patient.controls.work_phone.invalid && formSubmitted && !personalEdit"
+                                    [control]="patient.controls.work_phone"
+                                    ></idr-validation-message>
+                        </div>
+                    </div>
+                    <div class='control-quarter'>
+                        <label>Email <span *ngIf="!personalEdit" class="requiredStar">*</span></label>
+                        <idr-input-text
+                            [hasError]="patient.controls.email.invalid  && formSubmitted"
+                            formControlName="email"
+                            [readonly]="personalEdit"
+                            [control]="patient.controls.email"
+                            ></idr-input-text>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-quarter'>
+                        <label>MRN <span *ngIf="!personalEdit" class="requiredStar">*</span></label>
+                        <idr-input-text
+                            [hasError]="patient.controls.mrn.invalid && formSubmitted"
+                            formControlName="mrn"
+                            [readonly]="personalEdit"
+                            [control]="patient.controls.mrn"
+                            ></idr-input-text>
+                    </div>
+
+                    <div class='control-quarter'>
+                        <label>Preferred Communications Method <span *ngIf="!personalEdit" class="requiredStar">*</span></label>
+                        <ng-select
+                            [items]="preferred_mode"
+                            [selectOnTab]="true"
+                            bindLabel="label"
+                            bindValue="value"
+                            placeholder="Preferred Communications Method"
+                            [ngClass]="{'hasError': patient.controls.preferred_communication.invalid && formSubmitted}"
+                            formControlName="preferred_communication">
+                        </ng-select>
+                        <idr-validation-message
+                            *ngIf="formSubmitted"
+                            [control]="patient.controls.preferred_communication"
+                            ></idr-validation-message>
+                    </div>
+
+                    <div class='control-quarter'>
+                        <label>SSN <span *ngIf="!personalEdit" class="requiredStar">*</span></label>
+
+                        <div class='form-control phoneMask'
+                             [ngClass]="{'hasError' : patient.controls.ssn.invalid && formSubmitted}">
+                             <input
+                                placeholder="XXX-XXX-XXXX"
+                                ssnMask
+                                [readonly]="personalEdit"
+                                formControlName="ssn"
+                                >
+                                <idr-validation-message
+                                    *ngIf="patient.controls.ssn.invalid && formSubmitted"
+                                    [control]="patient.controls.ssn"
+                                    ></idr-validation-message>
+                        </div>
+                    </div>
+                    <div class='control-quarter'>
+                        <label>PCP</label>
+                        <idr-input-text
+                            [hasError]="patient.controls.pcp.invalid && formSubmitted"
+                            formControlName="pcp"
+                            [readonly]="personalEdit"
+                            [control]="patient.controls.pcp"
+                            ></idr-input-text>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-quarter'>
+                        <label>Address Line 1 <span *ngIf="!personalEdit" class="requiredStar">*</span></label>
+                        <idr-input-text
+                            [hasError]="patient.controls.address1.invalid && formSubmitted"
+                            formControlName="address1"
+                            [readonly]="personalEdit"
+                            [control]="patient.controls.address1"
+                            ></idr-input-text>
+                    </div>
+                    <div class='control-quarter'>
+                        <label>Address Line 2</label>
+                        <idr-input-text
+                            [hasError]="patient.controls.address2.invalid && formSubmitted"
+                            formControlName="address2"
+                            [readonly]="personalEdit"
+                            [control]="patient.controls.address2"
+                            ></idr-input-text>
+                    </div>
+                    <div class='control-quarter'>
+                        <label>Address Line 3</label>
+                        <idr-input-text
+                            [hasError]="patient.controls.address3.invalid && formSubmitted"
+                            formControlName="address3"
+                            [readonly]="personalEdit"
+                            [control]="patient.controls.address3"
+                            ></idr-input-text>
+                    </div>
+                    <div class='control-quarter'>
+                        <label>Preferred Pharmacy</label>
+                        <idr-input-text
+                            [hasError]="patient.controls.preferred_pharmacy.invalid && formSubmitted"
+                            [readonly]="personalEdit"
+                            formControlName="preferred_pharmacy"
+                            [control]="patient.controls.preferred_pharmacy"
+                            ></idr-input-text>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <idr-country-contacts
+                        formControlName="state"
+                        [formSubmitted]="formSubmitted"
+                        [control]="patient.controls.state.value"
+                        [readonly]="personalEdit"
+                        [stateChoosed]="patient.controls.country.value">
+                        <div class="country">
+                            <label>Country <span class="requiredStar" *ngIf="!personalEdit">*</span></label>
+                            <ng-select
+                                    [items]="country"
+                                    [selectOnTab]="true"
+                                    bindLabel="name"
+                                    bindValue="name"
+                                    placeholder="Country"
+                                    (change)="onChangeCountry($event)"
+                                    [ngClass]="{'hasError': patient.controls.country.invalid && formSubmitted}"
+                                    formControlName="country">
+                            </ng-select>
+                            <idr-validation-message
+                                *ngIf="formSubmitted"
+                                [control]="patient.controls.country"
+                                ></idr-validation-message>
+                        </div>
+                        <div class="city">
+                            <label>City <span class="requiredStar" *ngIf="!personalEdit">*</span></label>
+                            <idr-input-text
+                                [hasError]="patient.controls.city.invalid && formSubmitted"
+                                formControlName="city"
+                                [readonly]="personalEdit"
+                                [control]="patient.controls.city"
+                                ></idr-input-text>
+                        </div>
+                        <div class="zip">
+                            <label>Zip Code <span class="requiredStar" *ngIf="!personalEdit">*</span></label>
+                            <idr-input-text
+                                [hasError]="patient.controls.zip_code.invalid && formSubmitted"
+                                formControlName="zip_code"
+                                [readonly]="personalEdit"
+                                [control]="patient.controls.zip_code"
+                                ></idr-input-text>
+                        </div>
+                    </idr-country-contacts>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-quarter'>
+                        <label>Room</label>
+                        <idr-input-text
+                            [hasError]="patient.controls.room.invalid && formSubmitted"
+                            formControlName="room"
+                            [readonly]="personalEdit"
+                            [control]="patient.controls.room"
+                            ></idr-input-text>
+                    </div>
+                    <div class='control-quarter'></div>
+                    <div class='control-quarter'></div>
+                    <div class='control-quarter'></div>
+                </div>
+                <div class="formWrap" formArrayName="emergency_contacts">
+                    <h4 *ngIf="!personalEdit">Emergency Contact
+                        <span (click)="addNewEmContact()" class="createNewIcon">&#43;</span>
+                    </h4>
+                    <div class="formDynamicWrap pos-relative"
+                        *ngFor="let item of patient.controls.emergency_contacts.controls; let i=index"
+                        [formGroupName]="i">
+                        <h2>Emergency Contact #{{i+1}}</h2>
+                        <div *ngIf="!personalEdit && !item.controls.id.value"
+                            (click)="deleteEmergencyContact(i)"
+                            class="delete-icon">&#10006;
+                        </div>
+                        <div class="flexSpread">
+                            <div class='control-half'>
+                                <label>First Name <span class="requiredStar" *ngIf="!personalEdit">*</span></label>
+                                <idr-input-text
+                                    [readonly]="personalEdit"
+                                    [hasError]="patient.controls.emergency_contacts.controls[i]['controls'].first_name.invalid && formSubmitted"
+                                    formControlName="first_name"
+                                    [control]="patient.controls.emergency_contacts.controls[i]['controls'].first_name"
+                                    ></idr-input-text>
+                            </div>
+                            <div class='control-half'>
+                                <label>Last Name <span class="requiredStar" *ngIf="!personalEdit">*</span></label>
+                                <idr-input-text
+                                    [hasError]="patient.controls.emergency_contacts.controls[i]['controls'].last_name.invalid && formSubmitted"
+                                    formControlName="last_name"
+                                    [readonly]="personalEdit"
+                                    [control]="patient.controls.emergency_contacts.controls[i]['controls'].last_name"
+                                    ></idr-input-text>
+                            </div>
+                        </div>
+                        <div class="flexSpread">
+                            <div class='control-quarter'>
+                                <label>Relationship to Patients <span class="requiredStar"
+                                    *ngIf="!personalEdit">*</span>
+                                </label>
+                                <idr-input-text
+                                    [hasError]="patient.controls.emergency_contacts.controls[i]['controls'].relation_to_patient.invalid && formSubmitted"
+                                    formControlName="relation_to_patient"
+                                    [readonly]="personalEdit"
+                                    [control]="patient.controls.emergency_contacts.controls[i]['controls'].relation_to_patient"
+                                    ></idr-input-text>
+                            </div>
+                            <div class='control-quarter'>
+                                <label>Address Line 1</label>
+                                <idr-input-text
+                                    [hasError]="patient.controls.emergency_contacts.controls[i]['controls'].address1.invalid && formSubmitted"
+                                    formControlName="address1"
+                                    [readonly]="personalEdit"
+                                    [control]="patient.controls.emergency_contacts.controls[i]['controls'].address1"
+                                    ></idr-input-text>
+                            </div>
+                            <div class='control-quarter'>
+                                <label>Address Line 2</label>
+                                <idr-input-text
+                                    [hasError]="patient.controls.emergency_contacts.controls[i]['controls'].address2.invalid && formSubmitted"
+                                    formControlName="address2"
+                                    [readonly]="personalEdit"
+                                    [control]="patient.controls.emergency_contacts.controls[i]['controls'].address2"
+                                    ></idr-input-text>
+                            </div>
+                            <div class='control-quarter'>
+                                <label>Address Line 3</label>
+                                <idr-input-text
+                                    [hasError]="patient.controls.emergency_contacts.controls[i]['controls'].address3.invalid && formSubmitted"
+                                    formControlName="address3"
+                                    [readonly]="personalEdit"
+                                    [control]="patient.controls.emergency_contacts.controls[i]['controls'].address3"
+                                    ></idr-input-text>
+                            </div>
+                        </div>
+                        <idr-country-contacts
+                            [formSubmitted]="formSubmitted"
+                            formControlName="state"
+                            [control]="patient.controls.emergency_contacts.controls[i]['controls'].state.value"
+                            [readonly]="personalEdit"
+                            [stateChoosed]="patient.controls.emergency_contacts.controls[i]['controls'].country.value">
+                            <div class="country">
+                                <label>Country <span class="requiredStar" *ngIf="!personalEdit">*</span></label>
+                                <ng-select
+                                    [items]="country"
+                                    [selectOnTab]="true"
+                                    bindLabel="name"
+                                    bindValue="name"
+                                    placeholder="Country"
+                                    (change)="onChangeCountry($event)"
+                                    [ngClass]="{'hasError': patient.controls.emergency_contacts.controls[i]['controls'].country.invalid && formSubmitted}"
+                                    formControlName="country">
+                                </ng-select>
+                                <idr-validation-message
+                                    *ngIf="formSubmitted"
+                                    [control]="patient.controls.emergency_contacts.controls[i]['controls'].country"
+                                    ></idr-validation-message>
+                            </div>
+                            <div class="city">
+                                <label>City <span class="requiredStar" *ngIf="!personalEdit">*</span></label>
+                                <idr-input-text
+                                    [hasError]="patient.controls.emergency_contacts.controls[i]['controls'].city.invalid && formSubmitted"
+                                    formControlName="city"
+                                    [readonly]="personalEdit"
+                                    [control]="patient.controls.emergency_contacts.controls[i]['controls'].city"
+                                    ></idr-input-text>
+                            </div>
+                            <div class="zip">
+                                <label>Zip Code <span class="requiredStar" *ngIf="!personalEdit">*</span></label>
+                                <idr-input-text
+                                    [hasError]="patient.controls.emergency_contacts.controls[i]['controls'].zip_code.invalid && formSubmitted"
+                                    formControlName="zip_code"
+                                    [readonly]="personalEdit"
+                                    [control]="patient.controls.emergency_contacts.controls[i]['controls'].zip_code"
+                                    ></idr-input-text>
+                            </div>
+                        </idr-country-contacts>
+                        <div class="flexSpread">
+                            <div class='control-quarter'>
+                                <label>
+                                    Home Phone <span class="requiredStar" *ngIf="!personalEdit">* At least one phone number required</span>
+                                </label>
+                                <div class='form-control phoneMask' 
+                                     [ngClass]="{'hasError' :  (patient.controls.emergency_contacts.controls[i]['controls'].home_phone.invalid || 
+                                     (patient.controls.emergency_contacts.controls[i]['controls'].mobile_phone.invalid && 
+                                     patient.controls.emergency_contacts.controls[i]['controls'].work_phone.invalid)) && 
+                                     formSubmitted}">
+                                     <input
+                                        placeholder="(XXX) XXX-XXXX"
+                                        phoneMask
+                                        [readonly]="personalEdit"
+                                        formControlName="home_phone"
+                                        >
+                                        <idr-validation-message
+                                            *ngIf="(patient.controls.emergency_contacts.controls[i]['controls'].home_phone.invalid || 
+                                            (patient.controls.emergency_contacts.controls[i]['controls'].mobile_phone.invalid && 
+                                            patient.controls.emergency_contacts.controls[i]['controls'].work_phone.invalid)) && 
+                                            formSubmitted"
+                                            [control]="patient.controls.emergency_contacts.controls[i]['controls'].home_phone"
+                                            ></idr-validation-message>
+                                </div>
+                            </div>
+                            <div class='control-quarter'>
+                                <label>Mobile Phone</label>
+                                <div class='form-control phoneMask' 
+                                     [ngClass]="{'hasError' :  (patient.controls.emergency_contacts.controls[i]['controls'].mobile_phone.invalid || (
+                                     patient.controls.emergency_contacts.controls[i]['controls'].home_phone.invalid &&                   
+                                     patient.controls.emergency_contacts.controls[i]['controls'].work_phone.invalid)) && 
+                                     formSubmitted}">
+                                     <input
+                                        placeholder="(XXX) XXX-XXXX"
+                                        phoneMask
+                                        [readonly]="personalEdit"
+                                        formControlName="mobile_phone"
+                                        >
+                                        <idr-validation-message
+                                            *ngIf="(patient.controls.emergency_contacts.controls[i]['controls'].home_phone.invalid || 
+                                            (patient.controls.emergency_contacts.controls[i]['controls'].mobile_phone.invalid && 
+                                            patient.controls.emergency_contacts.controls[i]['controls'].work_phone.invalid)) && 
+                                            formSubmitted"
+                                            [control]="patient.controls.emergency_contacts.controls[i]['controls'].mobile_phone"
+                                            ></idr-validation-message>
+                                </div>
+                            </div>
+                                                            <div class='control-quarter'>
+                                        <label>Work Phone</label>
+
+                                        <div class='form-control phoneMask' 
+                                             [ngClass]="{'hasError' : (patient.controls.emergency_contacts.controls[i]['controls'].work_phone.invalid ||
+                                             (patient.controls.emergency_contacts.controls[i]['controls'].home_phone.invalid && 
+                                             patient.controls.emergency_contacts.controls[i]['controls'].mobile_phone.invalid)) && 
+                                             formSubmitted}">
+                                             <input
+                                                placeholder="(XXX) XXX-XXXX"
+                                                phoneMask
+                                                [readonly]="personalEdit"
+                                                formControlName="work_phone"
+                                                >
+                                                <idr-validation-message
+                                                    *ngIf="(patient.controls.emergency_contacts.controls[i]['controls'].work_phone.invalid ||
+                                                    (patient.controls.emergency_contacts.controls[i]['controls'].home_phone.invalid && 
+                                                    patient.controls.emergency_contacts.controls[i]['controls'].mobile_phone.invalid)) && 
+                                                    formSubmitted"
+                                                    [control]="patient.controls.emergency_contacts.controls[i]['controls'].work_phone"
+                                                    ></idr-validation-message>
+                                        </div>
+                                    </div>
+                                    <div class='control-quarter'>
+                                        <label>Next of Kin</label>
+                                        <ng-select
+                                            [items]="kin"
+                                            [selectOnTab]="true"
+                                            bindLabel="label"
+                                            bindValue="value"
+                                            placeholder="Next of Kin"
+                                            [ngClass]="{'hasError': patient.controls.emergency_contacts.controls[i]['controls'].next_of_kin.invalid && formSubmitted}"
+                                            formControlName="next_of_kin">
+                                        </ng-select>
+                                        <idr-validation-message
+                                            *ngIf="formSubmitted"
+                                            [control]="patient.controls.emergency_contacts.controls[i]['controls'].next_of_kin"
+                                            ></idr-validation-message>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="formWrap" formArrayName="guarantors">
+                            <h4 *ngIf="!personalEdit">Guarantor
+                                <span (click)="addNewGuarantor()" class="createNewIcon">&#43;</span>
+                            </h4>
+                            <div class="formDynamicWrap pos-relative"
+                                *ngFor="let item of patient.controls.guarantors.controls; let i=index"
+                                [formGroupName]="i">
+                                <h2>Guarantor #{{i+1}}</h2>
+                                <div *ngIf="!personalEdit && !item.controls.id.value"
+                                    (click)="deleteGuarantor(i)"
+                                    class="delete-icon">&#10006;
+                                </div>
+                                <div class="flexSpread">
+                                    <div class='control-quarter'>
+                                        <label>First Name <span class="requiredStar" *ngIf="!personalEdit">*</span></label>
+                                        <idr-input-text
+                                            [hasError]="patient.controls.guarantors.controls[i]['controls'].first_name.invalid && formSubmitted"
+                                            formControlName="first_name"
+                                            [readonly]="personalEdit"
+                                            [control]="patient.controls.guarantors.controls[i]['controls'].first_name"
+                                            ></idr-input-text>
+                                    </div>
+                                    <div class='control-quarter'>
+                                        <label>Last Name <span class="requiredStar" *ngIf="!personalEdit">*</span></label>
+                                        <idr-input-text
+                                            [hasError]="patient.controls.guarantors.controls[i]['controls'].last_name.invalid && formSubmitted"
+                                            formControlName="last_name"
+                                            [readonly]="personalEdit"
+                                            [control]="patient.controls.guarantors.controls[i]['controls'].last_name"
+                                            ></idr-input-text>
+                                    </div>
+                                    <div class='control-quarter'>
+                                        <label>Date of Birth <span class="requiredStar" *ngIf="!personalEdit">*</span></label>
+                                        <p *ngIf="personalEdit">{{this.patient.controls.birth_date.value}}</p>
+                                        <idr-date-select
+                                            [readonly]="personalEdit"
+                                            [date]="this.patient.controls.guarantors.controls[i]['controls'].birth_date.value"
+                                            formControlName="birth_date"
+                                            ></idr-date-select>
+                                        <idr-validation-message
+                                            *ngIf="formSubmitted"
+                                            [control]="patient.controls.guarantors.controls[i]['controls'].birth_date"
+                                            ></idr-validation-message>
+                                    </div>
+                                    <div class='control-quarter'>
+                                        <label>Sex <span class="requiredStar" *ngIf="!personalEdit">*</span></label>
+                                        <ng-select
+                                            [items]="sex"
+                                            [selectOnTab]="true"
+                                            bindLabel="label"
+                                            bindValue="value"
+                                            placeholder="Sex"
+                                            [ngClass]="{'hasError': patient.controls.guarantors.controls[i]['controls'].sex.invalid && formSubmitted}"
+                                            formControlName="sex">
+                                        </ng-select>
+                                        <idr-validation-message
+                                            *ngIf="formSubmitted"
+                                            [control]="patient.controls.guarantors.controls[i]['controls'].sex"
+                                            ></idr-validation-message>
+                                    </div>
+                                </div>
+                                <div class="flexSpread">
+                                    <div class='control-quarter'>
+                                        <label>Middle Name</label>
+                                        <idr-input-text
+                                            [hasError]="patient.controls.guarantors.controls[i]['controls'].middle_name.invalid && formSubmitted"
+                                            formControlName="middle_name"
+                                            [readonly]="personalEdit"
+                                            [control]="patient.controls.guarantors.controls[i]['controls'].middle_name"
+                                            ></idr-input-text>
+                                    </div>
+                                    <div class='control-quarter'>
+                                        <label>
+                                            Home Phone <span class="requiredStar" *ngIf="!personalEdit">* At least one phone number required</span>
+                                        </label>
+                                        <div class='form-control phoneMask' 
+                                             [ngClass]="{'hasError' :  patient.controls.guarantors.controls[i]['controls'].home_phone.invalid && 
+                                             patient.controls.guarantors.controls[i]['controls'].mobile_phone.invalid && 
+                                             patient.controls.guarantors.controls[i]['controls'].work_phone.invalid && 
+                                             formSubmitted}">
+                                             <input
+                                                placeholder="(XXX) XXX-XXXX"
+                                                phoneMask
+                                                [readonly]="personalEdit"
+                                                formControlName="home_phone"
+                                                >
+                                                <idr-validation-message
+                                                    *ngIf="patient.controls.guarantors.controls[i]['controls'].home_phone.invalid && 
+                                                    patient.controls.guarantors.controls[i]['controls'].mobile_phone.invalid && 
+                                                    patient.controls.guarantors.controls[i]['controls'].work_phone.invalid && 
+                                                    formSubmitted"
+                                                    [control]="patient.controls.guarantors.controls[i]['controls'].home_phone"
+                                                    ></idr-validation-message>
+                                        </div>
+                                    </div>
+                                    <div class='control-quarter'>
+                                        <label>Mobile Phone</label>
+                                        <div class='form-control phoneMask' 
+                                             [ngClass]="{'hasError' :  patient.controls.guarantors.controls[i]['controls'].home_phone.invalid && 
+                                             patient.controls.guarantors.controls[i]['controls'].mobile_phone.invalid && 
+                                             patient.controls.guarantors.controls[i]['controls'].work_phone.invalid && 
+                                             formSubmitted}">
+                                             <input
+                                                placeholder="(XXX) XXX-XXXX"
+                                                phoneMask
+                                                [readonly]="personalEdit"
+                                                formControlName="mobile_phone"
+                                                >
+                                                <idr-validation-message
+                                                    *ngIf=" patient.controls.guarantors.controls[i]['controls'].home_phone.invalid && 
+                                                    patient.controls.guarantors.controls[i]['controls'].mobile_phone.invalid && 
+                                                    patient.controls.guarantors.controls[i]['controls'].work_phone.invalid && 
+                                                    formSubmitted"
+                                                    [control]="patient.controls.guarantors.controls[i]['controls'].mobile_phone"
+                                                    ></idr-validation-message>
+                                        </div>
+                                    </div>
+                                    <div class='control-quarter'>
+                                        <label>Work Phone</label>
+                                        <div class='form-control phoneMask' 
+                                             [ngClass]="{'hasError' : patient.controls.guarantors.controls[i]['controls'].home_phone.invalid && 
+                                             patient.controls.guarantors.controls[i]['controls'].mobile_phone.invalid && 
+                                             patient.controls.guarantors.controls[i]['controls'].work_phone.invalid && 
+                                             formSubmitted}">
+                                             <input
+                                                placeholder="(XXX) XXX-XXXX"
+                                                phoneMask
+                                                [readonly]="personalEdit"
+                                                formControlName="work_phone"
+                                                >
+                                                <idr-validation-message
+                                                    *ngIf="patient.controls.guarantors.controls[i]['controls'].home_phone.invalid && 
+                                                    patient.controls.guarantors.controls[i]['controls'].mobile_phone.invalid && 
+                                                    patient.controls.guarantors.controls[i]['controls'].work_phone.invalid && 
+                                                    formSubmitted"
+                                                    [control]="patient.controls.guarantors.controls[i]['controls'].work_phone"
+                                                    ></idr-validation-message>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flexSpread">
+                                    <div class='control-quarter'>
+                                        <label>Relationship to Patient <span class="requiredStar" *ngIf="!personalEdit">*</span></label>
+                                        <idr-input-text
+                                            [hasError]="patient.controls.guarantors.controls[i]['controls'].relation_to_patient.invalid && formSubmitted"
+                                            formControlName="relation_to_patient"
+                                            [readonly]="personalEdit"
+                                            [control]="patient.controls.guarantors.controls[i]['controls'].relation_to_patient"
+                                            ></idr-input-text>
+                                    </div>
+                                    <div class='control-quarter'>
+                                        <label>Address Line 1</label>
+                                        <idr-input-text
+                                            [hasError]="patient.controls.guarantors.controls[i]['controls'].address1.invalid && formSubmitted"
+                                            formControlName="address1"
+                                            [readonly]="personalEdit"
+                                            [control]="patient.controls.guarantors.controls[i]['controls'].address1"
+                                            ></idr-input-text>
+                                    </div>
+                                    <div class='control-quarter'>
+                                        <label>Address Line 2</label>
+                                        <idr-input-text
+                                            [hasError]="patient.controls.guarantors.controls[i]['controls'].address2.invalid && formSubmitted"
+                                            formControlName="address2"
+                                            [readonly]="personalEdit"
+                                            [control]="patient.controls.guarantors.controls[i]['controls'].address2"
+                                            ></idr-input-text>
+                                    </div>
+                                    <div class='control-quarter'>
+                                        <label>Address Line 3</label>
+                                        <idr-input-text
+                                            [hasError]="patient.controls.guarantors.controls[i]['controls'].address3.invalid && formSubmitted"
+                                            formControlName="address3"
+                                            [readonly]="personalEdit"
+                                            [control]="patient.controls.guarantors.controls[i]['controls'].address3"
+                                            ></idr-input-text>
+                                    </div>
+                                </div>
+                                <idr-country-contacts
+                                    formControlName="state"
+                                    [formSubmitted]="formSubmitted"
+                                    [control]="patient.controls.guarantors.controls[i]['controls'].state.value"
+                                    [readonly]="personalEdit"
+                                    [stateChoosed]="patient.controls.guarantors.controls[i]['controls'].country.value">
+                                    <div class="country">
+                                        <label>Country <span class="requiredStar" *ngIf="!personalEdit">*</span></label>
+                                        <ng-select
+                                            [items]="country"
+                                            [selectOnTab]="true"
+                                            bindLabel="name"
+                                            bindValue="name"
+                                            placeholder="Country"
+                                            (change)="onChangeCountry($event)"
+                                            [ngClass]="{'hasError':patient.controls.guarantors.controls[i]['controls'].country.invalid && formSubmitted}"
+                                            formControlName="country">
+                                        </ng-select>
+                                        <idr-validation-message
+                                            *ngIf="formSubmitted"
+                                            [control]="patient.controls.guarantors.controls[i]['controls'].country"
+                                            ></idr-validation-message>
+                                    </div>
+                                    <div class="city">
+                                        <label>City <span class="requiredStar" *ngIf="!personalEdit">*</span></label>
+                                        <idr-input-text
+                                            [hasError]="patient.controls.guarantors.controls[i]['controls'].city.invalid && formSubmitted"
+                                            formControlName="city"
+                                            [readonly]="personalEdit"
+                                            [control]="patient.controls.guarantors.controls[i]['controls'].city"
+                                            ></idr-input-text>
+                                    </div>
+                                    <div class="zip">
+                                        <label>Zip Code <span class="requiredStar" *ngIf="!personalEdit">*</span></label>
+                                        <idr-input-text
+                                            [hasError]="patient.controls.guarantors.controls[i]['controls'].zip_code.invalid && formSubmitted"
+                                            formControlName="zip_code"
+                                            [readonly]="personalEdit"
+                                            [control]="patient.controls.guarantors.controls[i]['controls'].zip_code"
+                                            ></idr-input-text>
+                                    </div>
+                                </idr-country-contacts>
+                                <div class="flexSpread">
+                                    <div class='control-half'>
+                                        <label>SSN</label>
+
+                                        <div class='form-control phoneMask'
+                                             [ngClass]="{'hasError' : patient.controls.guarantors.controls[i]['controls'].ssn.invalid && formSubmitted}">
+                                             <input
+                                                placeholder="XXX-XXX-XXXX"
+                                                ssnMask
+                                                [readonly]="personalEdit"
+                                                formControlName="ssn"
+                                                >
+                                                <idr-validation-message
+                                                    *ngIf="patient.controls.guarantors.controls[i]['controls'].ssn.invalid && formSubmitted"
+                                                    [control]="patient.controls.guarantors.controls[i]['controls'].ssn"
+                                                    ></idr-validation-message>
+                                        </div>
+                                    </div>
+                                    <div class='control-half'>
+                                        <label>Employer</label>
+                                        <idr-textarea
+                                            [hasError]="patient.controls.guarantors.controls[i]['controls'].employer.invalid && formSubmitted"
+                                            formControlName="employer"
+                                            [readonly]="personalEdit"
+                                            [control]="patient.controls.guarantors.controls[i]['controls'].employer"
+                                            ></idr-textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="formWrap">
+                            <h4>Coverage Information</h4>
+                            <div class="flexSpread">
+                                <div class='control-half'>
+                                    <label>Primary Payor</label>
+                                    <idr-input-text
+                                        [hasError]="patient.controls.primary_payor.invalid && formSubmitted"
+                                        formControlName="primary_payor"
+                                        [readonly]="personalEdit"
+                                        [control]="patient.controls.primary_payor"
+                                        ></idr-input-text>
+                                </div>
+                                <div class='control-half'>
+                                    <label>Secondary Payor</label>
+                                    <idr-input-text
+                                        [hasError]="patient.controls.secondary_payor.invalid && formSubmitted"
+                                        formControlName="secondary_payor"
+                                        [readonly]="personalEdit"
+                                        [control]="patient.controls.secondary_payor"
+                                        ></idr-input-text>
+                                </div>
+
+                            </div>
+                        </div>
+                        <idr-server-error [message]="message"></idr-server-error>
+                    </form>
+        </div>
+        <div class="footerNavigation" *ngIf="!personalEdit">
+            <idr-default-btn
+                className="default btn-small"
+                (click)="cancel()"><span>Cancel</span></idr-default-btn>
+            <idr-default-btn
+                className="active btn-small"
+                (click)="save()"><span>Update</span></idr-default-btn>
+        </div>
+</ng-scrollbar>
+</div>

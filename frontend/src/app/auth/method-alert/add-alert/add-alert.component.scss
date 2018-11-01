@@ -1,0 +1,230 @@
+@import '~styles.scss';
+.form-control {
+    margin-bottom: 10px;
+}
+
+.list-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.list-group-item {
+    text-align: left;
+    flex-basis: 48%;
+    margin-bottom: 10px;
+}
+
+.form-control.phoneMask {
+    margin-bottom: 10px;
+    width: 100%;
+    position: relative;
+
+    input {
+        @include placeholder {
+            color: $bombay;
+            -webkit-text-fill-color: $bombay;
+        }
+        width: 100%;
+        border: $border-control;
+        font-size: $base-font-size;
+        border-radius: 5px;
+        font-family: $base-font-sans-serif;
+        font-weight: 600;
+        padding: 8px 15px 8px 20px;
+        color: $black;
+        -webkit-text-fill-color: $black;
+
+        &:focus {
+            outline: none;
+        }
+
+        &[readonly] {
+            border: 0;
+            padding-left: 0;
+             font-size: $base-font-size + 1;
+
+            & + .required {
+                display: none;
+            }
+        }
+    }
+
+
+    &.hasError {
+        input {
+            border-color: $red;
+        }
+    }
+    .required {
+        position: absolute;
+        top: 9px;
+        left: 10px;
+        color: $red;
+    }
+    
+}
+
+::ng-deep  .ng-select.hasError .ng-select-container {
+    border-color: $red;
+}
+
+:host {
+    display: block;
+    width: 100%;
+
+    idr-modal-wrap {
+        display: block;
+
+    }
+
+    idr-default-btn ::ng-deep .btn {
+        @include respond-to('small-height') {
+            margin-bottom: 10px;
+        }
+    }
+
+
+    ::ng-deep .mat-dialog-actions {
+        display: block;
+    }
+}
+
+::ng-deep .mat-dialog-container {
+    padding: 0;
+    box-shadow: none;
+    overflow: visible;
+}
+
+::ng-deep .cdk-overlay-container {
+    z-index: 1002;
+}
+
+.btn {
+    width: 100%;
+    background: none;
+    text-align: center;
+    border: 0;
+    display: inline-block;
+    font-size: $base-font-size + 4;
+    padding: 7px 17px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 10px  lighten($shadow-color, 10%);
+    font-weight: 600;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    transition: all .5s;
+      height: 40px;
+
+    idr-check-svg {
+        float: left;
+    }
+
+    span{
+        position: relative;
+        z-index: 2;
+        display: block
+    }
+
+    &:before,
+    &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        height: 100%;
+        background:  $dull-blue; /* onhover background color */
+        z-index: -1;
+        transform: translate3D(0,-100%,0); /* move elements above button so they don't appear initially */
+        transition: all .5s;
+    }
+
+    &:before{
+        z-index: 1;
+        top: 0;
+        left: 0;
+        width: 150%;
+        background:  $dull-blue;
+        transform-origin: 0 bottom;
+        transform:  translateX(-100%) rotate(-30deg);
+    }
+
+    &:after{
+        top: 0;
+        left: auto;
+        right: 0;
+        width: 150%;
+        transform-origin: right bottom;
+        transform: translateX(100%) rotate(30deg);
+    }
+
+    &:hover {
+        cursor: pointer;
+        color: $white;
+
+        &:after{
+
+            right: 0;
+            transform: rotate(0deg);
+            transition: all .5s;
+        }
+
+        &:before{
+            left: 0;
+            transform: rotate(0deg);
+            transition: all .5s;
+        }
+
+        i {
+            ::ng-deep svg {
+                path{
+                    fill: $white;
+                }
+            }
+        }
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    &-default {
+        background: $white;
+        color: $black;
+        border: $border;
+
+        i {
+            position: relative;
+            z-index:2;
+
+            ::ng-deep svg {
+                path{
+                    fill: $btn-background;
+                }
+            }
+        }
+    }
+
+    i {
+        float: left;
+        line-height: 16px;
+
+        ::ng-deep svg {
+            width: 14px;
+            height: 24px;
+        }
+    }
+}
+
+mat-dialog-content {
+    padding: 20px 20px;
+    @include respond-to('small-height') {
+        padding: 10px 20px;
+    }
+}
+

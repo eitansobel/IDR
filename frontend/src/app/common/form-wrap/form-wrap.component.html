@@ -1,0 +1,24 @@
+<ng-content></ng-content>
+<idr-server-error [message]="message"></idr-server-error>
+<div class="formFooter" *ngIf="!edittable">
+
+<!--    <ng4-files-drop
+        (filesSelect)="filesSelect($event)"
+        class="dragDrop">
+
+        <ng4-files-click (filesSelect)="filesSelect($event)">
+            {{filename}}
+        </ng4-files-click>
+    </ng4-files-drop>-->
+
+<!--    <idr-default-btn
+        className="default btn-small"
+        (click)="save()"><span>Import</span></idr-default-btn>-->
+    <idr-default-btn
+        className="default btn-small"
+        (click)="cancel()"><span>Cancel</span></idr-default-btn>
+    <idr-default-btn
+        className="active btn-small"
+        (click)="save()"><span>Update</span></idr-default-btn>
+
+</div>

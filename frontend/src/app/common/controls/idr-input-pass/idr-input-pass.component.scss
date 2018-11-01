@@ -1,0 +1,56 @@
+@import '~styles.scss';
+
+.form-control {
+    margin-bottom: 15px;
+    width: 100%;
+    position: relative;
+
+    input {
+        @include placeholder{
+            color: $bombay;
+            -webkit-text-fill-color: $bombay;
+        }
+        width: 100%;
+        border: $border-control;
+        color: $bombay;
+        font-size: $base-font-size;
+        border-radius: 5px;
+        padding: 8px 25px 8px 20px;
+        font-family: $base-font-sans-serif;
+        font-weight: 600;
+        color: $black;
+        -webkit-text-fill-color: $black;
+        
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &.hasError {
+        input {
+            border-color: $red;
+        }
+    }
+}
+
+.showPass {
+    position: absolute;
+    top: 12px;
+    right: 0;
+    cursor: pointer;
+    
+    &.show {
+        svg {
+            path {
+                fill: $dull-blue;
+            }
+        }
+    }
+}
+
+.required {
+    position: absolute;
+    top: 9px;
+    left: 10px;
+    color: $red;
+}

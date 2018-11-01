@@ -1,0 +1,181 @@
+<div class="fixedTable">
+    <div class="title-cell">
+        <div class="counter"><span class="counter-span"></span></div>
+        <idr-default-btn (click)="sortPatients()"
+            className="sort-patient"
+            class="sort-patient-position sort-cell">
+            <idr-sort-patient-svg class='icon'></idr-sort-patient-svg>
+            <span>Sort Patients</span></idr-default-btn>
+    </div>
+    <header class="fixedTable-header">
+        <table #tableHeader class="table table-bordered table-border">
+            <thead>
+            <tr>
+
+                <td *ngFor="let column of nestedColumnList" class="title-cell doctor-colour">
+                    <div class="cell-div">
+                        <div class="doctor-title-name text-left-top">
+                            <p class="doctor-name">{{column.author.full_name}}</p>
+                            <p class="doctor-title">{{column.author.job}}</p>
+                            <p class="doctor-job">{{column.title}}</p>
+                        </div>
+                        <idr-copy-svg
+                            class="btn-right-middle"
+                            *ngIf="userCanSeeColumnButton('copyIsAllowed', column)"
+                            (click)="userCanSeeColumnButton('copyIsAllowed', column) && copyRow(column)"></idr-copy-svg>
+                        <idr-settings-svg
+                            class="btn-right-bottom"
+                            *ngIf="userCanSeeColumnButton('edit', column)"
+                            (click)="editDataColumn(column)"></idr-settings-svg>
+                        <idr-cross-svg
+                            class="btn-left-bottom"
+                            (click)="hideColumn(column.id)"></idr-cross-svg>
+                    </div>
+                </td>
+            </tr>
+            </thead>
+        </table>
+    </header>
+    <aside class="fixedTable-sidebar">
+        <table #tableSidebar class="table table-bordered table-border">
+            <tbody>
+            <tr *ngFor="let patient of patients | filter:  patientSearchKeys:patientSearchText:true; let i = index"
+                [attr.data-index]="i">
+                <td class="title-cell">
+                    <div class="counter"><span class="counter-span">{{i + 1}}</span></div>
+                    <div class="cell-div patient-colour">
+                        <div class="patient-title-name text-left-top">
+                            <p class="patient-name">
+                                <a (click)="openPatientProfile(patient)">
+                                    {{patient.first_name}} {{patient.last_name}}
+                                </a>
+                            </p>
+                            <p class="patient-text hide-overflow-text">
+                                <span class="patient-prefix">MRN: </span>{{patient.mrn}}
+                            </p>
+                            <p class="patient-text hide-overflow-text">
+                                <span class="patient-prefix">ROOM: </span>{{patient.room || 'not added'}}
+                            </p>
+                            <p class="patient-text hide-overflow-text">
+                                <span class="patient-prefix">AGE: </span>{{patient.age}}
+                            </p>
+                            <p class="patient-text hide-overflow-text">
+                                <span class="patient-prefix">DOB: </span>{{patient.birth_date}}
+                            </p>
+                        </div>
+                        <idr-message-svg class="btn-right-top" (click)="createChat(patient)"></idr-message-svg>
+                        <idr-edit-home-svg class="btn-right-middle"
+                            (click)="openPatientProfile(patient, false)">
+                        </idr-edit-home-svg>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </aside>
+
+    <div class="fixedTable-body">
+        <ng-scrollbar [trackX]="true" (scrollState)="onWindowScroll($event)">
+            <table class="table table-bordered table-border">
+                <tbody>
+                <tr *ngFor="let patient of patients | filter:  patientSearchKeys:patientSearchText:true; let i = index"
+                    [attr.data-index]="i">
+                    <td *ngFor="let column of nestedColumnList; let j = index" [attr.data-index]="j" class="title-cell">
+                        <div class="cell-div {{getCellColorClass(patient.id, column.id)}}">
+                            <div class="empty-cell"
+                                *ngIf="!getPatientCell(patient.id, column.id); else cellExists"
+                                (click)="userCanCreateCell(column) && createCell(column, patient.id)">
+                            </div>
+                            <ng-template #cellExists>
+                                <div class="text-left-top cell-text">
+                                <span class="cell-title"
+                                    *ngIf="getPatientCell(patient.id, column.id).is_private; else cellBody">
+                                    Cell is private
+                                </span>
+                                    <ng-template #cellBody>
+                                        <p class="cell-title">{{getPatientCell(patient.id, column.id).title}}</p>
+                                        <div
+                                            *ngFor="let field of getPatientCell(patient.id, column.id)['fields'] | slice:0:2"
+                                            class="cell-field">
+                                            <p>{{field.title}}:</p>
+                                            <p>{{field.value}}</p>
+                                        </div>
+                                    </ng-template>
+                                </div>
+                                <div class="btn-right-top" *ngIf="userId !== column.author.id">
+                            <span
+                                class="messageCounter"
+                                *ngIf="getPatientCell(patient.id, column.id).chat && getPatientCell(patient.id, column.id).chat.count_of_unread_messages">
+                                {{getPatientCell(patient.id, column.id).chat.count_of_unread_messages}}
+                            </span>
+                                    <idr-message-svg
+                                        class="urgency-{{+getPatientCell(patient.id, column.id).chat?.top_urgency}}"
+                                        (click)="openChat(getPatientCell(patient.id, column.id), column)"
+                                    ></idr-message-svg>
+                                </div>
+                                <idr-lock-svg
+                                    *ngIf="userCanSeeLockButton(getPatientCell(patient.id, column.id), column)"
+                                    class="btn-right-middle {{getLockedClass(getPatientCell(patient.id, column.id))}}"
+                                    (click)="lockCell(getPatientCell(patient.id, column.id))"></idr-lock-svg>
+                                <idr-edit-home-svg
+                                    class="btn-right-bottom"
+                                    *ngIf="userCanSeeCellButton('editCell', getPatientCell(patient.id, column.id), column)"
+                                    (click)="editCell(getPatientCell(patient.id, column.id), column)"></idr-edit-home-svg>
+                            </ng-template>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </ng-scrollbar>
+    </div>
+</div>
+<div class="home-footer">
+    <div class="flexContainer">
+        <div class="searchContainer">
+            <idr-search-control placeholder="Search by Name" [(ngModel)]="patientSearchText"></idr-search-control>
+        </div>
+        <ng-content></ng-content>
+    </div>
+    <div class="footer-text">
+        <span class="footer-title">Columns:</span>
+        <idr-circle-svg class="circle-padding" color="#e9eef3"></idr-circle-svg>
+        <span class="footer-text-color">Soon</span>
+        <idr-circle-svg class="circle-padding" color="#f8ebe2"></idr-circle-svg>
+        <span class="footer-text-color">Time</span>
+        <span class="footer-title">Messages:</span>
+        <idr-circle-svg class="circle-padding" color="#e9edf5"></idr-circle-svg>
+        <span class="footer-text-color">Read</span>
+        <idr-circle-svg class="circle-padding" color="#1663d9"></idr-circle-svg>
+        <span class="footer-text-color">Recent</span>
+        <idr-circle-svg class="circle-padding" color="#f1d57b"></idr-circle-svg>
+        <span class="footer-text-color">Not urgent</span>
+        <idr-circle-svg class="circle-padding" color="#eaa121"></idr-circle-svg>
+        <span class="footer-text-color">Urgent</span>
+        <idr-circle-svg class="circle-padding" color="#e8204a"></idr-circle-svg>
+        <span class="footer-text-color">Urgent matter</span>
+    </div>
+</div>
+<div class="chatRoom" *ngIf="showChatWindow">
+    <header>
+        <idr-close-round-svg (click)="closeChat()"></idr-close-round-svg>
+        Conversation
+    </header>
+    <idr-create-message
+        [title]="title"
+        [chat]="choosedChat"
+        [patient]="choosedPatient"
+        [homePage]="true"
+        (createdChat)="createdChat($event)">
+        <idr-chat [chat]="choosedChat"></idr-chat>
+    </idr-create-message>
+</div>
+<div class='profile' [ngClass]="{'show': showPatientProfile}">
+    <idr-patient-view-profile
+        (closeAll)="closePatientProfile($event)"
+        [viewProfile]="patientProfileData"
+        [personalEdit]="viewProfileIsEdited"
+        [updateHomePatients]="true">
+    </idr-patient-view-profile>
+</div>
+<div class="overlay" *ngIf="showPatientProfile || showChatWindow"></div>

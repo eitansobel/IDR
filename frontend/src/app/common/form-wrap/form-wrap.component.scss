@@ -1,0 +1,23 @@
+@import '~styles.scss';
+.formFooter {
+    background: $gray;
+    padding: 15px;
+    text-align: right;
+}
+
+:host {
+    border: $border;
+    padding: 0 15px 15px;
+    display: block;
+    border-radius: 10px;
+    margin-bottom : 15px;
+    position: relative;
+}
+
+:host idr-default-btn {
+    display: inline-block;
+
+    ::ng-deep span {
+        margin-bottom: 0!important;
+    }
+}
