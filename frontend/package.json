@@ -80,7 +80,7 @@
     "karma-jasmine": "^1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
     "less-loader": "^4.0.5",
-    "node-sass": "^4.9.2",
+    "node-sass": "^4.13.1",
     "npm-watch": "^0.3.0",
     "postcss-loader": "^2.1.6",
     "postcss-url": "^7.1.2",
