@@ -29,7 +29,7 @@ MarkupSafe==1.0
 psycopg2-binary==2.7.4
 pycodestyle==2.4.0
 pycountry==18.2.23
-Pygments==2.2.0
+Pygments==2.7.4
 PyJWT==1.6.1
 PySocks==1.6.8
 python-dateutil==2.7.3
