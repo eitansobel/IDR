@@ -30,7 +30,7 @@ psycopg2-binary==2.7.4
 pycodestyle==2.4.0
 pycountry==18.2.23
 Pygments==2.2.0
-PyJWT==1.6.1
+PyJWT==2.4.0
 PySocks==1.6.8
 python-dateutil==2.7.3
 pytz==2018.4
