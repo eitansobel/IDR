@@ -40,7 +40,7 @@ six==1.11.0
 sorl-thumbnail==12.4.1
 sqlparse==0.2.4
 twilio==6.12.1
-Twisted==18.4.0
+Twisted==22.10.0
 uritemplate==3.0.0
 urllib3==1.22
 vine==1.1.4
