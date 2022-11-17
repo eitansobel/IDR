@@ -53,7 +53,7 @@
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
-    "@angular/cli": "1.6.0",
+    "@angular/cli": "15.0.0",
     "@angular/compiler-cli": "^5.2.11",
     "@angular/language-service": "^5.2.11",
     "@types/jasmine": "~2.5.53",
@@ -69,8 +69,8 @@
     "cssnano": "^3.10.0",
     "exports-loader": "^0.6.3",
     "file-loader": "^1.1.5",
-    "html-webpack-plugin": "^2.29.0",
-    "istanbul-instrumenter-loader": "^2.0.0",
+    "html-webpack-plugin": "^5.5.0",
+    "istanbul-instrumenter-loader": "^3.0.1",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
     "karma": "~1.7.0",
@@ -88,7 +88,7 @@
     "raw-loader": "^0.5.1",
     "rebuild-node-sass": "^1.1.0",
     "sass-loader": "^6.0.3",
-    "source-map-loader": "^0.2.0",
+    "source-map-loader": "^0.2.4",
     "style-loader": "^0.13.1",
     "stylus-loader": "^3.0.1",
     "ts-node": "~3.2.0",
