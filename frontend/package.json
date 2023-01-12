@@ -47,7 +47,7 @@
     "ng-pick-datetime-moment": "^1.0.6",
     "ngx-image-cropper": "^0.2.9",
     "ngx-mask": "^6.0.0",
-    "ngx-papaparse": "^3.0.0-beta.0",
+    "ngx-papaparse": "^6.0.2",
     "ngx-scrollbar": "^2.2.0",
     "rxjs": "^5.5.2",
     "zone.js": "^0.8.14"
